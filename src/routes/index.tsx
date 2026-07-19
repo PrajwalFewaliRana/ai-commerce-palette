@@ -130,8 +130,12 @@ function LandingPage() {
             >
               {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </button>
-            <Button variant="ghost" size="sm" className="hidden sm:inline-flex">Login</Button>
-            <Button size="sm" variant="hero" className="hidden sm:inline-flex">Register</Button>
+            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+              <Link to="/auth/login">Login</Link>
+            </Button>
+            <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
+              <Link to="/auth/register">Register</Link>
+            </Button>
             <button className="relative grid size-9 place-items-center rounded-lg text-muted-foreground transition hover:bg-accent hover:text-foreground" aria-label="Cart">
               <ShoppingCart className="size-4" />
               <span className="absolute -right-0.5 -top-0.5 grid size-4 place-items-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">2</span>
