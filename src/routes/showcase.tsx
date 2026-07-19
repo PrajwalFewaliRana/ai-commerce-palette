@@ -53,7 +53,7 @@ import watch from "@/assets/product-watch.jpg";
 import mug from "@/assets/product-mug.jpg";
 import sneakers from "@/assets/product-sneakers.jpg";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/showcase")({
   head: () => ({
     meta: [
       { title: "Nexa DS — AI Multi-Vendor Commerce Design System" },
