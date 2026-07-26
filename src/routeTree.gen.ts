@@ -32,6 +32,14 @@ import { Route as AuthResetPasswordRouteImport } from './routes/auth.reset-passw
 import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
+import { Route as DashboardSellerIndexRouteImport } from './routes/dashboard.seller.index'
+import { Route as DashboardSellerReviewsRouteImport } from './routes/dashboard.seller.reviews'
+import { Route as DashboardSellerProductsRouteImport } from './routes/dashboard.seller.products'
+import { Route as DashboardSellerOrdersRouteImport } from './routes/dashboard.seller.orders'
+import { Route as DashboardSellerInventoryRouteImport } from './routes/dashboard.seller.inventory'
+import { Route as DashboardSellerCustomersRouteImport } from './routes/dashboard.seller.customers'
+import { Route as DashboardSellerCouponsRouteImport } from './routes/dashboard.seller.coupons'
+import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard.seller.analytics'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -148,6 +156,49 @@ const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   path: '/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardSellerIndexRoute = DashboardSellerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardSellerRoute,
+} as any)
+const DashboardSellerReviewsRoute = DashboardSellerReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => DashboardSellerRoute,
+} as any)
+const DashboardSellerProductsRoute = DashboardSellerProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => DashboardSellerRoute,
+} as any)
+const DashboardSellerOrdersRoute = DashboardSellerOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => DashboardSellerRoute,
+} as any)
+const DashboardSellerInventoryRoute =
+  DashboardSellerInventoryRouteImport.update({
+    id: '/inventory',
+    path: '/inventory',
+    getParentRoute: () => DashboardSellerRoute,
+  } as any)
+const DashboardSellerCustomersRoute =
+  DashboardSellerCustomersRouteImport.update({
+    id: '/customers',
+    path: '/customers',
+    getParentRoute: () => DashboardSellerRoute,
+  } as any)
+const DashboardSellerCouponsRoute = DashboardSellerCouponsRouteImport.update({
+  id: '/coupons',
+  path: '/coupons',
+  getParentRoute: () => DashboardSellerRoute,
+} as any)
+const DashboardSellerAnalyticsRoute =
+  DashboardSellerAnalyticsRouteImport.update({
+    id: '/analytics',
+    path: '/analytics',
+    getParentRoute: () => DashboardSellerRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -170,9 +221,17 @@ export interface FileRoutesByFullPath {
   '/category/$slug': typeof CategorySlugRoute
   '/dashboard/admin': typeof DashboardAdminRoute
   '/dashboard/customer': typeof DashboardCustomerRoute
-  '/dashboard/seller': typeof DashboardSellerRoute
+  '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
+  '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
+  '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
+  '/dashboard/seller/inventory': typeof DashboardSellerInventoryRoute
+  '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
+  '/dashboard/seller/products': typeof DashboardSellerProductsRoute
+  '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/seller/': typeof DashboardSellerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -195,9 +254,16 @@ export interface FileRoutesByTo {
   '/category/$slug': typeof CategorySlugRoute
   '/dashboard/admin': typeof DashboardAdminRoute
   '/dashboard/customer': typeof DashboardCustomerRoute
-  '/dashboard/seller': typeof DashboardSellerRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
+  '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
+  '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
+  '/dashboard/seller/inventory': typeof DashboardSellerInventoryRoute
+  '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
+  '/dashboard/seller/products': typeof DashboardSellerProductsRoute
+  '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/seller': typeof DashboardSellerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -221,9 +287,17 @@ export interface FileRoutesById {
   '/category/$slug': typeof CategorySlugRoute
   '/dashboard/admin': typeof DashboardAdminRoute
   '/dashboard/customer': typeof DashboardCustomerRoute
-  '/dashboard/seller': typeof DashboardSellerRoute
+  '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
+  '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
+  '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
+  '/dashboard/seller/inventory': typeof DashboardSellerInventoryRoute
+  '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
+  '/dashboard/seller/products': typeof DashboardSellerProductsRoute
+  '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/seller/': typeof DashboardSellerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -251,6 +325,14 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/seller/analytics'
+    | '/dashboard/seller/coupons'
+    | '/dashboard/seller/customers'
+    | '/dashboard/seller/inventory'
+    | '/dashboard/seller/orders'
+    | '/dashboard/seller/products'
+    | '/dashboard/seller/reviews'
+    | '/dashboard/seller/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -273,9 +355,16 @@ export interface FileRouteTypes {
     | '/category/$slug'
     | '/dashboard/admin'
     | '/dashboard/customer'
-    | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/seller/analytics'
+    | '/dashboard/seller/coupons'
+    | '/dashboard/seller/customers'
+    | '/dashboard/seller/inventory'
+    | '/dashboard/seller/orders'
+    | '/dashboard/seller/products'
+    | '/dashboard/seller/reviews'
+    | '/dashboard/seller'
   id:
     | '__root__'
     | '/'
@@ -301,6 +390,14 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/seller/analytics'
+    | '/dashboard/seller/coupons'
+    | '/dashboard/seller/customers'
+    | '/dashboard/seller/inventory'
+    | '/dashboard/seller/orders'
+    | '/dashboard/seller/products'
+    | '/dashboard/seller/reviews'
+    | '/dashboard/seller/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -324,7 +421,7 @@ export interface RootRouteChildren {
   CategorySlugRoute: typeof CategorySlugRoute
   DashboardAdminRoute: typeof DashboardAdminRoute
   DashboardCustomerRoute: typeof DashboardCustomerRoute
-  DashboardSellerRoute: typeof DashboardSellerRoute
+  DashboardSellerRoute: typeof DashboardSellerRouteWithChildren
   ProductIdRoute: typeof ProductIdRoute
 }
 
@@ -491,6 +588,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/seller/': {
+      id: '/dashboard/seller/'
+      path: '/'
+      fullPath: '/dashboard/seller/'
+      preLoaderRoute: typeof DashboardSellerIndexRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/reviews': {
+      id: '/dashboard/seller/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/seller/reviews'
+      preLoaderRoute: typeof DashboardSellerReviewsRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/products': {
+      id: '/dashboard/seller/products'
+      path: '/products'
+      fullPath: '/dashboard/seller/products'
+      preLoaderRoute: typeof DashboardSellerProductsRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/orders': {
+      id: '/dashboard/seller/orders'
+      path: '/orders'
+      fullPath: '/dashboard/seller/orders'
+      preLoaderRoute: typeof DashboardSellerOrdersRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/inventory': {
+      id: '/dashboard/seller/inventory'
+      path: '/inventory'
+      fullPath: '/dashboard/seller/inventory'
+      preLoaderRoute: typeof DashboardSellerInventoryRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/customers': {
+      id: '/dashboard/seller/customers'
+      path: '/customers'
+      fullPath: '/dashboard/seller/customers'
+      preLoaderRoute: typeof DashboardSellerCustomersRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/coupons': {
+      id: '/dashboard/seller/coupons'
+      path: '/coupons'
+      fullPath: '/dashboard/seller/coupons'
+      preLoaderRoute: typeof DashboardSellerCouponsRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
+    '/dashboard/seller/analytics': {
+      id: '/dashboard/seller/analytics'
+      path: '/analytics'
+      fullPath: '/dashboard/seller/analytics'
+      preLoaderRoute: typeof DashboardSellerAnalyticsRouteImport
+      parentRoute: typeof DashboardSellerRoute
+    }
   }
 }
 
@@ -504,6 +657,32 @@ const OrdersRouteChildren: OrdersRouteChildren = {
 
 const OrdersRouteWithChildren =
   OrdersRoute._addFileChildren(OrdersRouteChildren)
+
+interface DashboardSellerRouteChildren {
+  DashboardSellerAnalyticsRoute: typeof DashboardSellerAnalyticsRoute
+  DashboardSellerCouponsRoute: typeof DashboardSellerCouponsRoute
+  DashboardSellerCustomersRoute: typeof DashboardSellerCustomersRoute
+  DashboardSellerInventoryRoute: typeof DashboardSellerInventoryRoute
+  DashboardSellerOrdersRoute: typeof DashboardSellerOrdersRoute
+  DashboardSellerProductsRoute: typeof DashboardSellerProductsRoute
+  DashboardSellerReviewsRoute: typeof DashboardSellerReviewsRoute
+  DashboardSellerIndexRoute: typeof DashboardSellerIndexRoute
+}
+
+const DashboardSellerRouteChildren: DashboardSellerRouteChildren = {
+  DashboardSellerAnalyticsRoute: DashboardSellerAnalyticsRoute,
+  DashboardSellerCouponsRoute: DashboardSellerCouponsRoute,
+  DashboardSellerCustomersRoute: DashboardSellerCustomersRoute,
+  DashboardSellerInventoryRoute: DashboardSellerInventoryRoute,
+  DashboardSellerOrdersRoute: DashboardSellerOrdersRoute,
+  DashboardSellerProductsRoute: DashboardSellerProductsRoute,
+  DashboardSellerReviewsRoute: DashboardSellerReviewsRoute,
+  DashboardSellerIndexRoute: DashboardSellerIndexRoute,
+}
+
+const DashboardSellerRouteWithChildren = DashboardSellerRoute._addFileChildren(
+  DashboardSellerRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -526,7 +705,7 @@ const rootRouteChildren: RootRouteChildren = {
   CategorySlugRoute: CategorySlugRoute,
   DashboardAdminRoute: DashboardAdminRoute,
   DashboardCustomerRoute: DashboardCustomerRoute,
-  DashboardSellerRoute: DashboardSellerRoute,
+  DashboardSellerRoute: DashboardSellerRouteWithChildren,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
