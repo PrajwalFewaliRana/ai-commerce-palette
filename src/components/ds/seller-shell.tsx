@@ -8,7 +8,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const NAV = [
+type NavItem = {
+  to: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  end?: boolean;
+};
+const NAV: NavItem[] = [
   { to: "/dashboard/seller", label: "Overview", icon: LayoutDashboard, end: true },
   { to: "/dashboard/seller/products", label: "Products", icon: Package },
   { to: "/dashboard/seller/inventory", label: "Inventory", icon: Warehouse },
@@ -17,7 +23,7 @@ const NAV = [
   { to: "/dashboard/seller/reviews", label: "Reviews", icon: Star },
   { to: "/dashboard/seller/customers", label: "Customers", icon: Users },
   { to: "/dashboard/seller/analytics", label: "Analytics", icon: BarChart3 },
-] as const;
+];
 
 function useDarkMode() {
   const [dark, setDark] = useState(false);
