@@ -41,6 +41,8 @@ import { Route as DashboardSellerInventoryRouteImport } from './routes/dashboard
 import { Route as DashboardSellerCustomersRouteImport } from './routes/dashboard.seller.customers'
 import { Route as DashboardSellerCouponsRouteImport } from './routes/dashboard.seller.coupons'
 import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard.seller.analytics'
+import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
+import { Route as DashboardAdminSellersRouteImport } from './routes/dashboard.admin.sellers'
 import { Route as DashboardAdminRevenueRouteImport } from './routes/dashboard.admin.revenue'
 
 const WishlistRoute = WishlistRouteImport.update({
@@ -206,6 +208,16 @@ const DashboardSellerAnalyticsRoute =
     path: '/analytics',
     getParentRoute: () => DashboardSellerRoute,
   } as any)
+const DashboardAdminUsersRoute = DashboardAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminSellersRoute = DashboardAdminSellersRouteImport.update({
+  id: '/sellers',
+  path: '/sellers',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 const DashboardAdminRevenueRoute = DashboardAdminRevenueRouteImport.update({
   id: '/revenue',
   path: '/revenue',
@@ -237,6 +249,8 @@ export interface FileRoutesByFullPath {
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
+  '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -270,6 +284,8 @@ export interface FileRoutesByTo {
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
+  '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -306,6 +322,8 @@ export interface FileRoutesById {
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
+  '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -343,6 +361,8 @@ export interface FileRouteTypes {
     | '/orders/$id'
     | '/product/$id'
     | '/dashboard/admin/revenue'
+    | '/dashboard/admin/sellers'
+    | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -376,6 +396,8 @@ export interface FileRouteTypes {
     | '/orders/$id'
     | '/product/$id'
     | '/dashboard/admin/revenue'
+    | '/dashboard/admin/sellers'
+    | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -411,6 +433,8 @@ export interface FileRouteTypes {
     | '/orders/$id'
     | '/product/$id'
     | '/dashboard/admin/revenue'
+    | '/dashboard/admin/sellers'
+    | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -673,6 +697,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSellerAnalyticsRouteImport
       parentRoute: typeof DashboardSellerRoute
     }
+    '/dashboard/admin/users': {
+      id: '/dashboard/admin/users'
+      path: '/users'
+      fullPath: '/dashboard/admin/users'
+      preLoaderRoute: typeof DashboardAdminUsersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/sellers': {
+      id: '/dashboard/admin/sellers'
+      path: '/sellers'
+      fullPath: '/dashboard/admin/sellers'
+      preLoaderRoute: typeof DashboardAdminSellersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/admin/revenue': {
       id: '/dashboard/admin/revenue'
       path: '/revenue'
@@ -696,11 +734,15 @@ const OrdersRouteWithChildren =
 
 interface DashboardAdminRouteChildren {
   DashboardAdminRevenueRoute: typeof DashboardAdminRevenueRoute
+  DashboardAdminSellersRoute: typeof DashboardAdminSellersRoute
+  DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
   DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
 }
 
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
   DashboardAdminRevenueRoute: DashboardAdminRevenueRoute,
+  DashboardAdminSellersRoute: DashboardAdminSellersRoute,
+  DashboardAdminUsersRoute: DashboardAdminUsersRoute,
   DashboardAdminIndexRoute: DashboardAdminIndexRoute,
 }
 
