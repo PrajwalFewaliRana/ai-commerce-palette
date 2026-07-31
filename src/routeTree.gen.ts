@@ -44,6 +44,8 @@ import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard
 import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
 import { Route as DashboardAdminSellersRouteImport } from './routes/dashboard.admin.sellers'
 import { Route as DashboardAdminRevenueRouteImport } from './routes/dashboard.admin.revenue'
+import { Route as DashboardAdminModerationRouteImport } from './routes/dashboard.admin.moderation'
+import { Route as DashboardAdminCategoriesRouteImport } from './routes/dashboard.admin.categories'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -223,6 +225,18 @@ const DashboardAdminRevenueRoute = DashboardAdminRevenueRouteImport.update({
   path: '/revenue',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
+const DashboardAdminModerationRoute =
+  DashboardAdminModerationRouteImport.update({
+    id: '/moderation',
+    path: '/moderation',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
+const DashboardAdminCategoriesRoute =
+  DashboardAdminCategoriesRouteImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -248,6 +262,8 @@ export interface FileRoutesByFullPath {
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
+  '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
@@ -283,6 +299,8 @@ export interface FileRoutesByTo {
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
+  '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
@@ -321,6 +339,8 @@ export interface FileRoutesById {
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
+  '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
@@ -360,6 +380,8 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/categories'
+    | '/dashboard/admin/moderation'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
     | '/dashboard/admin/users'
@@ -395,6 +417,8 @@ export interface FileRouteTypes {
     | '/dashboard/customer'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/categories'
+    | '/dashboard/admin/moderation'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
     | '/dashboard/admin/users'
@@ -432,6 +456,8 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/categories'
+    | '/dashboard/admin/moderation'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
     | '/dashboard/admin/users'
@@ -718,6 +744,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminRevenueRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
+    '/dashboard/admin/moderation': {
+      id: '/dashboard/admin/moderation'
+      path: '/moderation'
+      fullPath: '/dashboard/admin/moderation'
+      preLoaderRoute: typeof DashboardAdminModerationRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/categories': {
+      id: '/dashboard/admin/categories'
+      path: '/categories'
+      fullPath: '/dashboard/admin/categories'
+      preLoaderRoute: typeof DashboardAdminCategoriesRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
   }
 }
 
@@ -733,6 +773,8 @@ const OrdersRouteWithChildren =
   OrdersRoute._addFileChildren(OrdersRouteChildren)
 
 interface DashboardAdminRouteChildren {
+  DashboardAdminCategoriesRoute: typeof DashboardAdminCategoriesRoute
+  DashboardAdminModerationRoute: typeof DashboardAdminModerationRoute
   DashboardAdminRevenueRoute: typeof DashboardAdminRevenueRoute
   DashboardAdminSellersRoute: typeof DashboardAdminSellersRoute
   DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
@@ -740,6 +782,8 @@ interface DashboardAdminRouteChildren {
 }
 
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
+  DashboardAdminCategoriesRoute: DashboardAdminCategoriesRoute,
+  DashboardAdminModerationRoute: DashboardAdminModerationRoute,
   DashboardAdminRevenueRoute: DashboardAdminRevenueRoute,
   DashboardAdminSellersRoute: DashboardAdminSellersRoute,
   DashboardAdminUsersRoute: DashboardAdminUsersRoute,
