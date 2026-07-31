@@ -33,6 +33,7 @@ import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
 import { Route as DashboardSellerIndexRouteImport } from './routes/dashboard.seller.index'
+import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard.admin.index'
 import { Route as DashboardSellerReviewsRouteImport } from './routes/dashboard.seller.reviews'
 import { Route as DashboardSellerProductsRouteImport } from './routes/dashboard.seller.products'
 import { Route as DashboardSellerOrdersRouteImport } from './routes/dashboard.seller.orders'
@@ -40,6 +41,7 @@ import { Route as DashboardSellerInventoryRouteImport } from './routes/dashboard
 import { Route as DashboardSellerCustomersRouteImport } from './routes/dashboard.seller.customers'
 import { Route as DashboardSellerCouponsRouteImport } from './routes/dashboard.seller.coupons'
 import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard.seller.analytics'
+import { Route as DashboardAdminRevenueRouteImport } from './routes/dashboard.admin.revenue'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -161,6 +163,11 @@ const DashboardSellerIndexRoute = DashboardSellerIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardSellerRoute,
 } as any)
+const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 const DashboardSellerReviewsRoute = DashboardSellerReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
@@ -199,6 +206,11 @@ const DashboardSellerAnalyticsRoute =
     path: '/analytics',
     getParentRoute: () => DashboardSellerRoute,
   } as any)
+const DashboardAdminRevenueRoute = DashboardAdminRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -219,11 +231,12 @@ export interface FileRoutesByFullPath {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
-  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -231,6 +244,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
   '/dashboard/seller/products': typeof DashboardSellerProductsRoute
   '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/seller/': typeof DashboardSellerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -252,10 +266,10 @@ export interface FileRoutesByTo {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
-  '/dashboard/admin': typeof DashboardAdminRoute
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -263,6 +277,7 @@ export interface FileRoutesByTo {
   '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
   '/dashboard/seller/products': typeof DashboardSellerProductsRoute
   '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/admin': typeof DashboardAdminIndexRoute
   '/dashboard/seller': typeof DashboardSellerIndexRoute
 }
 export interface FileRoutesById {
@@ -285,11 +300,12 @@ export interface FileRoutesById {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
-  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -297,6 +313,7 @@ export interface FileRoutesById {
   '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
   '/dashboard/seller/products': typeof DashboardSellerProductsRoute
   '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/seller/': typeof DashboardSellerIndexRoute
 }
 export interface FileRouteTypes {
@@ -325,6 +342,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/revenue'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -332,6 +350,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller/orders'
     | '/dashboard/seller/products'
     | '/dashboard/seller/reviews'
+    | '/dashboard/admin/'
     | '/dashboard/seller/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -353,10 +372,10 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/verify-email'
     | '/category/$slug'
-    | '/dashboard/admin'
     | '/dashboard/customer'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/revenue'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -364,6 +383,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller/orders'
     | '/dashboard/seller/products'
     | '/dashboard/seller/reviews'
+    | '/dashboard/admin'
     | '/dashboard/seller'
   id:
     | '__root__'
@@ -390,6 +410,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/revenue'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -397,6 +418,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller/orders'
     | '/dashboard/seller/products'
     | '/dashboard/seller/reviews'
+    | '/dashboard/admin/'
     | '/dashboard/seller/'
   fileRoutesById: FileRoutesById
 }
@@ -419,7 +441,7 @@ export interface RootRouteChildren {
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   CategorySlugRoute: typeof CategorySlugRoute
-  DashboardAdminRoute: typeof DashboardAdminRoute
+  DashboardAdminRoute: typeof DashboardAdminRouteWithChildren
   DashboardCustomerRoute: typeof DashboardCustomerRoute
   DashboardSellerRoute: typeof DashboardSellerRouteWithChildren
   ProductIdRoute: typeof ProductIdRoute
@@ -595,6 +617,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSellerIndexRouteImport
       parentRoute: typeof DashboardSellerRoute
     }
+    '/dashboard/admin/': {
+      id: '/dashboard/admin/'
+      path: '/'
+      fullPath: '/dashboard/admin/'
+      preLoaderRoute: typeof DashboardAdminIndexRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/seller/reviews': {
       id: '/dashboard/seller/reviews'
       path: '/reviews'
@@ -644,6 +673,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSellerAnalyticsRouteImport
       parentRoute: typeof DashboardSellerRoute
     }
+    '/dashboard/admin/revenue': {
+      id: '/dashboard/admin/revenue'
+      path: '/revenue'
+      fullPath: '/dashboard/admin/revenue'
+      preLoaderRoute: typeof DashboardAdminRevenueRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
   }
 }
 
@@ -657,6 +693,20 @@ const OrdersRouteChildren: OrdersRouteChildren = {
 
 const OrdersRouteWithChildren =
   OrdersRoute._addFileChildren(OrdersRouteChildren)
+
+interface DashboardAdminRouteChildren {
+  DashboardAdminRevenueRoute: typeof DashboardAdminRevenueRoute
+  DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
+}
+
+const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
+  DashboardAdminRevenueRoute: DashboardAdminRevenueRoute,
+  DashboardAdminIndexRoute: DashboardAdminIndexRoute,
+}
+
+const DashboardAdminRouteWithChildren = DashboardAdminRoute._addFileChildren(
+  DashboardAdminRouteChildren,
+)
 
 interface DashboardSellerRouteChildren {
   DashboardSellerAnalyticsRoute: typeof DashboardSellerAnalyticsRoute
@@ -703,7 +753,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   CategorySlugRoute: CategorySlugRoute,
-  DashboardAdminRoute: DashboardAdminRoute,
+  DashboardAdminRoute: DashboardAdminRouteWithChildren,
   DashboardCustomerRoute: DashboardCustomerRoute,
   DashboardSellerRoute: DashboardSellerRouteWithChildren,
   ProductIdRoute: ProductIdRoute,
