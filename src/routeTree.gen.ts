@@ -44,6 +44,8 @@ import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard
 import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
 import { Route as DashboardAdminSellersRouteImport } from './routes/dashboard.admin.sellers'
 import { Route as DashboardAdminRevenueRouteImport } from './routes/dashboard.admin.revenue'
+import { Route as DashboardAdminReportsRouteImport } from './routes/dashboard.admin.reports'
+import { Route as DashboardAdminOrdersRouteImport } from './routes/dashboard.admin.orders'
 import { Route as DashboardAdminModerationRouteImport } from './routes/dashboard.admin.moderation'
 import { Route as DashboardAdminCategoriesRouteImport } from './routes/dashboard.admin.categories'
 
@@ -225,6 +227,16 @@ const DashboardAdminRevenueRoute = DashboardAdminRevenueRouteImport.update({
   path: '/revenue',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
+const DashboardAdminReportsRoute = DashboardAdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminOrdersRoute = DashboardAdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 const DashboardAdminModerationRoute =
   DashboardAdminModerationRouteImport.update({
     id: '/moderation',
@@ -264,6 +276,8 @@ export interface FileRoutesByFullPath {
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
   '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
+  '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
@@ -301,6 +315,8 @@ export interface FileRoutesByTo {
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
   '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
+  '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
@@ -341,6 +357,8 @@ export interface FileRoutesById {
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
   '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
+  '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
@@ -382,6 +400,8 @@ export interface FileRouteTypes {
     | '/product/$id'
     | '/dashboard/admin/categories'
     | '/dashboard/admin/moderation'
+    | '/dashboard/admin/orders'
+    | '/dashboard/admin/reports'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
     | '/dashboard/admin/users'
@@ -419,6 +439,8 @@ export interface FileRouteTypes {
     | '/product/$id'
     | '/dashboard/admin/categories'
     | '/dashboard/admin/moderation'
+    | '/dashboard/admin/orders'
+    | '/dashboard/admin/reports'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
     | '/dashboard/admin/users'
@@ -458,6 +480,8 @@ export interface FileRouteTypes {
     | '/product/$id'
     | '/dashboard/admin/categories'
     | '/dashboard/admin/moderation'
+    | '/dashboard/admin/orders'
+    | '/dashboard/admin/reports'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
     | '/dashboard/admin/users'
@@ -744,6 +768,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminRevenueRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
+    '/dashboard/admin/reports': {
+      id: '/dashboard/admin/reports'
+      path: '/reports'
+      fullPath: '/dashboard/admin/reports'
+      preLoaderRoute: typeof DashboardAdminReportsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/orders': {
+      id: '/dashboard/admin/orders'
+      path: '/orders'
+      fullPath: '/dashboard/admin/orders'
+      preLoaderRoute: typeof DashboardAdminOrdersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/admin/moderation': {
       id: '/dashboard/admin/moderation'
       path: '/moderation'
@@ -775,6 +813,8 @@ const OrdersRouteWithChildren =
 interface DashboardAdminRouteChildren {
   DashboardAdminCategoriesRoute: typeof DashboardAdminCategoriesRoute
   DashboardAdminModerationRoute: typeof DashboardAdminModerationRoute
+  DashboardAdminOrdersRoute: typeof DashboardAdminOrdersRoute
+  DashboardAdminReportsRoute: typeof DashboardAdminReportsRoute
   DashboardAdminRevenueRoute: typeof DashboardAdminRevenueRoute
   DashboardAdminSellersRoute: typeof DashboardAdminSellersRoute
   DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
@@ -784,6 +824,8 @@ interface DashboardAdminRouteChildren {
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
   DashboardAdminCategoriesRoute: DashboardAdminCategoriesRoute,
   DashboardAdminModerationRoute: DashboardAdminModerationRoute,
+  DashboardAdminOrdersRoute: DashboardAdminOrdersRoute,
+  DashboardAdminReportsRoute: DashboardAdminReportsRoute,
   DashboardAdminRevenueRoute: DashboardAdminRevenueRoute,
   DashboardAdminSellersRoute: DashboardAdminSellersRoute,
   DashboardAdminUsersRoute: DashboardAdminUsersRoute,
