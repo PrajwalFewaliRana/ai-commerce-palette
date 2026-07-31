@@ -33,6 +33,7 @@ import { Route as AuthRegisterRouteImport } from './routes/auth.register'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth.forgot-password'
 import { Route as DashboardSellerIndexRouteImport } from './routes/dashboard.seller.index'
+import { Route as DashboardAdminIndexRouteImport } from './routes/dashboard.admin.index'
 import { Route as DashboardSellerReviewsRouteImport } from './routes/dashboard.seller.reviews'
 import { Route as DashboardSellerProductsRouteImport } from './routes/dashboard.seller.products'
 import { Route as DashboardSellerOrdersRouteImport } from './routes/dashboard.seller.orders'
@@ -40,6 +41,15 @@ import { Route as DashboardSellerInventoryRouteImport } from './routes/dashboard
 import { Route as DashboardSellerCustomersRouteImport } from './routes/dashboard.seller.customers'
 import { Route as DashboardSellerCouponsRouteImport } from './routes/dashboard.seller.coupons'
 import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard.seller.analytics'
+import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
+import { Route as DashboardAdminSettingsRouteImport } from './routes/dashboard.admin.settings'
+import { Route as DashboardAdminSellersRouteImport } from './routes/dashboard.admin.sellers'
+import { Route as DashboardAdminRevenueRouteImport } from './routes/dashboard.admin.revenue'
+import { Route as DashboardAdminReportsRouteImport } from './routes/dashboard.admin.reports'
+import { Route as DashboardAdminOrdersRouteImport } from './routes/dashboard.admin.orders'
+import { Route as DashboardAdminNotificationsRouteImport } from './routes/dashboard.admin.notifications'
+import { Route as DashboardAdminModerationRouteImport } from './routes/dashboard.admin.moderation'
+import { Route as DashboardAdminCategoriesRouteImport } from './routes/dashboard.admin.categories'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -161,6 +171,11 @@ const DashboardSellerIndexRoute = DashboardSellerIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardSellerRoute,
 } as any)
+const DashboardAdminIndexRoute = DashboardAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 const DashboardSellerReviewsRoute = DashboardSellerReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
@@ -199,6 +214,54 @@ const DashboardSellerAnalyticsRoute =
     path: '/analytics',
     getParentRoute: () => DashboardSellerRoute,
   } as any)
+const DashboardAdminUsersRoute = DashboardAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminSettingsRoute = DashboardAdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminSellersRoute = DashboardAdminSellersRouteImport.update({
+  id: '/sellers',
+  path: '/sellers',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminRevenueRoute = DashboardAdminRevenueRouteImport.update({
+  id: '/revenue',
+  path: '/revenue',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminReportsRoute = DashboardAdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminOrdersRoute = DashboardAdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminNotificationsRoute =
+  DashboardAdminNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
+const DashboardAdminModerationRoute =
+  DashboardAdminModerationRouteImport.update({
+    id: '/moderation',
+    path: '/moderation',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
+const DashboardAdminCategoriesRoute =
+  DashboardAdminCategoriesRouteImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -219,11 +282,20 @@ export interface FileRoutesByFullPath {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
-  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
+  '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/notifications': typeof DashboardAdminNotificationsRoute
+  '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
+  '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
+  '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
+  '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/settings': typeof DashboardAdminSettingsRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -231,6 +303,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
   '/dashboard/seller/products': typeof DashboardSellerProductsRoute
   '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/seller/': typeof DashboardSellerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -252,10 +325,18 @@ export interface FileRoutesByTo {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
-  '/dashboard/admin': typeof DashboardAdminRoute
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
+  '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/notifications': typeof DashboardAdminNotificationsRoute
+  '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
+  '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
+  '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
+  '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/settings': typeof DashboardAdminSettingsRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -263,6 +344,7 @@ export interface FileRoutesByTo {
   '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
   '/dashboard/seller/products': typeof DashboardSellerProductsRoute
   '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/admin': typeof DashboardAdminIndexRoute
   '/dashboard/seller': typeof DashboardSellerIndexRoute
 }
 export interface FileRoutesById {
@@ -285,11 +367,20 @@ export interface FileRoutesById {
   '/auth/reset-password': typeof AuthResetPasswordRoute
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
-  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
+  '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
+  '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/notifications': typeof DashboardAdminNotificationsRoute
+  '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
+  '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
+  '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
+  '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/settings': typeof DashboardAdminSettingsRoute
+  '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
   '/dashboard/seller/customers': typeof DashboardSellerCustomersRoute
@@ -297,6 +388,7 @@ export interface FileRoutesById {
   '/dashboard/seller/orders': typeof DashboardSellerOrdersRoute
   '/dashboard/seller/products': typeof DashboardSellerProductsRoute
   '/dashboard/seller/reviews': typeof DashboardSellerReviewsRoute
+  '/dashboard/admin/': typeof DashboardAdminIndexRoute
   '/dashboard/seller/': typeof DashboardSellerIndexRoute
 }
 export interface FileRouteTypes {
@@ -325,6 +417,15 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/categories'
+    | '/dashboard/admin/moderation'
+    | '/dashboard/admin/notifications'
+    | '/dashboard/admin/orders'
+    | '/dashboard/admin/reports'
+    | '/dashboard/admin/revenue'
+    | '/dashboard/admin/sellers'
+    | '/dashboard/admin/settings'
+    | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -332,6 +433,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller/orders'
     | '/dashboard/seller/products'
     | '/dashboard/seller/reviews'
+    | '/dashboard/admin/'
     | '/dashboard/seller/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -353,10 +455,18 @@ export interface FileRouteTypes {
     | '/auth/reset-password'
     | '/auth/verify-email'
     | '/category/$slug'
-    | '/dashboard/admin'
     | '/dashboard/customer'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/categories'
+    | '/dashboard/admin/moderation'
+    | '/dashboard/admin/notifications'
+    | '/dashboard/admin/orders'
+    | '/dashboard/admin/reports'
+    | '/dashboard/admin/revenue'
+    | '/dashboard/admin/sellers'
+    | '/dashboard/admin/settings'
+    | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -364,6 +474,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller/orders'
     | '/dashboard/seller/products'
     | '/dashboard/seller/reviews'
+    | '/dashboard/admin'
     | '/dashboard/seller'
   id:
     | '__root__'
@@ -390,6 +501,15 @@ export interface FileRouteTypes {
     | '/dashboard/seller'
     | '/orders/$id'
     | '/product/$id'
+    | '/dashboard/admin/categories'
+    | '/dashboard/admin/moderation'
+    | '/dashboard/admin/notifications'
+    | '/dashboard/admin/orders'
+    | '/dashboard/admin/reports'
+    | '/dashboard/admin/revenue'
+    | '/dashboard/admin/sellers'
+    | '/dashboard/admin/settings'
+    | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
     | '/dashboard/seller/customers'
@@ -397,6 +517,7 @@ export interface FileRouteTypes {
     | '/dashboard/seller/orders'
     | '/dashboard/seller/products'
     | '/dashboard/seller/reviews'
+    | '/dashboard/admin/'
     | '/dashboard/seller/'
   fileRoutesById: FileRoutesById
 }
@@ -419,7 +540,7 @@ export interface RootRouteChildren {
   AuthResetPasswordRoute: typeof AuthResetPasswordRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   CategorySlugRoute: typeof CategorySlugRoute
-  DashboardAdminRoute: typeof DashboardAdminRoute
+  DashboardAdminRoute: typeof DashboardAdminRouteWithChildren
   DashboardCustomerRoute: typeof DashboardCustomerRoute
   DashboardSellerRoute: typeof DashboardSellerRouteWithChildren
   ProductIdRoute: typeof ProductIdRoute
@@ -595,6 +716,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSellerIndexRouteImport
       parentRoute: typeof DashboardSellerRoute
     }
+    '/dashboard/admin/': {
+      id: '/dashboard/admin/'
+      path: '/'
+      fullPath: '/dashboard/admin/'
+      preLoaderRoute: typeof DashboardAdminIndexRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/seller/reviews': {
       id: '/dashboard/seller/reviews'
       path: '/reviews'
@@ -644,6 +772,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSellerAnalyticsRouteImport
       parentRoute: typeof DashboardSellerRoute
     }
+    '/dashboard/admin/users': {
+      id: '/dashboard/admin/users'
+      path: '/users'
+      fullPath: '/dashboard/admin/users'
+      preLoaderRoute: typeof DashboardAdminUsersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/settings': {
+      id: '/dashboard/admin/settings'
+      path: '/settings'
+      fullPath: '/dashboard/admin/settings'
+      preLoaderRoute: typeof DashboardAdminSettingsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/sellers': {
+      id: '/dashboard/admin/sellers'
+      path: '/sellers'
+      fullPath: '/dashboard/admin/sellers'
+      preLoaderRoute: typeof DashboardAdminSellersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/revenue': {
+      id: '/dashboard/admin/revenue'
+      path: '/revenue'
+      fullPath: '/dashboard/admin/revenue'
+      preLoaderRoute: typeof DashboardAdminRevenueRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/reports': {
+      id: '/dashboard/admin/reports'
+      path: '/reports'
+      fullPath: '/dashboard/admin/reports'
+      preLoaderRoute: typeof DashboardAdminReportsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/orders': {
+      id: '/dashboard/admin/orders'
+      path: '/orders'
+      fullPath: '/dashboard/admin/orders'
+      preLoaderRoute: typeof DashboardAdminOrdersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/notifications': {
+      id: '/dashboard/admin/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/admin/notifications'
+      preLoaderRoute: typeof DashboardAdminNotificationsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/moderation': {
+      id: '/dashboard/admin/moderation'
+      path: '/moderation'
+      fullPath: '/dashboard/admin/moderation'
+      preLoaderRoute: typeof DashboardAdminModerationRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/categories': {
+      id: '/dashboard/admin/categories'
+      path: '/categories'
+      fullPath: '/dashboard/admin/categories'
+      preLoaderRoute: typeof DashboardAdminCategoriesRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
   }
 }
 
@@ -657,6 +848,36 @@ const OrdersRouteChildren: OrdersRouteChildren = {
 
 const OrdersRouteWithChildren =
   OrdersRoute._addFileChildren(OrdersRouteChildren)
+
+interface DashboardAdminRouteChildren {
+  DashboardAdminCategoriesRoute: typeof DashboardAdminCategoriesRoute
+  DashboardAdminModerationRoute: typeof DashboardAdminModerationRoute
+  DashboardAdminNotificationsRoute: typeof DashboardAdminNotificationsRoute
+  DashboardAdminOrdersRoute: typeof DashboardAdminOrdersRoute
+  DashboardAdminReportsRoute: typeof DashboardAdminReportsRoute
+  DashboardAdminRevenueRoute: typeof DashboardAdminRevenueRoute
+  DashboardAdminSellersRoute: typeof DashboardAdminSellersRoute
+  DashboardAdminSettingsRoute: typeof DashboardAdminSettingsRoute
+  DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
+  DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
+}
+
+const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
+  DashboardAdminCategoriesRoute: DashboardAdminCategoriesRoute,
+  DashboardAdminModerationRoute: DashboardAdminModerationRoute,
+  DashboardAdminNotificationsRoute: DashboardAdminNotificationsRoute,
+  DashboardAdminOrdersRoute: DashboardAdminOrdersRoute,
+  DashboardAdminReportsRoute: DashboardAdminReportsRoute,
+  DashboardAdminRevenueRoute: DashboardAdminRevenueRoute,
+  DashboardAdminSellersRoute: DashboardAdminSellersRoute,
+  DashboardAdminSettingsRoute: DashboardAdminSettingsRoute,
+  DashboardAdminUsersRoute: DashboardAdminUsersRoute,
+  DashboardAdminIndexRoute: DashboardAdminIndexRoute,
+}
+
+const DashboardAdminRouteWithChildren = DashboardAdminRoute._addFileChildren(
+  DashboardAdminRouteChildren,
+)
 
 interface DashboardSellerRouteChildren {
   DashboardSellerAnalyticsRoute: typeof DashboardSellerAnalyticsRoute
@@ -703,7 +924,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   CategorySlugRoute: CategorySlugRoute,
-  DashboardAdminRoute: DashboardAdminRoute,
+  DashboardAdminRoute: DashboardAdminRouteWithChildren,
   DashboardCustomerRoute: DashboardCustomerRoute,
   DashboardSellerRoute: DashboardSellerRouteWithChildren,
   ProductIdRoute: ProductIdRoute,
