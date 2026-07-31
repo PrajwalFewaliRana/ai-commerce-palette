@@ -42,10 +42,12 @@ import { Route as DashboardSellerCustomersRouteImport } from './routes/dashboard
 import { Route as DashboardSellerCouponsRouteImport } from './routes/dashboard.seller.coupons'
 import { Route as DashboardSellerAnalyticsRouteImport } from './routes/dashboard.seller.analytics'
 import { Route as DashboardAdminUsersRouteImport } from './routes/dashboard.admin.users'
+import { Route as DashboardAdminSettingsRouteImport } from './routes/dashboard.admin.settings'
 import { Route as DashboardAdminSellersRouteImport } from './routes/dashboard.admin.sellers'
 import { Route as DashboardAdminRevenueRouteImport } from './routes/dashboard.admin.revenue'
 import { Route as DashboardAdminReportsRouteImport } from './routes/dashboard.admin.reports'
 import { Route as DashboardAdminOrdersRouteImport } from './routes/dashboard.admin.orders'
+import { Route as DashboardAdminNotificationsRouteImport } from './routes/dashboard.admin.notifications'
 import { Route as DashboardAdminModerationRouteImport } from './routes/dashboard.admin.moderation'
 import { Route as DashboardAdminCategoriesRouteImport } from './routes/dashboard.admin.categories'
 
@@ -217,6 +219,11 @@ const DashboardAdminUsersRoute = DashboardAdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
+const DashboardAdminSettingsRoute = DashboardAdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 const DashboardAdminSellersRoute = DashboardAdminSellersRouteImport.update({
   id: '/sellers',
   path: '/sellers',
@@ -237,6 +244,12 @@ const DashboardAdminOrdersRoute = DashboardAdminOrdersRouteImport.update({
   path: '/orders',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
+const DashboardAdminNotificationsRoute =
+  DashboardAdminNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
 const DashboardAdminModerationRoute =
   DashboardAdminModerationRouteImport.update({
     id: '/moderation',
@@ -276,10 +289,12 @@ export interface FileRoutesByFullPath {
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
   '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/notifications': typeof DashboardAdminNotificationsRoute
   '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
   '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/settings': typeof DashboardAdminSettingsRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
@@ -315,10 +330,12 @@ export interface FileRoutesByTo {
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
   '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/notifications': typeof DashboardAdminNotificationsRoute
   '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
   '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/settings': typeof DashboardAdminSettingsRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
@@ -357,10 +374,12 @@ export interface FileRoutesById {
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
   '/dashboard/admin/moderation': typeof DashboardAdminModerationRoute
+  '/dashboard/admin/notifications': typeof DashboardAdminNotificationsRoute
   '/dashboard/admin/orders': typeof DashboardAdminOrdersRoute
   '/dashboard/admin/reports': typeof DashboardAdminReportsRoute
   '/dashboard/admin/revenue': typeof DashboardAdminRevenueRoute
   '/dashboard/admin/sellers': typeof DashboardAdminSellersRoute
+  '/dashboard/admin/settings': typeof DashboardAdminSettingsRoute
   '/dashboard/admin/users': typeof DashboardAdminUsersRoute
   '/dashboard/seller/analytics': typeof DashboardSellerAnalyticsRoute
   '/dashboard/seller/coupons': typeof DashboardSellerCouponsRoute
@@ -400,10 +419,12 @@ export interface FileRouteTypes {
     | '/product/$id'
     | '/dashboard/admin/categories'
     | '/dashboard/admin/moderation'
+    | '/dashboard/admin/notifications'
     | '/dashboard/admin/orders'
     | '/dashboard/admin/reports'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
+    | '/dashboard/admin/settings'
     | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
@@ -439,10 +460,12 @@ export interface FileRouteTypes {
     | '/product/$id'
     | '/dashboard/admin/categories'
     | '/dashboard/admin/moderation'
+    | '/dashboard/admin/notifications'
     | '/dashboard/admin/orders'
     | '/dashboard/admin/reports'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
+    | '/dashboard/admin/settings'
     | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
@@ -480,10 +503,12 @@ export interface FileRouteTypes {
     | '/product/$id'
     | '/dashboard/admin/categories'
     | '/dashboard/admin/moderation'
+    | '/dashboard/admin/notifications'
     | '/dashboard/admin/orders'
     | '/dashboard/admin/reports'
     | '/dashboard/admin/revenue'
     | '/dashboard/admin/sellers'
+    | '/dashboard/admin/settings'
     | '/dashboard/admin/users'
     | '/dashboard/seller/analytics'
     | '/dashboard/seller/coupons'
@@ -754,6 +779,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminUsersRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
+    '/dashboard/admin/settings': {
+      id: '/dashboard/admin/settings'
+      path: '/settings'
+      fullPath: '/dashboard/admin/settings'
+      preLoaderRoute: typeof DashboardAdminSettingsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/admin/sellers': {
       id: '/dashboard/admin/sellers'
       path: '/sellers'
@@ -780,6 +812,13 @@ declare module '@tanstack/react-router' {
       path: '/orders'
       fullPath: '/dashboard/admin/orders'
       preLoaderRoute: typeof DashboardAdminOrdersRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/notifications': {
+      id: '/dashboard/admin/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/admin/notifications'
+      preLoaderRoute: typeof DashboardAdminNotificationsRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
     '/dashboard/admin/moderation': {
@@ -813,10 +852,12 @@ const OrdersRouteWithChildren =
 interface DashboardAdminRouteChildren {
   DashboardAdminCategoriesRoute: typeof DashboardAdminCategoriesRoute
   DashboardAdminModerationRoute: typeof DashboardAdminModerationRoute
+  DashboardAdminNotificationsRoute: typeof DashboardAdminNotificationsRoute
   DashboardAdminOrdersRoute: typeof DashboardAdminOrdersRoute
   DashboardAdminReportsRoute: typeof DashboardAdminReportsRoute
   DashboardAdminRevenueRoute: typeof DashboardAdminRevenueRoute
   DashboardAdminSellersRoute: typeof DashboardAdminSellersRoute
+  DashboardAdminSettingsRoute: typeof DashboardAdminSettingsRoute
   DashboardAdminUsersRoute: typeof DashboardAdminUsersRoute
   DashboardAdminIndexRoute: typeof DashboardAdminIndexRoute
 }
@@ -824,10 +865,12 @@ interface DashboardAdminRouteChildren {
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
   DashboardAdminCategoriesRoute: DashboardAdminCategoriesRoute,
   DashboardAdminModerationRoute: DashboardAdminModerationRoute,
+  DashboardAdminNotificationsRoute: DashboardAdminNotificationsRoute,
   DashboardAdminOrdersRoute: DashboardAdminOrdersRoute,
   DashboardAdminReportsRoute: DashboardAdminReportsRoute,
   DashboardAdminRevenueRoute: DashboardAdminRevenueRoute,
   DashboardAdminSellersRoute: DashboardAdminSellersRoute,
+  DashboardAdminSettingsRoute: DashboardAdminSettingsRoute,
   DashboardAdminUsersRoute: DashboardAdminUsersRoute,
   DashboardAdminIndexRoute: DashboardAdminIndexRoute,
 }
@@ -889,3 +932,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
