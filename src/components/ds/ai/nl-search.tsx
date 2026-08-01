@@ -11,7 +11,11 @@ export function NaturalLanguageSearch({
   defaultValue = "",
   className,
   autoFocus,
-}: { defaultValue?: string; className?: string; autoFocus?: boolean }) {
+}: {
+  defaultValue?: string;
+  className?: string;
+  autoFocus?: boolean;
+}) {
   const navigate = useNavigate();
   const [value, setValue] = React.useState(defaultValue);
   const parsed = React.useMemo(() => parseQuery(value), [value]);
@@ -45,10 +49,14 @@ export function NaturalLanguageSearch({
 
       {value.trim().length > 2 ? (
         <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1 font-medium text-primary"><Wand2 className="size-3.5" /> Understood:</span>
+          <span className="inline-flex items-center gap-1 font-medium text-primary">
+            <Wand2 className="size-3.5" /> Understood:
+          </span>
           {parsed.facets.length ? (
             parsed.facets.map((f) => (
-              <Badge key={f.label} variant={f.kind === "budget" ? "ai" : "secondary"}>{f.label}</Badge>
+              <Badge key={f.label} variant={f.kind === "budget" ? "ai" : "secondary"}>
+                {f.label}
+              </Badge>
             ))
           ) : (
             <span>reading your sentence — add a budget or a use case to sharpen it</span>

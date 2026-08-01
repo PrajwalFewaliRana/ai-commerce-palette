@@ -11,7 +11,10 @@ export interface FloatingInputProps extends React.InputHTMLAttributes<HTMLInputE
 }
 
 export const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputProps>(
-  ({ className, label, icon: Icon, error, success, endAdornment, id, type = "text", ...props }, ref) => {
+  (
+    { className, label, icon: Icon, error, success, endAdornment, id, type = "text", ...props },
+    ref,
+  ) => {
     const reactId = React.useId();
     const inputId = id ?? reactId;
     return (
@@ -20,7 +23,11 @@ export const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputPro
           className={cn(
             "group relative rounded-xl border bg-card transition",
             "focus-within:border-primary focus-within:shadow-[var(--shadow-glow)]",
-            error ? "border-destructive" : success ? "border-[color:var(--success)]" : "border-border",
+            error
+              ? "border-destructive"
+              : success
+                ? "border-[color:var(--success)]"
+                : "border-border",
           )}
         >
           {Icon && (
@@ -50,7 +57,9 @@ export const FloatingInput = React.forwardRef<HTMLInputElement, FloatingInputPro
             {label}
           </label>
           {endAdornment && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">{endAdornment}</div>
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+              {endAdornment}
+            </div>
           )}
         </div>
         {error && <p className="mt-1.5 text-xs text-destructive">{error}</p>}

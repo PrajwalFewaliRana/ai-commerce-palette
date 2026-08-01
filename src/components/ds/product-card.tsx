@@ -16,12 +16,28 @@ export interface ProductCardProps {
 }
 
 export function ProductCard({
-  title, vendor, price, originalPrice, rating, reviews, image, badge, className,
+  title,
+  vendor,
+  price,
+  originalPrice,
+  rating,
+  reviews,
+  image,
+  badge,
+  className,
 }: ProductCardProps) {
   return (
-    <div className={cn("group relative overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-lg)]", className)}>
+    <div
+      className={cn(
+        "group relative overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-lg)]",
+        className,
+      )}
+    >
       <div className="relative aspect-square overflow-hidden bg-muted">
-        <div className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url(${image})` }} />
+        <div
+          className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+          style={{ backgroundImage: `url(${image})` }}
+        />
         {badge && (
           <Badge variant={badge.variant ?? "ai"} className="absolute left-3 top-3">
             {badge.label}
@@ -42,7 +58,11 @@ export function ProductCard({
         <div className="flex items-end justify-between pt-1">
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-bold">${price.toFixed(2)}</span>
-            {originalPrice && <span className="text-xs text-muted-foreground line-through">${originalPrice.toFixed(2)}</span>}
+            {originalPrice && (
+              <span className="text-xs text-muted-foreground line-through">
+                ${originalPrice.toFixed(2)}
+              </span>
+            )}
           </div>
           <Button size="icon" variant="hero" className="rounded-lg">
             <ShoppingCart />

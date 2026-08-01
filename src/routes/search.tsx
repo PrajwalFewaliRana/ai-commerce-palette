@@ -11,12 +11,17 @@ import { aiSuggestions } from "@/lib/shop-data";
 
 export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>) => ({ q: typeof s.q === "string" ? s.q : "" }),
-  head: () => ({ meta: [
-    { title: "AI Search Results — Nexa" },
-    { name: "description", content: "AI-curated matches for what you actually meant." },
-    { property: "og:title", content: "AI Search Results — Nexa" },
-    { property: "og:description", content: "Nexa AI understands natural language and finds the right products." },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: "AI Search Results — Nexa" },
+      { name: "description", content: "AI-curated matches for what you actually meant." },
+      { property: "og:title", content: "AI Search Results — Nexa" },
+      {
+        property: "og:description",
+        content: "Nexa AI understands natural language and finds the right products.",
+      },
+    ],
+  }),
   component: SearchPage,
 });
 
@@ -39,13 +44,19 @@ function SearchPage() {
         subtitle={parsed.interpretation}
       >
         <p className="text-sm text-muted-foreground">
-          I found <span className="font-medium text-foreground">{ranked.length} matches</span> across{" "}
-          <span className="font-medium text-foreground">{vendors} vendors</span>, ranked by how well each one answers your sentence.
+          I found <span className="font-medium text-foreground">{ranked.length} matches</span>{" "}
+          across <span className="font-medium text-foreground">{vendors} vendors</span>, ranked by
+          how well each one answers your sentence.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {parsed.facets.length ? (
             parsed.facets.map((f) => (
-              <Badge key={f.label} variant={f.kind === "budget" || f.kind === "rating" ? "ai" : "secondary"}>{f.label}</Badge>
+              <Badge
+                key={f.label}
+                variant={f.kind === "budget" || f.kind === "rating" ? "ai" : "secondary"}
+              >
+                {f.label}
+              </Badge>
             ))
           ) : (
             <Badge variant="secondary">Broad search — add a budget or use case to narrow it</Badge>
@@ -54,8 +65,12 @@ function SearchPage() {
       </AiPanel>
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-foreground">Showing {ranked.length} results, sorted by AI relevance</p>
-        <Button variant="outline" size="sm"><Filter className="size-4" /> Refine</Button>
+        <p className="text-sm text-muted-foreground">
+          Showing {ranked.length} results, sorted by AI relevance
+        </p>
+        <Button variant="outline" size="sm">
+          <Filter className="size-4" /> Refine
+        </Button>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -68,7 +83,12 @@ function SearchPage() {
         <p className="text-sm font-semibold">Try refining your search</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {aiSuggestions.map((s) => (
-            <Link key={s} to="/search" search={{ q: s }} className="rounded-full border border-border bg-card px-3 py-1.5 text-xs hover:border-primary/40 hover:text-primary">
+            <Link
+              key={s}
+              to="/search"
+              search={{ q: s }}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs hover:border-primary/40 hover:text-primary"
+            >
               {s}
             </Link>
           ))}

@@ -24,7 +24,9 @@ export function DashboardShell({
             Nexa
           </Link>
           <div className="flex items-center gap-3">
-            <Badge variant="ai" className="capitalize">{role}</Badge>
+            <Badge variant="ai" className="capitalize">
+              {role}
+            </Badge>
             <Button asChild variant="ghost" size="sm">
               <Link to="/auth/login">
                 <LogOut className="size-4" /> Sign out
@@ -36,7 +38,8 @@ export function DashboardShell({
       <main className="mx-auto max-w-7xl px-6 py-10">
         <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          This is a placeholder {role} dashboard. Build your workflows on top of the Nexa design system.
+          This is a placeholder {role} dashboard. Build your workflows on top of the Nexa design
+          system.
         </p>
         <div className="mt-8">{children}</div>
       </main>

@@ -51,14 +51,22 @@ export function parseQuery(raw: string): ParsedQuery {
   if (budget) facets.push({ kind: "budget", label: `Under $${budget}` });
 
   const ratingMatch = q.match(/(\d(?:\.\d)?)\s*\+?\s*star/);
-  const minRating = ratingMatch ? Number(ratingMatch[1]) : q.includes("best") || q.includes("top") ? 4.5 : undefined;
+  const minRating = ratingMatch
+    ? Number(ratingMatch[1])
+    : q.includes("best") || q.includes("top")
+      ? 4.5
+      : undefined;
   if (minRating) facets.push({ kind: "rating", label: `${minRating}+ rating` });
 
   let category: string | undefined;
   for (const [word, slug] of Object.entries(CATEGORY_WORDS)) {
-    if (q.includes(word)) { category = slug; break; }
+    if (q.includes(word)) {
+      category = slug;
+      break;
+    }
   }
-  if (category) facets.push({ kind: "category", label: category[0].toUpperCase() + category.slice(1) });
+  if (category)
+    facets.push({ kind: "category", label: category[0].toUpperCase() + category.slice(1) });
 
   for (const [word, label] of Object.entries(ATTRIBUTE_WORDS)) {
     if (q.includes(word) && !facets.some((f) => f.label === label)) {
@@ -104,7 +112,9 @@ export function rankProducts(parsed: ParsedQuery, pool: Product[] = products): R
       if (parsed.budget) {
         if (product.price <= parsed.budget) {
           score += 12;
-          reasons.push(`sits $${Math.max(1, parsed.budget - product.price)} under your $${parsed.budget} budget`);
+          reasons.push(
+            `sits $${Math.max(1, parsed.budget - product.price)} under your $${parsed.budget} budget`,
+          );
         } else {
           score -= 22;
           reasons.push(`slightly over budget at $${product.price}`);
@@ -118,7 +128,8 @@ export function rankProducts(parsed: ParsedQuery, pool: Product[] = products): R
         score += 5;
         reasons.push("consistently praised in recent reviews");
       }
-      if (product.originalPrice) reasons.push(`currently discounted from $${product.originalPrice}`);
+      if (product.originalPrice)
+        reasons.push(`currently discounted from $${product.originalPrice}`);
 
       return {
         product,
@@ -159,10 +170,7 @@ export function reviewInsight(product: Product): ReviewInsight {
       "Holds up well after months of daily use",
       `Buyers repeatedly recommend it over pricier ${product.category} options`,
     ],
-    cons: [
-      "Accessories are sold separately",
-      "A handful of reports about slow vendor replies",
-    ],
+    cons: ["Accessories are sold separately", "A handful of reports about slow vendor replies"],
     verdict: `Across ${product.reviews.toLocaleString()} reviews the picture is consistent: people buy the ${product.title} for reliability and keep it for the finish. Complaints cluster around extras, not the product itself.`,
   };
 }
@@ -175,9 +183,15 @@ export function explainProduct(product: Product) {
     goodFor: ["Everyday use", "Gifting", `Fans of ${product.vendor}`],
     skipIf: ["You need pro-tier specs", "You already own a newer model"],
     jargon: [
-      { term: "ANC", meaning: "Active noise cancellation — electronically cancels steady background sound." },
+      {
+        term: "ANC",
+        meaning: "Active noise cancellation — electronically cancels steady background sound.",
+      },
       { term: "Sapphire crystal", meaning: "A very scratch-resistant watch glass." },
-      { term: "Responsive foam", meaning: "Midsole that springs back, so it feels less flat over long runs." },
+      {
+        term: "Responsive foam",
+        meaning: "Midsole that springs back, so it feels less flat over long runs.",
+      },
     ],
   };
 }
@@ -194,15 +208,20 @@ export function generateDescription(name: string, keywordsInput: string, tone: T
     technical: `${product}: engineered specs, measured performance, no marketing fluff.`,
   };
   const bodies: Record<Tone, string> = {
-    premium: "Every surface is finished by hand, every component chosen for longevity. It arrives in recycled packaging and is backed by a one-year vendor warranty.",
-    friendly: "It sets up in seconds, fits into your routine, and keeps working the way you expect. Free shipping, easy 30-day returns, and real humans on support.",
-    technical: "Tested across 200 duty cycles with a measured failure rate under 0.4%. Ships with full spec sheet, calibration notes, and a one-year warranty.",
+    premium:
+      "Every surface is finished by hand, every component chosen for longevity. It arrives in recycled packaging and is backed by a one-year vendor warranty.",
+    friendly:
+      "It sets up in seconds, fits into your routine, and keeps working the way you expect. Free shipping, easy 30-day returns, and real humans on support.",
+    technical:
+      "Tested across 200 duty cycles with a measured failure rate under 0.4%. Ships with full spec sheet, calibration notes, and a one-year warranty.",
   };
   const seed = keywordsInput
     .split(/[,\n]/)
     .map((k) => k.trim())
     .filter(Boolean);
-  const keywords = (seed.length ? seed : [product, "best value", "free shipping", "premium finish", "durable"]) 
+  const keywords = (
+    seed.length ? seed : [product, "best value", "free shipping", "premium finish", "durable"]
+  )
     .slice(0, 8)
     .map((k) => k.toLowerCase());
 
@@ -232,7 +251,8 @@ export interface SellerInsight {
 export const sellerInsights: SellerInsight[] = [
   {
     title: "Raise ANC Earbuds price by 6%",
-    detail: "Demand held steady through two competitor price drops, and 41% of buyers arrived from natural-language searches mentioning ‘best’ rather than ‘cheap’.",
+    detail:
+      "Demand held steady through two competitor price drops, and 41% of buyers arrived from natural-language searches mentioning ‘best’ rather than ‘cheap’.",
     impact: "+$1,940 / mo",
     confidence: 87,
     tone: "opportunity",
@@ -240,7 +260,8 @@ export const sellerInsights: SellerInsight[] = [
   },
   {
     title: "Restock Studio Headphones within 6 days",
-    detail: "Sell-through accelerated 22% week-over-week. At current velocity you go out of stock before your supplier lead time closes.",
+    detail:
+      "Sell-through accelerated 22% week-over-week. At current velocity you go out of stock before your supplier lead time closes.",
     impact: "Protects $6,300",
     confidence: 92,
     tone: "risk",
@@ -248,7 +269,8 @@ export const sellerInsights: SellerInsight[] = [
   },
   {
     title: "Fashion queries are up 34% for your store",
-    detail: "Shoppers asking for ‘everyday running shoes for beginners’ land on your Runner Pro but bounce on the size guide.",
+    detail:
+      "Shoppers asking for ‘everyday running shoes for beginners’ land on your Runner Pro but bounce on the size guide.",
     impact: "+1.1% conversion",
     confidence: 78,
     tone: "trend",
@@ -256,7 +278,8 @@ export const sellerInsights: SellerInsight[] = [
   },
   {
     title: "Two listings have thin descriptions",
-    detail: "Both rank below page 2 for their main keyword. Generated copy with structured specs typically recovers position within 10 days.",
+    detail:
+      "Both rank below page 2 for their main keyword. Generated copy with structured specs typically recovers position within 10 days.",
     impact: "+320 sessions / mo",
     confidence: 71,
     tone: "opportunity",

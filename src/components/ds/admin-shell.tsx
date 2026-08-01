@@ -1,8 +1,24 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
 import {
-  Sparkles, LayoutDashboard, LineChart, Users, ShieldCheck, PackageSearch, FolderTree,
-  ShoppingBag, FileBarChart, Bell, Settings, Search, Moon, Sun, LogOut, Menu,
-  ChevronDown, ChevronLeft, ChevronRight,
+  Sparkles,
+  LayoutDashboard,
+  LineChart,
+  Users,
+  ShieldCheck,
+  PackageSearch,
+  FolderTree,
+  ShoppingBag,
+  FileBarChart,
+  Bell,
+  Settings,
+  Search,
+  Moon,
+  Sun,
+  LogOut,
+  Menu,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -14,7 +30,12 @@ const NAV = [
   { to: "/dashboard/admin/revenue", label: "Revenue analytics", icon: LineChart },
   { to: "/dashboard/admin/users", label: "User management", icon: Users },
   { to: "/dashboard/admin/sellers", label: "Seller verification", icon: ShieldCheck, badge: "12" },
-  { to: "/dashboard/admin/moderation", label: "Product moderation", icon: PackageSearch, badge: "23" },
+  {
+    to: "/dashboard/admin/moderation",
+    label: "Product moderation",
+    icon: PackageSearch,
+    badge: "23",
+  },
   { to: "/dashboard/admin/categories", label: "Categories", icon: FolderTree },
   { to: "/dashboard/admin/orders", label: "Orders", icon: ShoppingBag },
   { to: "/dashboard/admin/reports", label: "Reports", icon: FileBarChart },
@@ -38,15 +59,22 @@ function useDarkMode() {
 function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-2 border-b border-border/60 px-5 py-4 text-lg font-semibold">
+      <Link
+        to="/"
+        className="flex items-center gap-2 border-b border-border/60 px-5 py-4 text-lg font-semibold"
+      >
         <span className="grid size-8 place-items-center rounded-lg text-primary-foreground [background-image:var(--gradient-ai)]">
           <Sparkles className="size-4" />
         </span>
         Nexa
-        <Badge variant="ai" className="ml-1 text-[10px]">Admin</Badge>
+        <Badge variant="ai" className="ml-1 text-[10px]">
+          Admin
+        </Badge>
       </Link>
       <nav className="flex-1 space-y-0.5 overflow-y-auto p-3 text-sm">
-        <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">Platform</p>
+        <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          Platform
+        </p>
         {NAV.map(({ to, label, icon: Icon, end, badge }) => {
           const active = end ? pathname === to : pathname.startsWith(to);
           return (
@@ -61,7 +89,11 @@ function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?:
             >
               <Icon className={cn("size-4 shrink-0", active && "text-primary")} />
               <span className="truncate">{label}</span>
-              {badge && <Badge variant="warning" className="ml-auto text-[10px]">{badge}</Badge>}
+              {badge && (
+                <Badge variant="warning" className="ml-auto text-[10px]">
+                  {badge}
+                </Badge>
+              )}
             </Link>
           );
         })}
@@ -75,7 +107,9 @@ function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?:
             23 listings and 4 stores need a human decision today.
           </p>
           <Button size="sm" variant="hero" className="mt-3 w-full" asChild>
-            <Link to="/dashboard/admin/moderation" onClick={onNavigate}>Review queue</Link>
+            <Link to="/dashboard/admin/moderation" onClick={onNavigate}>
+              Review queue
+            </Link>
           </Button>
         </div>
       </div>
@@ -96,7 +130,10 @@ export function AdminShell() {
 
       {mobileOpen && (
         <>
-          <div className="fixed inset-0 z-40 bg-background/70 backdrop-blur lg:hidden" onClick={() => setMobileOpen(false)} />
+          <div
+            className="fixed inset-0 z-40 bg-background/70 backdrop-blur lg:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
           <aside className="fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-card lg:hidden">
             <SidebarInner pathname={pathname} onNavigate={() => setMobileOpen(false)} />
           </aside>
@@ -106,7 +143,12 @@ export function AdminShell() {
       <div className="lg:pl-64">
         <header className="sticky top-0 z-20 border-b border-border/60 bg-background/80 backdrop-blur">
           <div className="flex items-center gap-3 px-4 py-3 sm:px-6">
-            <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(true)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setMobileOpen(true)}
+            >
               <Menu className="size-4" />
             </Button>
             <div className="relative hidden max-w-md flex-1 md:block">
@@ -128,7 +170,9 @@ export function AdminShell() {
                 <span className="absolute right-2 top-2 size-1.5 rounded-full bg-destructive" />
               </Link>
               <div className="ml-2 flex items-center gap-2 rounded-xl border border-border bg-card px-2.5 py-1.5">
-                <div className="grid size-7 place-items-center rounded-lg bg-primary text-xs font-semibold text-primary-foreground">NX</div>
+                <div className="grid size-7 place-items-center rounded-lg bg-primary text-xs font-semibold text-primary-foreground">
+                  NX
+                </div>
                 <div className="hidden sm:block">
                   <p className="text-xs font-semibold leading-tight">Nexa Ops</p>
                   <p className="text-[10px] text-muted-foreground">Super admin</p>
@@ -136,7 +180,9 @@ export function AdminShell() {
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
               <Button variant="ghost" size="icon" asChild>
-                <Link to="/auth/login" aria-label="Sign out"><LogOut className="size-4" /></Link>
+                <Link to="/auth/login" aria-label="Sign out">
+                  <LogOut className="size-4" />
+                </Link>
               </Button>
             </div>
           </div>
@@ -152,7 +198,10 @@ export function AdminShell() {
 /* ---------- shared data-heavy table primitives ---------- */
 
 export function DataToolbar({
-  query, onQuery, placeholder, children,
+  query,
+  onQuery,
+  placeholder,
+  children,
 }: {
   query: string;
   onQuery: (v: string) => void;
@@ -176,7 +225,10 @@ export function DataToolbar({
 }
 
 export function FilterSelect({
-  value, onChange, options, label,
+  value,
+  onChange,
+  options,
+  label,
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -192,7 +244,9 @@ export function FilterSelect({
         className="rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary/50"
       >
         {options.map((o) => (
-          <option key={o.value} value={o.value}>{o.label}</option>
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
         ))}
       </select>
     </label>
@@ -200,7 +254,11 @@ export function FilterSelect({
 }
 
 export function Pager({
-  page, pageSize, total, onPage, onPageSize,
+  page,
+  pageSize,
+  total,
+  onPage,
+  onPageSize,
 }: {
   page: number;
   pageSize: number;
@@ -219,20 +277,36 @@ export function Pager({
   return (
     <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 p-4 text-xs text-muted-foreground">
       <p>
-        Showing <b className="text-foreground">{from}–{to}</b> of{" "}
-        <b className="text-foreground">{total.toLocaleString()}</b>
+        Showing{" "}
+        <b className="text-foreground">
+          {from}–{to}
+        </b>{" "}
+        of <b className="text-foreground">{total.toLocaleString()}</b>
       </p>
       <div className="flex items-center gap-2">
         {onPageSize && (
           <select
             value={pageSize}
-            onChange={(e) => { onPageSize(Number(e.target.value)); onPage(1); }}
+            onChange={(e) => {
+              onPageSize(Number(e.target.value));
+              onPage(1);
+            }}
             className="rounded-lg border border-border bg-background px-2 py-1.5 text-xs text-foreground outline-none"
           >
-            {[10, 25, 50].map((n) => <option key={n} value={n}>{n} / page</option>)}
+            {[10, 25, 50].map((n) => (
+              <option key={n} value={n}>
+                {n} / page
+              </option>
+            ))}
           </select>
         )}
-        <Button variant="outline" size="icon" className="size-8" disabled={page <= 1} onClick={() => onPage(page - 1)}>
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-8"
+          disabled={page <= 1}
+          onClick={() => onPage(page - 1)}
+        >
           <ChevronLeft className="size-4" />
         </Button>
         {window.map((p) => (
@@ -246,7 +320,13 @@ export function Pager({
             {p}
           </Button>
         ))}
-        <Button variant="outline" size="icon" className="size-8" disabled={page >= pages} onClick={() => onPage(page + 1)}>
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-8"
+          disabled={page >= pages}
+          onClick={() => onPage(page + 1)}
+        >
           <ChevronRight className="size-4" />
         </Button>
       </div>
@@ -254,11 +334,26 @@ export function Pager({
   );
 }
 
-export function Panel({ title, subtitle, actions, children, className }: {
-  title?: string; subtitle?: string; actions?: ReactNode; children: ReactNode; className?: string;
+export function Panel({
+  title,
+  subtitle,
+  actions,
+  children,
+  className,
+}: {
+  title?: string;
+  subtitle?: string;
+  actions?: ReactNode;
+  children: ReactNode;
+  className?: string;
 }) {
   return (
-    <section className={cn("overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]", className)}>
+    <section
+      className={cn(
+        "overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]",
+        className,
+      )}
+    >
       {(title || actions) && (
         <div className="flex flex-wrap items-center justify-between gap-3 p-5 pb-4">
           <div>

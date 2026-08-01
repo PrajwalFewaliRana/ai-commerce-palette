@@ -39,7 +39,9 @@ export function AiPanel({
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <p className="text-xs font-medium uppercase tracking-wide text-primary">{eyebrow}</p>
-            <Badge variant="ai" className="text-[10px]">AI</Badge>
+            <Badge variant="ai" className="text-[10px]">
+              AI
+            </Badge>
           </div>
           <div className="mt-1 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -59,9 +61,14 @@ export function ConfidenceMeter({ value, label = "Match" }: { value: number; lab
   return (
     <div className="flex items-center gap-2">
       <div className="h-1.5 w-16 overflow-hidden rounded-full bg-muted">
-        <div className="h-full rounded-full [background-image:var(--gradient-ai)]" style={{ width: `${value}%` }} />
+        <div
+          className="h-full rounded-full [background-image:var(--gradient-ai)]"
+          style={{ width: `${value}%` }}
+        />
       </div>
-      <span className="text-xs font-medium text-muted-foreground">{value}% {label}</span>
+      <span className="text-xs font-medium text-muted-foreground">
+        {value}% {label}
+      </span>
     </div>
   );
 }

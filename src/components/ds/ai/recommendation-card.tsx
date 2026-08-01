@@ -10,14 +10,32 @@ import { cn } from "@/lib/utils";
 export function RecommendationCard({ item, className }: { item: Ranked; className?: string }) {
   const { product, score, reason } = item;
   return (
-    <article className={cn("group flex flex-col overflow-hidden rounded-2xl border border-primary/20 bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-lg)]", className)}>
-      <Link to="/product/$id" params={{ id: product.id }} className="relative block aspect-[4/3] overflow-hidden bg-muted">
-        <div className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style={{ backgroundImage: `url(${product.image})` }} />
-        <Badge variant="ai" className="absolute left-3 top-3 gap-1"><Sparkles className="size-3" /> AI Pick</Badge>
+    <article
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-2xl border border-primary/20 bg-card shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-lg)]",
+        className,
+      )}
+    >
+      <Link
+        to="/product/$id"
+        params={{ id: product.id }}
+        className="relative block aspect-[4/3] overflow-hidden bg-muted"
+      >
+        <div
+          className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+          style={{ backgroundImage: `url(${product.image})` }}
+        />
+        <Badge variant="ai" className="absolute left-3 top-3 gap-1">
+          <Sparkles className="size-3" /> AI Pick
+        </Badge>
       </Link>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <p className="text-xs text-muted-foreground">{product.vendor}</p>
-        <Link to="/product/$id" params={{ id: product.id }} className="line-clamp-2 text-sm font-semibold leading-tight hover:text-primary">
+        <Link
+          to="/product/$id"
+          params={{ id: product.id }}
+          className="line-clamp-2 text-sm font-semibold leading-tight hover:text-primary"
+        >
           {product.title}
         </Link>
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -34,12 +52,20 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-baseline gap-2">
               <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
-              {product.originalPrice && <span className="text-xs text-muted-foreground line-through">${product.originalPrice.toFixed(2)}</span>}
+              {product.originalPrice && (
+                <span className="text-xs text-muted-foreground line-through">
+                  ${product.originalPrice.toFixed(2)}
+                </span>
+              )}
             </div>
             <div className="flex gap-1">
-              <Button size="icon" variant="ghost" aria-label="Not relevant"><ThumbsDown /></Button>
+              <Button size="icon" variant="ghost" aria-label="Not relevant">
+                <ThumbsDown />
+              </Button>
               <Button size="icon" variant="hero" aria-label="Add to cart" asChild>
-                <Link to="/cart"><ShoppingCart /></Link>
+                <Link to="/cart">
+                  <ShoppingCart />
+                </Link>
               </Button>
             </div>
           </div>
@@ -49,17 +75,29 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
   );
 }
 
-export function RecommendationRow({ items, title = "Recommended for you", note }: { items: Ranked[]; title?: string; note?: string }) {
+export function RecommendationRow({
+  items,
+  title = "Recommended for you",
+  note,
+}: {
+  items: Ranked[];
+  title?: string;
+  note?: string;
+}) {
   return (
     <section>
       <div className="mb-4 flex flex-wrap items-end justify-between gap-2">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-semibold"><Sparkles className="size-5 text-primary" /> {title}</h2>
+          <h2 className="flex items-center gap-2 text-lg font-semibold">
+            <Sparkles className="size-5 text-primary" /> {title}
+          </h2>
           {note && <p className="mt-1 text-sm text-muted-foreground">{note}</p>}
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((item) => <RecommendationCard key={item.product.id} item={item} />)}
+        {items.map((item) => (
+          <RecommendationCard key={item.product.id} item={item} />
+        ))}
       </div>
     </section>
   );

@@ -27,15 +27,27 @@ export function AiProductExplanation({ product }: { product: Product }) {
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="flex items-center gap-2 text-sm font-semibold text-[color:var(--success)]"><Check className="size-4" /> Buy it if</p>
+          <p className="flex items-center gap-2 text-sm font-semibold text-[color:var(--success)]">
+            <Check className="size-4" /> Buy it if
+          </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {info.goodFor.map((g) => <Badge key={g} variant="success">{g}</Badge>)}
+            {info.goodFor.map((g) => (
+              <Badge key={g} variant="success">
+                {g}
+              </Badge>
+            ))}
           </div>
         </div>
         <div className="rounded-2xl border border-border bg-card p-4">
-          <p className="flex items-center gap-2 text-sm font-semibold text-destructive"><X className="size-4" /> Skip it if</p>
+          <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
+            <X className="size-4" /> Skip it if
+          </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            {info.skipIf.map((g) => <Badge key={g} variant="secondary">{g}</Badge>)}
+            {info.skipIf.map((g) => (
+              <Badge key={g} variant="secondary">
+                {g}
+              </Badge>
+            ))}
           </div>
         </div>
       </div>

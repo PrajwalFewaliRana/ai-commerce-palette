@@ -29,7 +29,9 @@ export function AiDescriptionGenerator({ defaultName = "" }: { defaultName?: str
   const copy = async () => {
     if (!result) return;
     try {
-      await navigator.clipboard.writeText(`${result.description}\n\n${result.bullets.map((b) => `• ${b}`).join("\n")}`);
+      await navigator.clipboard.writeText(
+        `${result.description}\n\n${result.bullets.map((b) => `• ${b}`).join("\n")}`,
+      );
       setCopied(true);
     } catch {
       setCopied(false);
@@ -45,7 +47,11 @@ export function AiDescriptionGenerator({ defaultName = "" }: { defaultName?: str
     >
       <div className="grid gap-4 lg:grid-cols-2">
         <div className="space-y-3">
-          <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Product name (e.g. Studio Wireless Headphones ANC)" />
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Product name (e.g. Studio Wireless Headphones ANC)"
+          />
           <Textarea
             value={keywords}
             onChange={(e) => setKeywords(e.target.value)}
@@ -68,13 +74,18 @@ export function AiDescriptionGenerator({ defaultName = "" }: { defaultName?: str
         <div className="rounded-2xl border border-border bg-card p-4">
           {!result && !busy && (
             <p className="text-sm text-muted-foreground">
-              Add a product name and I'll draft the description, bullets and SEO metadata you can paste straight into the listing.
+              Add a product name and I'll draft the description, bullets and SEO metadata you can
+              paste straight into the listing.
             </p>
           )}
           {busy && (
             <div className="space-y-2">
               {[90, 78, 84, 60].map((w) => (
-                <div key={w} className="h-3 animate-pulse rounded-full bg-muted" style={{ width: `${w}%` }} />
+                <div
+                  key={w}
+                  className="h-3 animate-pulse rounded-full bg-muted"
+                  style={{ width: `${w}%` }}
+                />
               ))}
             </div>
           )}
@@ -83,21 +94,36 @@ export function AiDescriptionGenerator({ defaultName = "" }: { defaultName?: str
               <p className="text-sm leading-relaxed">{result.description}</p>
               <ul className="space-y-1.5 text-sm text-muted-foreground">
                 {result.bullets.map((b) => (
-                  <li key={b} className="flex gap-2"><Check className="mt-0.5 size-3.5 shrink-0 text-[color:var(--success)]" />{b}</li>
+                  <li key={b} className="flex gap-2">
+                    <Check className="mt-0.5 size-3.5 shrink-0 text-[color:var(--success)]" />
+                    {b}
+                  </li>
                 ))}
               </ul>
               <div>
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">SEO keywords</p>
+                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  SEO keywords
+                </p>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {result.keywords.map((k) => <Badge key={k} variant="secondary">{k}</Badge>)}
+                  {result.keywords.map((k) => (
+                    <Badge key={k} variant="secondary">
+                      {k}
+                    </Badge>
+                  ))}
                 </div>
               </div>
               <div className="space-y-1 rounded-xl bg-accent/50 p-3 text-xs">
-                <p><span className="font-semibold">SEO title:</span> {result.seoTitle}</p>
-                <p className="text-muted-foreground"><span className="font-semibold text-foreground">Meta:</span> {result.metaDescription}</p>
+                <p>
+                  <span className="font-semibold">SEO title:</span> {result.seoTitle}
+                </p>
+                <p className="text-muted-foreground">
+                  <span className="font-semibold text-foreground">Meta:</span>{" "}
+                  {result.metaDescription}
+                </p>
               </div>
               <Button variant="outline" size="sm" onClick={copy}>
-                {copied ? <Check className="size-4" /> : <Copy className="size-4" />} {copied ? "Copied" : "Copy copy"}
+                {copied ? <Check className="size-4" /> : <Copy className="size-4" />}{" "}
+                {copied ? "Copied" : "Copy copy"}
               </Button>
             </div>
           )}

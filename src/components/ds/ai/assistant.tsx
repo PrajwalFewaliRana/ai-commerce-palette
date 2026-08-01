@@ -16,21 +16,67 @@ interface Turn {
 /** Context-aware prompts so the assistant feels part of the page, not a bolted-on chatbot. */
 function contextFor(pathname: string) {
   if (pathname.startsWith("/product/")) {
-    return { label: "Helping you with this product", prompts: ["Is this worth the price?", "What do reviewers complain about?", "Show me a cheaper alternative"] };
+    return {
+      label: "Helping you with this product",
+      prompts: [
+        "Is this worth the price?",
+        "What do reviewers complain about?",
+        "Show me a cheaper alternative",
+      ],
+    };
   }
-  if (pathname.startsWith("/cart") || pathname.startsWith("/checkout") || pathname.startsWith("/payment")) {
-    return { label: "Reviewing your cart", prompts: ["Can I get free shipping?", "Anything cheaper in my cart?", "Do these work together?"] };
+  if (
+    pathname.startsWith("/cart") ||
+    pathname.startsWith("/checkout") ||
+    pathname.startsWith("/payment")
+  ) {
+    return {
+      label: "Reviewing your cart",
+      prompts: [
+        "Can I get free shipping?",
+        "Anything cheaper in my cart?",
+        "Do these work together?",
+      ],
+    };
   }
   if (pathname.startsWith("/orders")) {
-    return { label: "Tracking your orders", prompts: ["Where is my order?", "Can I still change the address?", "Start a return"] };
+    return {
+      label: "Tracking your orders",
+      prompts: ["Where is my order?", "Can I still change the address?", "Start a return"],
+    };
   }
   if (pathname.startsWith("/dashboard/seller")) {
-    return { label: "Working on your store", prompts: ["What should I restock?", "Write a description for my newest product", "Why did sales dip?"] };
+    return {
+      label: "Working on your store",
+      prompts: [
+        "What should I restock?",
+        "Write a description for my newest product",
+        "Why did sales dip?",
+      ],
+    };
   }
-  if (pathname.startsWith("/search") || pathname.startsWith("/products") || pathname.startsWith("/categor")) {
-    return { label: "Narrowing these results", prompts: ["Only show items under $150", "Best rated wireless option", "Gift for a coffee lover"] };
+  if (
+    pathname.startsWith("/search") ||
+    pathname.startsWith("/products") ||
+    pathname.startsWith("/categor")
+  ) {
+    return {
+      label: "Narrowing these results",
+      prompts: [
+        "Only show items under $150",
+        "Best rated wireless option",
+        "Gift for a coffee lover",
+      ],
+    };
   }
-  return { label: "Ready when you are", prompts: ["Wireless headphones under $200 with great bass", "Minimalist watch for daily wear", "Everyday running shoes for beginners"] };
+  return {
+    label: "Ready when you are",
+    prompts: [
+      "Wireless headphones under $200 with great bass",
+      "Minimalist watch for daily wear",
+      "Everyday running shoes for beginners",
+    ],
+  };
 }
 
 function answerFor(text: string): Turn {
@@ -96,8 +142,14 @@ export function ShoppingAssistant() {
             <span className="block text-sm font-semibold">Shopping assistant</span>
             <span className="block truncate text-xs text-muted-foreground">{ctx.label}</span>
           </span>
-          <Badge variant="ai" className="hidden text-[10px] sm:inline-flex">Built in</Badge>
-          {open ? <ChevronDown className="size-4 text-muted-foreground" /> : <ChevronUp className="size-4 text-muted-foreground" />}
+          <Badge variant="ai" className="hidden text-[10px] sm:inline-flex">
+            Built in
+          </Badge>
+          {open ? (
+            <ChevronDown className="size-4 text-muted-foreground" />
+          ) : (
+            <ChevronUp className="size-4 text-muted-foreground" />
+          )}
         </button>
 
         {open && (
@@ -105,13 +157,16 @@ export function ShoppingAssistant() {
             <div ref={scroller} className="max-h-[46vh] space-y-4 overflow-y-auto px-4 py-4">
               {turns.length === 0 && (
                 <p className="text-sm text-muted-foreground">
-                  Ask in your own words. I read the page you're on, so you can say things like “is there a cheaper one that's still 4.5★+”.
+                  Ask in your own words. I read the page you're on, so you can say things like “is
+                  there a cheaper one that's still 4.5★+”.
                 </p>
               )}
               {turns.map((turn) =>
                 turn.role === "you" ? (
                   <div key={turn.id} className="flex justify-end">
-                    <p className="max-w-[85%] rounded-2xl bg-primary px-3.5 py-2 text-sm text-primary-foreground">{turn.text}</p>
+                    <p className="max-w-[85%] rounded-2xl bg-primary px-3.5 py-2 text-sm text-primary-foreground">
+                      {turn.text}
+                    </p>
                   </div>
                 ) : (
                   <div key={turn.id} className="space-y-3">
@@ -125,17 +180,26 @@ export function ShoppingAssistant() {
                               params={{ id: product.id }}
                               className="flex items-center gap-3 rounded-2xl border border-border bg-card p-2.5 transition hover:border-primary/40"
                             >
-                              <span className="size-12 shrink-0 rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${product.image})` }} />
+                              <span
+                                className="size-12 shrink-0 rounded-xl bg-cover bg-center"
+                                style={{ backgroundImage: `url(${product.image})` }}
+                              />
                               <span className="min-w-0 flex-1">
                                 <span className="flex items-center gap-2">
-                                  <span className="line-clamp-1 text-sm font-semibold">{product.title}</span>
-                                  <Badge variant="ai" className="shrink-0 text-[10px]">{score}%</Badge>
+                                  <span className="line-clamp-1 text-sm font-semibold">
+                                    {product.title}
+                                  </span>
+                                  <Badge variant="ai" className="shrink-0 text-[10px]">
+                                    {score}%
+                                  </Badge>
                                 </span>
                                 <span className="mt-0.5 flex items-center gap-2 text-xs text-muted-foreground">
                                   <Star className="size-3 fill-[color:var(--warning)] text-[color:var(--warning)]" />
                                   {product.rating} · ${product.price.toFixed(2)}
                                 </span>
-                                <span className="mt-1 line-clamp-2 block text-xs text-muted-foreground">{reason}</span>
+                                <span className="mt-1 line-clamp-2 block text-xs text-muted-foreground">
+                                  {reason}
+                                </span>
                               </span>
                             </Link>
                           </li>
@@ -147,7 +211,8 @@ export function ShoppingAssistant() {
               )}
               {thinking && (
                 <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Sparkles className="size-4 animate-pulse text-primary" /> Reading listings and reviews...
+                  <Sparkles className="size-4 animate-pulse text-primary" /> Reading listings and
+                  reviews...
                 </p>
               )}
             </div>

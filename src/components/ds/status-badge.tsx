@@ -3,7 +3,10 @@ import { cn } from "@/lib/utils";
 
 type Status = "active" | "pending" | "failed" | "draft";
 
-const map: Record<Status, { label: string; variant: "success" | "warning" | "destructive" | "secondary"; dot: string }> = {
+const map: Record<
+  Status,
+  { label: string; variant: "success" | "warning" | "destructive" | "secondary"; dot: string }
+> = {
   active: { label: "Active", variant: "success", dot: "bg-[color:var(--success)]" },
   pending: { label: "Pending", variant: "warning", dot: "bg-[color:var(--warning)]" },
   failed: { label: "Failed", variant: "destructive", dot: "bg-destructive" },
