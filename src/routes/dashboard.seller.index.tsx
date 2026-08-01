@@ -13,6 +13,7 @@ import {
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { revenueSeries, categoryMix, sellerOrders, sellerProducts } from "@/lib/seller-data";
+import { AiSellerInsights } from "@/components/ds/ai/seller-insights";
 
 export const Route = createFileRoute("/dashboard/seller/")({
   head: () => ({ meta: [{ title: "Seller Overview — Nexa" }] }),
@@ -136,6 +137,10 @@ function SellerOverview() {
             <Link to="/dashboard/seller/analytics">View full analytics <ArrowRight className="size-3.5" /></Link>
           </Button>
         </AiCard>
+      </div>
+
+      <div className="mt-6">
+        <AiSellerInsights />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
