@@ -151,20 +151,6 @@ function FeatureRow({ icon: Icon, title, desc }: { icon: typeof Truck; title: st
   );
 }
 
-function SectionHeading({ icon: Icon, title, subtitle }: { icon?: typeof GitCompareArrows; title: string; subtitle?: string }) {
-  return (
-    <div className="flex flex-wrap items-end justify-between gap-3">
-      <div>
-        <h2 className="flex items-center gap-2 text-2xl font-bold tracking-tight">
-          {Icon && <Icon className="size-6 text-primary" />}
-          {title}
-        </h2>
-        {subtitle && <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>}
-      </div>
-    </div>
-  );
-}
-
 function AiSummaryCard({ product }: { product: { title: string; description: string } }) {
   return (
     <section className="mt-10 rounded-3xl border border-border/60 bg-card/60 p-6 shadow-[var(--shadow-card)] sm:p-8">
@@ -189,62 +175,5 @@ function AiSummaryCard({ product }: { product: { title: string; description: str
         </div>
       </div>
     </section>
-  );
-}
-
-function AiReviewSummary() {
-  const pros = [
-    "Exceptional comfort for long sessions",
-    "Battery life exceeds the advertised spec",
-    "Noise cancellation works well on flights",
-  ];
-  const cons = [
-    "App could offer more EQ presets",
-    "Case footprint is larger than competitors",
-  ];
-  return (
-    <section className="mt-10 rounded-3xl border border-border/60 bg-accent/40 p-6 sm:p-8">
-      <div className="flex items-start gap-4">
-        <div className="grid size-12 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary">
-          <ScrollText className="size-5" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-xs font-medium uppercase tracking-wide text-primary">AI Review Summary</p>
-          <h2 className="mt-1 text-xl font-semibold">1,240 reviews, distilled</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-card p-4">
-              <p className="flex items-center gap-2 text-sm font-semibold text-[color:var(--success)]">
-                <Check className="size-4" /> What buyers love
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                {pros.map((p) => <li key={p} className="flex gap-2"><span className="mt-2 size-1 shrink-0 rounded-full bg-[color:var(--success)]" />{p}</li>)}
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-4">
-              <p className="flex items-center gap-2 text-sm font-semibold text-destructive">
-                <X className="size-4" /> Common complaints
-              </p>
-              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                {cons.map((p) => <li key={p} className="flex gap-2"><span className="mt-2 size-1 shrink-0 rounded-full bg-destructive" />{p}</li>)}
-              </ul>
-            </div>
-          </div>
-          <Button variant="ghost" size="sm" className="mt-4"><Bot className="size-4" /> Ask AI about this product</Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ComparisonRow({ label, values }: { label: string; values: (string | number | boolean)[] }) {
-  return (
-    <tr>
-      <td className="p-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</td>
-      {values.map((v, i) => (
-        <td key={i} className="p-4 font-medium">
-          {typeof v === "boolean" ? (v ? <Check className="size-4 text-[color:var(--success)]" /> : <X className="size-4 text-muted-foreground" />) : v}
-        </td>
-      ))}
-    </tr>
   );
 }
