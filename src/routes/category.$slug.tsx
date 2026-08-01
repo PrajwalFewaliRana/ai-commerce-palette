@@ -53,7 +53,7 @@ function CategoryPage() {
       ) : (
         <div className="rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center">
           <p className="text-muted-foreground">No products in this category yet.</p>
-          <Link to="/search" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">Ask AI to find similar items →</Link>
+          <Link to="/search" search={{ q: cat.label }} className="mt-3 inline-block text-sm font-medium text-primary hover:underline">Ask AI to find similar items →</Link>
         </div>
       )}
     </ShopShell>
