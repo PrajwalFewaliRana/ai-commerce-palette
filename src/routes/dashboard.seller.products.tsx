@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { AiCard, PageHeader } from "@/components/ds/seller-shell";
+import { PageHeader } from "@/components/ds/seller-shell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, Search, Sparkles, Filter, Copy, Pencil, Trash2 } from "lucide-react";
 import { sellerProducts, type ListingStatus } from "@/lib/seller-data";
+import { AiDescriptionGenerator } from "@/components/ds/ai/description-generator";
 
 export const Route = createFileRoute("/dashboard/seller/products")({
   head: () => ({ meta: [{ title: "Products — Seller · Nexa" }] }),
@@ -134,25 +135,10 @@ function ProductsPage() {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <AiCard title="AI Product Description Generator" description="Turn a short brief into a polished, keyword-rich listing.">
-          <Textarea placeholder="e.g. Over-ear studio headphones, ANC, 40h battery, memory foam..." rows={3} />
-          <div className="mt-3 rounded-xl border border-border bg-muted/40 p-3 text-xs text-muted-foreground">
-            <b className="text-foreground">Preview:</b> Immerse yourself in studio-grade sound with adaptive active noise cancellation, 40 hours of battery life, and plush memory-foam earcups engineered for all-day wear...
-          </div>
-          <Button variant="ai" size="sm" className="mt-3 w-full"><Sparkles className="size-3.5" /> Generate description</Button>
-        </AiCard>
-
-        <AiCard title="AI SEO Keywords" description="Rank higher in Nexa search and external engines.">
-          <div className="flex flex-wrap gap-1.5">
-            {["wireless headphones", "noise cancelling", "over-ear ANC", "40h battery", "studio monitor", "bluetooth 5.3", "audiophile", "travel headphones"].map((k) => (
-              <Badge key={k} variant="secondary" className="cursor-pointer hover:bg-accent">{k}</Badge>
-            ))}
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Estimated monthly reach: <b className="text-foreground">42.1K</b> · Competition: <b className="text-foreground">Medium</b></p>
-          <Button variant="ai" size="sm" className="mt-3 w-full"><Sparkles className="size-3.5" /> Regenerate keywords</Button>
-        </AiCard>
+      <div className="mt-6">
+        <AiDescriptionGenerator />
       </div>
+
     </>
   );
 }
