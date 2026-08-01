@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Package, Heart, Wallet, Star, ArrowRight, Sparkles, Bell, User, Truck } from "lucide-react";
 import { orders, products, notifications } from "@/lib/shop-data";
+import { RecommendationRow } from "@/components/ds/ai/recommendation-card";
+import { parseQuery, rankProducts } from "@/lib/ai-mock";
 
 export const Route = createFileRoute("/dashboard/customer")({
   head: () => ({ meta: [
@@ -96,9 +98,14 @@ function CustomerDashboardPage() {
       <section className="mt-10">
         <div className="mb-4 flex items-center justify-between">
           <p className="flex items-center gap-2 text-lg font-semibold"><Sparkles className="size-5 text-primary" /> AI picks for you</p>
-          <Link to="/search" className="text-sm font-medium text-primary hover:underline">Ask AI →</Link>
+          <Link to="/search" search={{ q: "recommend something for me" }} className="text-sm font-medium text-primary hover:underline">Ask AI →</Link>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <RecommendationRow
+          title="Because of what you browsed"
+          note="Ranked from your recent searches, saved items and past orders."
+          items={rankProducts(parseQuery("wireless headphones under $200 with great bass")).slice(0, 4)}
+        />
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {picks.map((p) => (
             <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
               <ProductCard {...p} />
