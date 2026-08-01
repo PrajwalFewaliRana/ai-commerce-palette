@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ShopShell, Breadcrumbs } from "@/components/ds/shop-shell";
-import { ProductCard } from "@/components/ds/product-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { findProduct, products } from "@/lib/shop-data";
@@ -108,7 +107,7 @@ function ProductDetailsPage() {
       </div>
 
       <section className="mt-10">
-        <SectionHeading title="Frequently bought together" />
+        <h2 className="text-2xl font-bold tracking-tight">Frequently bought together</h2>
         <div className="mt-4 rounded-2xl border border-border bg-card p-6">
           <div className="flex flex-wrap items-center gap-4">
             {[product, ...fbt].map((p, i) => (
