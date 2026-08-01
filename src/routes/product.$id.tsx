@@ -4,9 +4,14 @@ import { ProductCard } from "@/components/ds/product-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { findProduct, products } from "@/lib/shop-data";
+import { AiProductExplanation } from "@/components/ds/ai/explain";
+import { AiProductComparison } from "@/components/ds/ai/comparison";
+import { AiReviewSummary } from "@/components/ds/ai/review-summary";
+import { RecommendationRow } from "@/components/ds/ai/recommendation-card";
+import { parseQuery, rankProducts } from "@/lib/ai-mock";
 import {
   Sparkles, Star, Heart, ShoppingCart, Truck, ShieldCheck, RotateCcw,
-  Check, X, ScrollText, GitCompareArrows, Bot,
+  Check,
 } from "lucide-react";
 
 export const Route = createFileRoute("/product/$id")({
@@ -90,30 +95,17 @@ function ProductDetailsPage() {
 
       <AiSummaryCard product={product} />
 
-      <section className="mt-10">
-        <SectionHeading icon={GitCompareArrows} title="AI Product Comparison" subtitle="Side-by-side with similar picks in this category" />
-        <div className="mt-4 overflow-x-auto rounded-2xl border border-border bg-card">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead className="bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
-              <tr>
-                <th className="p-4">Feature</th>
-                <th className="p-4">{product.title}</th>
-                {compareWith.map((c) => <th key={c.id} className="p-4">{c.title}</th>)}
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              <ComparisonRow label="Price" values={[`$${product.price}`, ...compareWith.map((c) => `$${c.price}`)]} />
-              <ComparisonRow label="Rating" values={[`${product.rating}★`, ...compareWith.map((c) => `${c.rating}★`)]} />
-              <ComparisonRow label="Reviews" values={[product.reviews.toLocaleString(), ...compareWith.map((c) => c.reviews.toLocaleString())]} />
-              <ComparisonRow label="Vendor" values={[product.vendor, ...compareWith.map((c) => c.vendor)]} />
-              <ComparisonRow label="Free shipping" values={[true, true, true]} />
-              <ComparisonRow label="AI Pick" values={[!!product.aiPick, !!compareWith[0]?.aiPick, !!compareWith[1]?.aiPick]} />
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <div className="mt-10">
+        <AiProductExplanation product={product} />
+      </div>
 
-      <AiReviewSummary />
+      <div className="mt-10">
+        <AiProductComparison base={product} rivals={compareWith} />
+      </div>
+
+      <div className="mt-10">
+        <AiReviewSummary product={product} />
+      </div>
 
       <section className="mt-10">
         <SectionHeading title="Frequently bought together" />
@@ -137,14 +129,11 @@ function ProductDetailsPage() {
       </section>
 
       <section className="mt-10">
-        <SectionHeading title="Related products" />
-        <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {related.map((p) => (
-            <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
-              <ProductCard {...p} />
-            </Link>
-          ))}
-        </div>
+        <RecommendationRow
+          title="Because you're looking at this"
+          note="Ranked by how closely each alternative matches this product's strengths."
+          items={rankProducts(parseQuery(`${product.category} like ${product.title}`), related).slice(0, 4)}
+        />
       </section>
     </ShopShell>
   );
