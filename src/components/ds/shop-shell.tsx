@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { aiSuggestions } from "@/lib/shop-data";
+import { ShoppingAssistant } from "@/components/ds/ai/assistant";
 
 function useDarkMode() {
   const [dark, setDark] = useState(false);
@@ -187,8 +188,9 @@ export function ShopShell({ children, compactNav }: { children: ReactNode; compa
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ShopNav compact={compactNav} />
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-28 sm:px-6">{children}</main>
       <ShopFooter />
+      <ShoppingAssistant />
     </div>
   );
 }
