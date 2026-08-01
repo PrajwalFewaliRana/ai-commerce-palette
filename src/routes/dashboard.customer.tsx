@@ -4,16 +4,33 @@ import { DashboardCard } from "@/components/ds/dashboard-card";
 import { ProductCard } from "@/components/ds/product-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Package, Heart, Wallet, Star, ArrowRight, Sparkles, Bell, User, Truck } from "lucide-react";
+import {
+  Package,
+  Heart,
+  Wallet,
+  Star,
+  ArrowRight,
+  Sparkles,
+  Bell,
+  User,
+  Truck,
+} from "lucide-react";
 import { orders, products, notifications } from "@/lib/shop-data";
+import { RecommendationRow } from "@/components/ds/ai/recommendation-card";
+import { parseQuery, rankProducts } from "@/lib/ai-mock";
 
 export const Route = createFileRoute("/dashboard/customer")({
-  head: () => ({ meta: [
-    { title: "Customer Dashboard — Nexa" },
-    { name: "description", content: "Your Nexa dashboard: orders, wishlist, AI picks, and notifications." },
-    { property: "og:title", content: "Customer Dashboard — Nexa" },
-    { property: "og:description", content: "Everything about your Nexa account, in one place." },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: "Customer Dashboard — Nexa" },
+      {
+        name: "description",
+        content: "Your Nexa dashboard: orders, wishlist, AI picks, and notifications.",
+      },
+      { property: "og:title", content: "Customer Dashboard — Nexa" },
+      { property: "og:description", content: "Everything about your Nexa account, in one place." },
+    ],
+  }),
   component: CustomerDashboardPage,
 });
 
@@ -39,13 +56,26 @@ function CustomerDashboardPage() {
           <p className="mt-1 text-sm text-muted-foreground">Here's what's new for you today.</p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button variant="outline" asChild><Link to="/profile"><User className="size-4" /> Profile</Link></Button>
-          <Button variant="outline" asChild><Link to="/notifications"><Bell className="size-4" /> Notifications</Link></Button>
+          <Button variant="outline" asChild>
+            <Link to="/profile">
+              <User className="size-4" /> Profile
+            </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link to="/notifications">
+              <Bell className="size-4" /> Notifications
+            </Link>
+          </Button>
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <DashboardCard label="Active orders" value={String(active.length)} delta={12} icon={Package} />
+        <DashboardCard
+          label="Active orders"
+          value={String(active.length)}
+          delta={12}
+          icon={Package}
+        />
         <DashboardCard label="Wishlist" value="18" delta={4} icon={Heart} />
         <DashboardCard label="Wallet balance" value="$248" delta={-2} icon={Wallet} />
         <DashboardCard label="Reviews given" value="27" delta={8} icon={Star} />
@@ -54,17 +84,30 @@ function CustomerDashboardPage() {
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.5fr_1fr]">
         <section className="rounded-2xl border border-border bg-card p-6">
           <div className="mb-4 flex items-center justify-between">
-            <p className="flex items-center gap-2 text-sm font-semibold"><Truck className="size-4 text-primary" /> Active orders</p>
-            <Link to="/orders" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              <Truck className="size-4 text-primary" /> Active orders
+            </p>
+            <Link to="/orders" className="text-xs font-medium text-primary hover:underline">
+              View all →
+            </Link>
           </div>
           <ul className="space-y-3">
             {active.map((o) => (
               <li key={o.id}>
-                <Link to="/orders/$id" params={{ id: o.id }} className="flex items-center gap-4 rounded-xl border border-border p-3 hover:border-primary/40">
-                  <div className="size-12 shrink-0 overflow-hidden rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${o.items[0].product.image})` }} />
+                <Link
+                  to="/orders/$id"
+                  params={{ id: o.id }}
+                  className="flex items-center gap-4 rounded-xl border border-border p-3 hover:border-primary/40"
+                >
+                  <div
+                    className="size-12 shrink-0 overflow-hidden rounded-lg bg-cover bg-center"
+                    style={{ backgroundImage: `url(${o.items[0].product.image})` }}
+                  />
                   <div className="min-w-0 flex-1">
                     <p className="line-clamp-1 text-sm font-semibold">{o.items[0].product.title}</p>
-                    <p className="text-xs text-muted-foreground">{o.id} · ETA {o.eta}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {o.id} · ETA {o.eta}
+                    </p>
                   </div>
                   <Badge variant={statusVariant[o.status]}>{o.status.replace(/_/g, " ")}</Badge>
                   <ArrowRight className="size-4 text-muted-foreground" />
@@ -76,8 +119,12 @@ function CustomerDashboardPage() {
 
         <section className="rounded-2xl border border-border bg-card p-6">
           <div className="mb-4 flex items-center justify-between">
-            <p className="flex items-center gap-2 text-sm font-semibold"><Bell className="size-4 text-primary" /> Notifications</p>
-            <Link to="/notifications" className="text-xs font-medium text-primary hover:underline">View all →</Link>
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              <Bell className="size-4 text-primary" /> Notifications
+            </p>
+            <Link to="/notifications" className="text-xs font-medium text-primary hover:underline">
+              View all →
+            </Link>
           </div>
           <ul className="space-y-3">
             {unread.slice(0, 4).map((n) => (
@@ -95,10 +142,26 @@ function CustomerDashboardPage() {
 
       <section className="mt-10">
         <div className="mb-4 flex items-center justify-between">
-          <p className="flex items-center gap-2 text-lg font-semibold"><Sparkles className="size-5 text-primary" /> AI picks for you</p>
-          <Link to="/search" className="text-sm font-medium text-primary hover:underline">Ask AI →</Link>
+          <p className="flex items-center gap-2 text-lg font-semibold">
+            <Sparkles className="size-5 text-primary" /> AI picks for you
+          </p>
+          <Link
+            to="/search"
+            search={{ q: "recommend something for me" }}
+            className="text-sm font-medium text-primary hover:underline"
+          >
+            Ask AI →
+          </Link>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <RecommendationRow
+          title="Because of what you browsed"
+          note="Ranked from your recent searches, saved items and past orders."
+          items={rankProducts(parseQuery("wireless headphones under $200 with great bass")).slice(
+            0,
+            4,
+          )}
+        />
+        <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {picks.map((p) => (
             <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
               <ProductCard {...p} />

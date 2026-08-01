@@ -7,7 +7,15 @@ export interface AiSearchProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 export const AiSearch = React.forwardRef<HTMLInputElement, AiSearchProps>(
-  ({ className, onAskAi, placeholder = "Ask AI: 'wireless headphones under $100 with great bass'", ...props }, ref) => {
+  (
+    {
+      className,
+      onAskAi,
+      placeholder = "Ask AI: 'wireless headphones under $100 with great bass'",
+      ...props
+    },
+    ref,
+  ) => {
     const [value, setValue] = React.useState("");
     return (
       <div

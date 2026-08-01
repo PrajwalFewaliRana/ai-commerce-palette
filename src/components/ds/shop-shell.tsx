@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { aiSuggestions } from "@/lib/shop-data";
+import { ShoppingAssistant } from "@/components/ds/ai/assistant";
 
 function useDarkMode() {
   const [dark, setDark] = useState(false);
@@ -44,10 +45,12 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
 
         {!compact && (
           <div className="relative hidden flex-1 md:block">
-            <div className={cn(
-              "flex items-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-1.5 transition",
-              focus && "border-primary/50 shadow-[var(--shadow-glow)]"
-            )}>
+            <div
+              className={cn(
+                "flex items-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-1.5 transition",
+                focus && "border-primary/50 shadow-[var(--shadow-glow)]",
+              )}
+            >
               <Sparkles className="size-4 shrink-0 text-primary" />
               <input
                 value={q}
@@ -69,12 +72,17 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             </div>
             {focus && (
               <div className="absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-border bg-popover shadow-[var(--shadow-lg)]">
-                <p className="border-b border-border/60 px-4 py-2 text-xs uppercase tracking-wide text-muted-foreground">Try asking</p>
+                <p className="border-b border-border/60 px-4 py-2 text-xs uppercase tracking-wide text-muted-foreground">
+                  Try asking
+                </p>
                 {aiSuggestions.map((s) => (
                   <button
                     key={s}
                     className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm hover:bg-accent"
-                    onMouseDown={() => { setQ(s); navigate({ to: "/search", search: { q: s } as never }); }}
+                    onMouseDown={() => {
+                      setQ(s);
+                      navigate({ to: "/search", search: { q: s } as never });
+                    }}
                   >
                     <Sparkles className="size-3.5 text-primary" /> {s}
                   </button>
@@ -85,27 +93,56 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
         )}
 
         <nav className="ml-auto flex items-center gap-1">
-          <Link to="/categories" className={cn("hidden rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground lg:inline-flex", pathname.startsWith("/categor") && "text-foreground")}>
+          <Link
+            to="/categories"
+            className={cn(
+              "hidden rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground lg:inline-flex",
+              pathname.startsWith("/categor") && "text-foreground",
+            )}
+          >
             Categories
           </Link>
-          <Link to="/products" className={cn("hidden rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground lg:inline-flex", pathname === "/products" && "text-foreground")}>
+          <Link
+            to="/products"
+            className={cn(
+              "hidden rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground lg:inline-flex",
+              pathname === "/products" && "text-foreground",
+            )}
+          >
             Deals
           </Link>
           <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
             {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </Button>
-          <Link to="/notifications" className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground">
+          <Link
+            to="/notifications"
+            className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
+          >
             <Bell className="size-4" />
             <span className="absolute right-2 top-2 size-1.5 rounded-full bg-primary" />
           </Link>
-          <Link to="/wishlist" className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex">
+          <Link
+            to="/wishlist"
+            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+          >
             <Heart className="size-4" />
           </Link>
-          <Link to="/cart" className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground">
+          <Link
+            to="/cart"
+            className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
+          >
             <ShoppingCart className="size-4" />
-            <Badge variant="ai" className="absolute -right-1 -top-1 h-4 min-w-4 justify-center px-1 text-[10px]">2</Badge>
+            <Badge
+              variant="ai"
+              className="absolute -right-1 -top-1 h-4 min-w-4 justify-center px-1 text-[10px]"
+            >
+              2
+            </Badge>
           </Link>
-          <Link to="/dashboard/customer" className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex">
+          <Link
+            to="/dashboard/customer"
+            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+          >
             <User className="size-4" />
           </Link>
           <Button variant="ghost" size="icon" className="lg:hidden">
@@ -157,9 +194,33 @@ export function ShopFooter() {
             The AI-powered marketplace that finds what you actually meant.
           </p>
         </div>
-        <FooterCol title="Shop" links={[["Categories", "/categories"], ["All products", "/products"], ["Wishlist", "/wishlist"], ["Cart", "/cart"]]} />
-        <FooterCol title="Account" links={[["Dashboard", "/dashboard/customer"], ["Orders", "/orders"], ["Profile", "/profile"], ["Notifications", "/notifications"]]} />
-        <FooterCol title="Company" links={[["About", "/"], ["Become a seller", "/auth/register"], ["Help", "/"], ["Privacy", "/"]]} />
+        <FooterCol
+          title="Shop"
+          links={[
+            ["Categories", "/categories"],
+            ["All products", "/products"],
+            ["Wishlist", "/wishlist"],
+            ["Cart", "/cart"],
+          ]}
+        />
+        <FooterCol
+          title="Account"
+          links={[
+            ["Dashboard", "/dashboard/customer"],
+            ["Orders", "/orders"],
+            ["Profile", "/profile"],
+            ["Notifications", "/notifications"],
+          ]}
+        />
+        <FooterCol
+          title="Company"
+          links={[
+            ["About", "/"],
+            ["Become a seller", "/auth/register"],
+            ["Help", "/"],
+            ["Privacy", "/"],
+          ]}
+        />
       </div>
       <div className="border-t border-border/60 py-5 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Nexa. All rights reserved.
@@ -175,7 +236,9 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
       <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
         {links.map(([label, href]) => (
           <li key={label}>
-            <Link to={href} className="hover:text-foreground">{label}</Link>
+            <Link to={href} className="hover:text-foreground">
+              {label}
+            </Link>
           </li>
         ))}
       </ul>
@@ -187,8 +250,9 @@ export function ShopShell({ children, compactNav }: { children: ReactNode; compa
   return (
     <div className="min-h-screen bg-background text-foreground">
       <ShopNav compact={compactNav} />
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-28 sm:px-6">{children}</main>
       <ShopFooter />
+      <ShoppingAssistant />
     </div>
   );
 }
@@ -199,7 +263,9 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
       {items.map((item, i) => (
         <span key={i} className="inline-flex items-center gap-1.5">
           {item.to ? (
-            <Link to={item.to} className="hover:text-foreground">{item.label}</Link>
+            <Link to={item.to} className="hover:text-foreground">
+              {item.label}
+            </Link>
           ) : (
             <span className="text-foreground">{item.label}</span>
           )}

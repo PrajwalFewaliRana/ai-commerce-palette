@@ -1,63 +1,81 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShopShell, Breadcrumbs } from "@/components/ds/shop-shell";
-import { ProductCard } from "@/components/ds/product-card";
+import { NaturalLanguageSearch } from "@/components/ds/ai/nl-search";
+import { RecommendationCard } from "@/components/ds/ai/recommendation-card";
+import { AiPanel } from "@/components/ds/ai/ai-panel";
+import { parseQuery, rankProducts } from "@/lib/ai-mock";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Filter, DollarSign, Star } from "lucide-react";
-import { products, aiSuggestions } from "@/lib/shop-data";
+import { Filter, Wand2 } from "lucide-react";
+import { aiSuggestions } from "@/lib/shop-data";
 
 export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>) => ({ q: typeof s.q === "string" ? s.q : "" }),
-  head: () => ({ meta: [
-    { title: "AI Search Results — Nexa" },
-    { name: "description", content: "AI-curated matches for what you actually meant." },
-    { property: "og:title", content: "AI Search Results — Nexa" },
-    { property: "og:description", content: "Nexa AI understands natural language and finds the right products." },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: "AI Search Results — Nexa" },
+      { name: "description", content: "AI-curated matches for what you actually meant." },
+      { property: "og:title", content: "AI Search Results — Nexa" },
+      {
+        property: "og:description",
+        content: "Nexa AI understands natural language and finds the right products.",
+      },
+    ],
+  }),
   component: SearchPage,
 });
 
 function SearchPage() {
   const { q } = Route.useSearch();
   const term = q || "wireless headphones under $200 with great bass";
+  const parsed = parseQuery(term);
+  const ranked = rankProducts(parsed);
+  const vendors = new Set(ranked.map((r) => r.product.vendor)).size;
   return (
     <ShopShell>
       <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "AI Search" }]} />
 
-      <div className="rounded-3xl border border-border/60 bg-card/60 p-6 shadow-[var(--shadow-card)] sm:p-8">
-        <div className="flex items-start gap-4">
-          <div className="grid size-12 shrink-0 place-items-center rounded-2xl text-primary-foreground [background-image:var(--gradient-ai)]">
-            <Sparkles className="size-5" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-xs font-medium uppercase tracking-wide text-primary">AI Interpretation</p>
-            <h1 className="mt-1 text-xl font-semibold leading-snug sm:text-2xl">"{term}"</h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              I found <span className="font-medium text-foreground">{products.length} matches</span> across{" "}
-              <span className="font-medium text-foreground">3 vendors</span>. Prioritizing highly-rated items under
-              your budget with strong bass response and active noise cancellation.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Badge variant="ai" className="gap-1"><DollarSign className="size-3" /> Under $200</Badge>
-              <Badge variant="secondary" className="gap-1"><Star className="size-3" /> 4.5+ rating</Badge>
-              <Badge variant="secondary">Wireless</Badge>
-              <Badge variant="secondary">Great bass</Badge>
-              <Badge variant="secondary">ANC</Badge>
-            </div>
-          </div>
+      <NaturalLanguageSearch defaultValue={term} className="mb-6" />
+
+      <AiPanel
+        eyebrow="AI Interpretation"
+        icon={<Wand2 className="size-5" />}
+        title={`"${term}"`}
+        subtitle={parsed.interpretation}
+      >
+        <p className="text-sm text-muted-foreground">
+          I found <span className="font-medium text-foreground">{ranked.length} matches</span>{" "}
+          across <span className="font-medium text-foreground">{vendors} vendors</span>, ranked by
+          how well each one answers your sentence.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {parsed.facets.length ? (
+            parsed.facets.map((f) => (
+              <Badge
+                key={f.label}
+                variant={f.kind === "budget" || f.kind === "rating" ? "ai" : "secondary"}
+              >
+                {f.label}
+              </Badge>
+            ))
+          ) : (
+            <Badge variant="secondary">Broad search — add a budget or use case to narrow it</Badge>
+          )}
         </div>
-      </div>
+      </AiPanel>
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-foreground">Showing {products.length} results, sorted by AI relevance</p>
-        <Button variant="outline" size="sm"><Filter className="size-4" /> Refine</Button>
+        <p className="text-sm text-muted-foreground">
+          Showing {ranked.length} results, sorted by AI relevance
+        </p>
+        <Button variant="outline" size="sm">
+          <Filter className="size-4" /> Refine
+        </Button>
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {products.map((p) => (
-          <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
-            <ProductCard {...p} />
-          </Link>
+        {ranked.map((item) => (
+          <RecommendationCard key={item.product.id} item={item} />
         ))}
       </div>
 
@@ -65,7 +83,12 @@ function SearchPage() {
         <p className="text-sm font-semibold">Try refining your search</p>
         <div className="mt-3 flex flex-wrap gap-2">
           {aiSuggestions.map((s) => (
-            <Link key={s} to="/search" search={{ q: s }} className="rounded-full border border-border bg-card px-3 py-1.5 text-xs hover:border-primary/40 hover:text-primary">
+            <Link
+              key={s}
+              to="/search"
+              search={{ q: s }}
+              className="rounded-full border border-border bg-card px-3 py-1.5 text-xs hover:border-primary/40 hover:text-primary"
+            >
               {s}
             </Link>
           ))}

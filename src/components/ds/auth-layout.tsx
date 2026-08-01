@@ -31,7 +31,9 @@ export function AuthLayout({
               <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
               {subtitle && <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>}
               <div className="mt-8">{children}</div>
-              {footer && <div className="mt-6 text-center text-sm text-muted-foreground">{footer}</div>}
+              {footer && (
+                <div className="mt-6 text-center text-sm text-muted-foreground">{footer}</div>
+              )}
             </div>
           </div>
           <p className="text-center text-xs text-muted-foreground lg:text-left">
