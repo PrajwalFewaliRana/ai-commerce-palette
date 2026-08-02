@@ -16,8 +16,8 @@ export function AuthLayout({
   aside?: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="grid min-h-screen lg:grid-cols-2">
+    <div className="min-h-dvh bg-background text-foreground">
+      <div className="grid min-h-dvh lg:grid-cols-2">
         {/* Form side */}
         <div className="flex flex-col px-6 py-8 sm:px-10 lg:px-16">
           <Link to="/" className="inline-flex items-center gap-2 text-lg font-semibold">

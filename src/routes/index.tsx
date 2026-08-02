@@ -106,7 +106,7 @@ function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       {/* NAV */}
       <header className={`sticky top-0 z-50 border-b border-transparent backdrop-blur transition-all ${scrolled ? "border-border/60 bg-background/80 shadow-[var(--shadow-sm)]" : "bg-background/60"}`}>
         <div className="mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-3 sm:px-6">
