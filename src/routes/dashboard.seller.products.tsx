@@ -141,7 +141,7 @@ function ProductsPage() {
               <TableRow key={p.id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
-                    <img src={${p.image}} alt="" loading="lazy" decoding="async" className="size-10 shrink-0 rounded-lg object-cover" />
+                    <img src={p.image} alt="" loading="lazy" decoding="async" className="size-10 shrink-0 rounded-lg object-cover" />
                     <div className="min-w-0">
                       <p className="line-clamp-1 text-sm font-semibold">{p.title}</p>
                       <p className="text-xs text-muted-foreground">★ {p.rating || "—"}</p>

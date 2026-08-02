@@ -40,7 +40,7 @@ function OrdersPage() {
                   <div className="flex min-w-0 items-center gap-4">
                     <div className="flex -space-x-3">
                       {o.items.map((it) => (
-                        <img key={it.product.id} src={${it.product.image}} alt="" loading="lazy" decoding="async" className="size-14 shrink-0 rounded-xl border-2 border-card object-cover" />
+                        <img key={it.product.id} src={it.product.image} alt="" loading="lazy" decoding="async" className="size-14 shrink-0 rounded-xl border-2 border-card object-cover" />
                       ))}
                     </div>
                     <div className="min-w-0">

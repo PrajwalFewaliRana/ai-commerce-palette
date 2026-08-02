@@ -21,7 +21,7 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
         params={{ id: product.id }}
         className="relative block aspect-[4/3] overflow-hidden bg-muted"
       >
-        <img src={${product.image}} alt="" loading="lazy" decoding="async" className="h-full w-full  transition-transform duration-500 group-hover:scale-105 object-cover" />
+        <img src={product.image} alt="" loading="lazy" decoding="async" className="size-full  transition-transform duration-500 group-hover:scale-105 object-cover" />
         <Badge variant="ai" className="absolute left-3 top-3 gap-1">
           <Sparkles className="size-3" /> AI Pick
         </Badge>
