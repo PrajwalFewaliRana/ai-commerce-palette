@@ -156,7 +156,7 @@ function AnalyticsPage() {
               <TableRow key={p.id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
-                    <div className="size-9 shrink-0 rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${p.image})` }} />
+                    <img src={${p.image}} alt="" loading="lazy" decoding="async" className="size-9 shrink-0 rounded-lg object-cover" />
                     <span className="line-clamp-1 text-sm font-medium">{p.title}</span>
                   </div>
                 </TableCell>

@@ -87,7 +87,7 @@ function OrderTrackingPage() {
           <ul className="divide-y divide-border">
             {order.items.map((it) => (
               <li key={it.product.id} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
-                <div className="size-16 shrink-0 overflow-hidden rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${it.product.image})` }} />
+                <img src={${it.product.image}} alt="" loading="lazy" decoding="async" className="size-16 shrink-0 overflow-hidden rounded-xl object-cover" />
                 <div className="min-w-0 flex-1">
                   <p className="text-xs text-muted-foreground">{it.product.vendor}</p>
                   <Link to="/product/$id" params={{ id: it.product.id }} className="line-clamp-1 text-sm font-semibold hover:text-primary">{it.product.title}</Link>

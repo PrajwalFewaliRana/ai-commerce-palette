@@ -63,18 +63,11 @@ function ProductDetailsPage() {
       <div className="grid gap-8 lg:grid-cols-2">
         <div>
           <div className="overflow-hidden rounded-3xl border border-border bg-muted">
-            <div
-              className="aspect-square bg-cover bg-center"
-              style={{ backgroundImage: `url(${product.image})` }}
-            />
+            <img src={${product.image}} alt="" loading="lazy" decoding="async" className="aspect-square object-cover" />
           </div>
           <div className="mt-3 grid grid-cols-4 gap-3">
             {[product.image, product.image, product.image, product.image].map((img, i) => (
-              <div
-                key={i}
-                className="aspect-square overflow-hidden rounded-xl border border-border bg-cover bg-center"
-                style={{ backgroundImage: `url(${img})` }}
-              />
+              <img key={i} src={${img}} alt="" loading="lazy" decoding="async" className="aspect-square overflow-hidden rounded-xl border border-border object-cover" />
             ))}
           </div>
         </div>
@@ -150,10 +143,7 @@ function ProductDetailsPage() {
           <div className="flex flex-wrap items-center gap-4">
             {[product, ...fbt].map((p, i) => (
               <div key={p.id} className="flex items-center gap-3">
-                <div
-                  className="size-16 shrink-0 overflow-hidden rounded-xl border border-border bg-cover bg-center"
-                  style={{ backgroundImage: `url(${p.image})` }}
-                />
+                <img src={${p.image}} alt="" loading="lazy" decoding="async" className="size-16 shrink-0 overflow-hidden rounded-xl border border-border object-cover" />
                 {i < fbt.length && (
                   <span className="text-2xl font-light text-muted-foreground">+</span>
                 )}

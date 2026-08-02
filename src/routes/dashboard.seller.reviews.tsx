@@ -88,7 +88,7 @@ function ReviewsPage() {
         {sellerReviews.map((r) => (
           <article key={r.id} className="rounded-2xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
             <div className="flex flex-wrap items-start gap-4">
-              <div className="size-12 shrink-0 rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${r.productImage})` }} />
+              <img src={${r.productImage}} alt="" loading="lazy" decoding="async" className="size-12 shrink-0 rounded-xl object-cover" />
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-semibold">{r.author}</p>

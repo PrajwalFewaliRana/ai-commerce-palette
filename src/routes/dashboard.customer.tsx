@@ -99,10 +99,7 @@ function CustomerDashboardPage() {
                   params={{ id: o.id }}
                   className="flex items-center gap-4 rounded-xl border border-border p-3 hover:border-primary/40"
                 >
-                  <div
-                    className="size-12 shrink-0 overflow-hidden rounded-lg bg-cover bg-center"
-                    style={{ backgroundImage: `url(${o.items[0].product.image})` }}
-                  />
+                  <img src={${o.items[0].product.image}} alt="" loading="lazy" decoding="async" className="size-12 shrink-0 overflow-hidden rounded-lg object-cover" />
                   <div className="min-w-0 flex-1">
                     <p className="line-clamp-1 text-sm font-semibold">{o.items[0].product.title}</p>
                     <p className="text-xs text-muted-foreground">
