@@ -305,9 +305,17 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
 
 export function ShopShell({ children, compactNav }: { children: ReactNode; compactNav?: boolean }) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <ShopNav compact={compactNav} />
-      <main className="mx-auto max-w-7xl px-4 py-8 pb-28 sm:px-6">{children}</main>
+      <main
+        id="main-content"
+        className="animate-fade-in mx-auto max-w-7xl px-4 py-8 pb-28 sm:px-6 lg:px-8"
+      >
+        {children}
+      </main>
       <ShopFooter />
       <ShoppingAssistant />
     </div>
@@ -316,7 +324,10 @@ export function ShopShell({ children, compactNav }: { children: ReactNode; compa
 
 export function Breadcrumbs({ items }: { items: { label: string; to?: string }[] }) {
   return (
-    <nav className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
+    <nav
+      aria-label="Breadcrumb"
+      className="mb-6 flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground"
+    >
       {items.map((item, i) => (
         <span key={i} className="inline-flex items-center gap-1.5">
           {item.to ? (
@@ -324,9 +335,15 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
               {item.label}
             </Link>
           ) : (
-            <span className="text-foreground">{item.label}</span>
+            <span aria-current="page" className="text-foreground">
+              {item.label}
+            </span>
           )}
-          {i < items.length - 1 && <span className="text-muted-foreground/50">/</span>}
+          {i < items.length - 1 && (
+            <span aria-hidden="true" className="text-muted-foreground">
+              /
+            </span>
+          )}
         </span>
       ))}
     </nav>
