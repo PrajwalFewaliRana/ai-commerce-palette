@@ -56,14 +56,14 @@ export function AuthLayout({
 function DefaultAside() {
   return (
     <>
-      <div className="inline-flex w-fit items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs backdrop-blur">
+      <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary-foreground/25 bg-primary-foreground/10 px-3 py-1 text-xs backdrop-blur">
         <Sparkles className="size-3.5" /> AI-powered marketplace
       </div>
       <div className="space-y-6">
         <h2 className="text-4xl font-bold leading-tight">
           Discover products the way you think about them.
         </h2>
-        <p className="max-w-md text-white/80">
+        <p className="max-w-md text-primary-foreground/85">
           Describe what you need in plain language. Nexa's AI finds the right products from
           thousands of trusted sellers — no more scrolling through irrelevant results.
         </p>
@@ -73,14 +73,14 @@ function DefaultAside() {
             "Personalized AI recommendations",
             "Instant side-by-side comparisons",
           ].map((f) => (
-            <div key={f} className="flex items-center gap-2 text-sm text-white/90">
-              <span className="grid size-5 place-items-center rounded-full bg-white/15">✓</span>
+            <div key={f} className="flex items-center gap-2 text-sm text-primary-foreground/90">
+              <span className="grid size-5 place-items-center rounded-full bg-primary-foreground/20">✓</span>
               {f}
             </div>
           ))}
         </div>
       </div>
-      <p className="text-xs text-white/60">Trusted by 50,000+ sellers worldwide</p>
+      <p className="text-xs text-primary-foreground/70">Trusted by 50,000+ sellers worldwide</p>
     </>
   );
 }

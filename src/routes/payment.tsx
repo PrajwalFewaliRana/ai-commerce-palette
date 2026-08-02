@@ -91,7 +91,7 @@ function Stepper({ current }: { current: number }) {
         const active = i === current;
         return (
           <li key={s} className="flex items-center gap-2">
-            <span className={`grid size-6 place-items-center rounded-full text-xs font-semibold ${done ? "bg-[color:var(--success)] text-white" : active ? "text-primary-foreground [background-image:var(--gradient-ai)]" : "border border-border bg-card text-muted-foreground"}`}>
+            <span className={`grid size-6 place-items-center rounded-full text-xs font-semibold ${done ? "bg-[color:var(--success)] text-[color:var(--success-foreground)]" : active ? "text-primary-foreground [background-image:var(--gradient-ai)]" : "border border-border bg-card text-muted-foreground"}`}>
               {done ? <Check className="size-3" /> : i + 1}
             </span>
             <span className={active ? "font-semibold" : "text-muted-foreground"}>{s}</span>
