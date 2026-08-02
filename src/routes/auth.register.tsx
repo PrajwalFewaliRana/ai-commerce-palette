@@ -12,7 +12,10 @@ export const Route = createFileRoute("/auth/register")({
   head: () => ({
     meta: [
       { title: "Create your account — Nexa" },
-      { name: "description", content: "Join Nexa as a customer or seller. Discover products with AI." },
+      {
+        name: "description",
+        content: "Join Nexa as a customer or seller. Discover products with AI.",
+      },
     ],
   }),
   component: RegisterPage,
@@ -67,7 +70,9 @@ function RegisterPage() {
               onClick={() => setRole(r)}
               className={cn(
                 "inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-sm font-medium transition",
-                active ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
+                active
+                  ? "bg-card text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               <Icon className="size-4" />
@@ -135,8 +140,14 @@ function RegisterPage() {
           />
           <span>
             I agree to Nexa's{" "}
-            <a className="text-primary hover:underline" href="#">Terms of Service</a> and{" "}
-            <a className="text-primary hover:underline" href="#">Privacy Policy</a>.
+            <a className="text-primary hover:underline" href="#">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a className="text-primary hover:underline" href="#">
+              Privacy Policy
+            </a>
+            .
           </span>
         </label>
         {errors.agreed && <p className="text-xs text-destructive">{errors.agreed}</p>}

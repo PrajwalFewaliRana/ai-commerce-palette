@@ -141,9 +141,12 @@ function ProductsPage() {
               <TableRow key={p.id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
-                    <div
-                      className="size-10 shrink-0 rounded-lg bg-cover bg-center"
-                      style={{ backgroundImage: `url(${p.image})` }}
+                    <img
+                      src={p.image}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="size-10 shrink-0 rounded-lg object-cover"
                     />
                     <div className="min-w-0">
                       <p className="line-clamp-1 text-sm font-semibold">{p.title}</p>

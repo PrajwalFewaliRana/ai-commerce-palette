@@ -4,7 +4,14 @@ import { DashboardCard } from "@/components/ds/dashboard-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Users, UserPlus, Star, DollarSign, Search, Mail, Download } from "lucide-react";
 import { sellerCustomers } from "@/lib/seller-data";
 
@@ -25,14 +32,23 @@ function CustomersPage() {
       <PageHeader
         title="Customers"
         subtitle="Everyone who's ever bought from your store."
-        actions={<Button variant="outline"><Download className="size-4" /> Export</Button>}
+        actions={
+          <Button variant="outline">
+            <Download className="size-4" /> Export
+          </Button>
+        }
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <DashboardCard label="Total customers" value={String(total)} delta={11} icon={Users} />
         <DashboardCard label="VIPs" value={String(vip)} delta={6} icon={Star} />
         <DashboardCard label="New (30d)" value="127" delta={14} icon={UserPlus} />
-        <DashboardCard label="Lifetime value" value={`$${totalSpend.toLocaleString()}`} delta={9} icon={DollarSign} />
+        <DashboardCard
+          label="Lifetime value"
+          value={`$${totalSpend.toLocaleString()}`}
+          delta={9}
+          icon={DollarSign}
+        />
       </div>
 
       <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-[var(--shadow-card)]">
@@ -60,7 +76,10 @@ function CustomersPage() {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <div className="grid size-9 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
-                      {c.name.split(" ").map((n) => n[0]).join("")}
+                      {c.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                     </div>
                     <div>
                       <p className="text-sm font-medium">{c.name}</p>
@@ -68,12 +87,20 @@ function CustomersPage() {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell><Badge variant={tierVariant[c.tier]} className="capitalize">{c.tier}</Badge></TableCell>
+                <TableCell>
+                  <Badge variant={tierVariant[c.tier]} className="capitalize">
+                    {c.tier}
+                  </Badge>
+                </TableCell>
                 <TableCell className="text-right">{c.orders}</TableCell>
-                <TableCell className="text-right font-semibold">${c.spent.toLocaleString()}</TableCell>
+                <TableCell className="text-right font-semibold">
+                  ${c.spent.toLocaleString()}
+                </TableCell>
                 <TableCell className="text-sm">{c.lastOrder}</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="outline" size="sm"><Mail className="size-3.5" /> Contact</Button>
+                  <Button variant="outline" size="sm">
+                    <Mail className="size-3.5" /> Contact
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

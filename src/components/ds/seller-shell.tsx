@@ -111,21 +111,41 @@ export function SellerShell() {
   const { dark, toggle } = useDarkMode();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMobileOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       {/* Sidebar - desktop */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-border/60 bg-card/50 lg:block">
+      <aside
+        aria-label="Seller navigation"
+        className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-border/60 bg-card/50 lg:block"
+      >
         <SidebarInner pathname={pathname} />
       </aside>
 
       {/* Mobile drawer */}
       {mobileOpen && (
         <>
-          <div
-            className="fixed inset-0 z-40 bg-background/70 backdrop-blur lg:hidden"
+          <button
+            type="button"
+            aria-label="Close menu"
+            className="animate-fade-in fixed inset-0 z-40 bg-background/70 backdrop-blur lg:hidden"
             onClick={() => setMobileOpen(false)}
           />
-          <aside className="fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-card lg:hidden">
+          <aside
+            role="dialog"
+            aria-modal="true"
+            aria-label="Seller navigation"
+            className="animate-slide-in-left fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-card lg:hidden"
+          >
             <SidebarInner pathname={pathname} onNavigate={() => setMobileOpen(false)} />
           </aside>
         </>
@@ -138,6 +158,8 @@ export function SellerShell() {
               variant="ghost"
               size="icon"
               className="lg:hidden"
+              aria-label="Open navigation menu"
+              aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(true)}
             >
               <Menu className="size-4" />
@@ -147,14 +169,22 @@ export function SellerShell() {
               <input
                 className="w-full rounded-xl border border-border bg-card py-2 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-primary/50"
                 placeholder="Search products, orders, customers..."
+                aria-label="Search your store"
               />
             </div>
             <div className="ml-auto flex items-center gap-1">
-              <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggle}
+                aria-pressed={dark}
+                aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+              >
                 {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
               </Button>
               <Link
                 to="/notifications"
+                aria-label="Notifications, unread"
                 className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 <Bell className="size-4" />
@@ -178,7 +208,10 @@ export function SellerShell() {
             </div>
           </div>
         </header>
-        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <main
+          id="main-content"
+          className="animate-fade-in mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"
+        >
           <Outlet />
         </main>
       </div>

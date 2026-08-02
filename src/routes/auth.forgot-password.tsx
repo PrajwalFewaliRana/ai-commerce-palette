@@ -36,7 +36,10 @@ function ForgotPasswordPage() {
           : "Enter the email you registered with and we'll send you a reset link."
       }
       footer={
-        <Link to="/auth/login" className="inline-flex items-center gap-1.5 text-primary hover:underline">
+        <Link
+          to="/auth/login"
+          className="inline-flex items-center gap-1.5 text-primary hover:underline"
+        >
           <ArrowLeft className="size-3.5" /> Back to sign in
         </Link>
       }

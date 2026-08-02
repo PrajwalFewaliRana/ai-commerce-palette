@@ -14,7 +14,7 @@ export function DashboardShell({
   children: ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <header className="border-b border-border bg-card/50 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <Link to="/" className="inline-flex items-center gap-2 text-lg font-semibold">

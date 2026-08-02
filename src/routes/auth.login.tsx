@@ -82,7 +82,10 @@ function LoginPage() {
 
         <div className="flex items-center justify-between text-sm">
           <label className="inline-flex items-center gap-2 text-muted-foreground">
-            <input type="checkbox" className="size-4 rounded border-border accent-[color:var(--primary)]" />
+            <input
+              type="checkbox"
+              className="size-4 rounded border-border accent-[color:var(--primary)]"
+            />
             Remember me
           </label>
           <Link to="/auth/forgot-password" className="font-medium text-primary hover:underline">

@@ -1,9 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
-  Sparkles, Search, Bell, Menu, ShoppingBag, Home, Package, Store, BarChart3, Users,
-  Settings, ChevronRight, Plus, Filter, MoreHorizontal, Laptop, Shirt, Watch, Coffee,
-  Dumbbell, Baby, Wrench, Book, Inbox, DollarSign, ShoppingCart, TrendingUp,
+  Sparkles,
+  Search,
+  Bell,
+  Menu,
+  ShoppingBag,
+  Home,
+  Package,
+  Store,
+  BarChart3,
+  Users,
+  Settings,
+  ChevronRight,
+  Plus,
+  Filter,
+  MoreHorizontal,
+  Laptop,
+  Shirt,
+  Watch,
+  Coffee,
+  Dumbbell,
+  Baby,
+  Wrench,
+  Book,
+  Inbox,
+  DollarSign,
+  ShoppingCart,
+  TrendingUp,
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 
@@ -18,25 +42,55 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import {
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
 import {
-  Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader,
-  DialogTitle, DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
-  Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet";
 import {
-  Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList,
-  BreadcrumbPage, BreadcrumbSeparator,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import {
-  Pagination, PaginationContent, PaginationEllipsis, PaginationItem,
-  PaginationLink, PaginationNext, PaginationPrevious,
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
 } from "@/components/ui/pagination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
@@ -57,9 +111,16 @@ export const Route = createFileRoute("/showcase")({
   head: () => ({
     meta: [
       { title: "Nexa DS — AI Multi-Vendor Commerce Design System" },
-      { name: "description", content: "A complete, reusable design language for AI-powered multi-vendor e-commerce platforms — tokens, components, patterns." },
+      {
+        name: "description",
+        content:
+          "A complete, reusable design language for AI-powered multi-vendor e-commerce platforms — tokens, components, patterns.",
+      },
       { property: "og:title", content: "Nexa DS — AI Multi-Vendor Commerce Design System" },
-      { property: "og:description", content: "Tokens, components, and patterns for AI-powered multi-vendor e-commerce." },
+      {
+        property: "og:description",
+        content: "Tokens, components, and patterns for AI-powered multi-vendor e-commerce.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -83,8 +144,18 @@ const chartConfig = {
 };
 
 function Section({
-  id, eyebrow, title, description, children,
-}: { id: string; eyebrow: string; title: string; description?: string; children: React.ReactNode }) {
+  id,
+  eyebrow,
+  title,
+  description,
+  children,
+}: {
+  id: string;
+  eyebrow: string;
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}) {
   return (
     <section id={id} className="scroll-mt-24 space-y-6">
       <header className="space-y-2">
@@ -121,7 +192,7 @@ function DesignSystem() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <Toaster richColors position="top-right" />
 
       {/* Top nav */}
@@ -134,23 +205,35 @@ function DesignSystem() {
             <div className="grid size-8 place-items-center rounded-lg text-primary-foreground shadow-[var(--shadow-glow)] [background-image:var(--gradient-ai)]">
               <Sparkles className="size-4" />
             </div>
-            <span className="text-lg font-bold tracking-tight">Nexa<span className="text-primary">DS</span></span>
+            <span className="text-lg font-bold tracking-tight">
+              Nexa<span className="text-primary">DS</span>
+            </span>
           </a>
           <nav className="ml-6 hidden items-center gap-1 lg:flex">
             {nav.slice(0, 6).map((n) => (
-              <a key={n.id} href={`#${n.id}`} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground">
+              <a
+                key={n.id}
+                href={`#${n.id}`}
+                className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground"
+              >
                 {n.label}
               </a>
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <SearchBar className="hidden w-72 md:flex" placeholder="Search components..." />
-            <Button size="icon" variant="ghost" aria-label="Notifications"><Bell /></Button>
+            <Button size="icon" variant="ghost" aria-label="Notifications">
+              <Bell />
+            </Button>
             <div className="flex items-center gap-2 rounded-full border border-border bg-card px-2 py-1">
               <Switch checked={dark} onCheckedChange={toggleDark} aria-label="Toggle dark mode" />
-              <span className="hidden text-xs font-medium sm:inline">{dark ? "Dark" : "Light"}</span>
+              <span className="hidden text-xs font-medium sm:inline">
+                {dark ? "Dark" : "Light"}
+              </span>
             </div>
-            <Avatar className="size-8"><AvatarFallback>NX</AvatarFallback></Avatar>
+            <Avatar className="size-8">
+              <AvatarFallback>NX</AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </header>
@@ -159,11 +242,16 @@ function DesignSystem() {
         {/* Sidebar (desktop) */}
         <aside className="sticky top-24 hidden h-[calc(100vh-8rem)] w-56 shrink-0 lg:block">
           <div className="rounded-2xl border border-border bg-card p-3 shadow-[var(--shadow-card)]">
-            <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Sections</p>
+            <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              Sections
+            </p>
             <ul className="space-y-1">
               {nav.map((n) => (
                 <li key={n.id}>
-                  <a href={`#${n.id}`} className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-foreground/80 transition hover:bg-accent hover:text-foreground">
+                  <a
+                    href={`#${n.id}`}
+                    className="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-foreground/80 transition hover:bg-accent hover:text-foreground"
+                  >
                     <span>{n.label}</span>
                     <ChevronRight className="size-3.5 opacity-40" />
                   </a>
@@ -183,8 +271,13 @@ function DesignSystem() {
             <ul className="mt-4 space-y-1">
               {nav.map((n) => (
                 <li key={n.id}>
-                  <a href={`#${n.id}`} onClick={() => setSidebarOpen(false)} className="flex items-center justify-between rounded-lg px-3 py-2 text-sm hover:bg-accent">
-                    {n.label}<ChevronRight className="size-3.5" />
+                  <a
+                    href={`#${n.id}`}
+                    onClick={() => setSidebarOpen(false)}
+                    className="flex items-center justify-between rounded-lg px-3 py-2 text-sm hover:bg-accent"
+                  >
+                    {n.label}
+                    <ChevronRight className="size-3.5" />
                   </a>
                 </li>
               ))}
@@ -197,26 +290,47 @@ function DesignSystem() {
           <section className="relative overflow-hidden rounded-3xl border border-border bg-[image:var(--gradient-subtle)] p-8 shadow-[var(--shadow-lg)] sm:p-12">
             <div className="absolute -right-24 -top-24 size-72 rounded-full [background:var(--gradient-ai)] opacity-30 blur-3xl" />
             <div className="relative max-w-2xl">
-              <Badge variant="ai" className="gap-1"><Sparkles className="size-3" /> Design System v1.0</Badge>
+              <Badge variant="ai" className="gap-1">
+                <Sparkles className="size-3" /> Design System v1.0
+              </Badge>
               <h1 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                A design language for <span className="bg-clip-text text-transparent [background-image:var(--gradient-ai)]">AI multi-vendor commerce</span>.
+                A design language for{" "}
+                <span className="bg-clip-text text-transparent [background-image:var(--gradient-ai)]">
+                  AI multi-vendor commerce
+                </span>
+                .
               </h1>
               <p className="mt-4 text-base text-muted-foreground sm:text-lg">
                 Tokens, primitives, and patterns every seller, buyer, and admin surface reuses.
                 Built with React, Tailwind v4, shadcn/ui, and Lucide.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button variant="hero" size="lg">Get started</Button>
-                <Button variant="outline" size="lg">View components</Button>
+                <Button variant="hero" size="lg">
+                  Get started
+                </Button>
+                <Button variant="outline" size="lg">
+                  View components
+                </Button>
               </div>
               <div className="mt-8">
-                <AiSearch onAskAi={(q) => toast.success("AI searching…", { description: q || "Try: 'linen shirts under $50'" })} />
+                <AiSearch
+                  onAskAi={(q) =>
+                    toast.success("AI searching…", {
+                      description: q || "Try: 'linen shirts under $50'",
+                    })
+                  }
+                />
               </div>
             </div>
           </section>
 
           {/* Foundations */}
-          <Section id="foundations" eyebrow="Foundations" title="Colors, type, spacing, radius, shadows" description="Semantic tokens defined in CSS. Never hardcode colors in components.">
+          <Section
+            id="foundations"
+            eyebrow="Foundations"
+            title="Colors, type, spacing, radius, shadows"
+            description="Semantic tokens defined in CSS. Never hardcode colors in components."
+          >
             {/* Colors */}
             <div>
               <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Color palette</h3>
@@ -225,21 +339,42 @@ function DesignSystem() {
                   { name: "Primary", cls: "bg-primary text-primary-foreground" },
                   { name: "Secondary", cls: "bg-secondary text-secondary-foreground" },
                   { name: "Accent", cls: "bg-accent text-accent-foreground" },
-                  { name: "Success", cls: "bg-[color:var(--success)] text-[color:var(--success-foreground)]" },
-                  { name: "Warning", cls: "bg-[color:var(--warning)] text-[color:var(--warning-foreground)]" },
+                  {
+                    name: "Success",
+                    cls: "bg-[color:var(--success)] text-[color:var(--success-foreground)]",
+                  },
+                  {
+                    name: "Warning",
+                    cls: "bg-[color:var(--warning)] text-[color:var(--warning-foreground)]",
+                  },
                   { name: "Destructive", cls: "bg-destructive text-destructive-foreground" },
                 ].map((c) => (
-                  <div key={c.name} className={`rounded-xl p-4 shadow-[var(--shadow-card)] ${c.cls}`}>
+                  <div
+                    key={c.name}
+                    className={`rounded-xl p-4 shadow-[var(--shadow-card)] ${c.cls}`}
+                  >
                     <p className="text-xs opacity-80">Token</p>
                     <p className="text-sm font-semibold">{c.name}</p>
                   </div>
                 ))}
               </div>
               <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div className="rounded-xl p-6 text-primary-foreground shadow-[var(--shadow-glow)] [background-image:var(--gradient-primary)]"><p className="text-xs opacity-80">Gradient</p><p className="font-semibold">Primary</p></div>
-                <div className="rounded-xl p-6 text-primary-foreground shadow-[var(--shadow-glow)] [background-image:var(--gradient-ai)]"><p className="text-xs opacity-80">Gradient</p><p className="font-semibold">AI</p></div>
-                <div className="rounded-xl border border-border p-6 [background-image:var(--gradient-subtle)]"><p className="text-xs text-muted-foreground">Gradient</p><p className="font-semibold">Subtle</p></div>
-                <div className="rounded-xl border border-border bg-card p-6"><p className="text-xs text-muted-foreground">Surface</p><p className="font-semibold">Card</p></div>
+                <div className="rounded-xl p-6 text-primary-foreground shadow-[var(--shadow-glow)] [background-image:var(--gradient-primary)]">
+                  <p className="text-xs opacity-80">Gradient</p>
+                  <p className="font-semibold">Primary</p>
+                </div>
+                <div className="rounded-xl p-6 text-primary-foreground shadow-[var(--shadow-glow)] [background-image:var(--gradient-ai)]">
+                  <p className="text-xs opacity-80">Gradient</p>
+                  <p className="font-semibold">AI</p>
+                </div>
+                <div className="rounded-xl border border-border p-6 [background-image:var(--gradient-subtle)]">
+                  <p className="text-xs text-muted-foreground">Gradient</p>
+                  <p className="font-semibold">Subtle</p>
+                </div>
+                <div className="rounded-xl border border-border bg-card p-6">
+                  <p className="text-xs text-muted-foreground">Surface</p>
+                  <p className="font-semibold">Card</p>
+                </div>
               </div>
             </div>
 
@@ -247,21 +382,51 @@ function DesignSystem() {
             <div>
               <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Typography scale</h3>
               <div className="space-y-2 rounded-2xl border border-border bg-card p-6">
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">H1</span><p className="text-4xl font-bold tracking-tight sm:text-5xl">Headline</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">H2</span><p className="text-3xl font-bold tracking-tight">Section title</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">H3</span><p className="text-2xl font-semibold">Subsection</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">H4</span><p className="text-xl font-semibold">Card title</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">H5</span><p className="text-lg font-semibold">List heading</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">H6</span><p className="text-base font-semibold">Label</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">Body</span><p className="text-sm">Standard paragraph text used across product and dashboard surfaces.</p></div>
-                <div className="flex items-baseline gap-4"><span className="w-16 text-xs text-muted-foreground">Caption</span><p className="text-xs text-muted-foreground">Small metadata, timestamps, helper text.</p></div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">H1</span>
+                  <p className="text-4xl font-bold tracking-tight sm:text-5xl">Headline</p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">H2</span>
+                  <p className="text-3xl font-bold tracking-tight">Section title</p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">H3</span>
+                  <p className="text-2xl font-semibold">Subsection</p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">H4</span>
+                  <p className="text-xl font-semibold">Card title</p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">H5</span>
+                  <p className="text-lg font-semibold">List heading</p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">H6</span>
+                  <p className="text-base font-semibold">Label</p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">Body</span>
+                  <p className="text-sm">
+                    Standard paragraph text used across product and dashboard surfaces.
+                  </p>
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <span className="w-16 text-xs text-muted-foreground">Caption</span>
+                  <p className="text-xs text-muted-foreground">
+                    Small metadata, timestamps, helper text.
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* Spacing / Radius / Shadows */}
             <div className="grid gap-4 lg:grid-cols-3">
               <div className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="mb-4 text-sm font-semibold text-muted-foreground">Spacing (4px grid)</h3>
+                <h3 className="mb-4 text-sm font-semibold text-muted-foreground">
+                  Spacing (4px grid)
+                </h3>
                 <div className="space-y-2">
                   {[4, 8, 16, 24, 32, 48, 64].map((s) => (
                     <div key={s} className="flex items-center gap-3">
@@ -298,7 +463,12 @@ function DesignSystem() {
                     { l: "lg", c: "shadow-[var(--shadow-lg)]" },
                     { l: "glow", c: "shadow-[var(--shadow-glow)]" },
                   ].map((s) => (
-                    <div key={s.l} className={`grid h-16 place-items-center rounded-xl bg-card text-xs text-muted-foreground ${s.c}`}>{s.l}</div>
+                    <div
+                      key={s.l}
+                      className={`grid h-16 place-items-center rounded-xl bg-card text-xs text-muted-foreground ${s.c}`}
+                    >
+                      {s.l}
+                    </div>
                   ))}
                 </div>
               </div>
@@ -306,12 +476,21 @@ function DesignSystem() {
 
             {/* Breakpoints */}
             <div className="rounded-2xl border border-border bg-card p-6">
-              <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Responsive breakpoints</h3>
+              <h3 className="mb-3 text-sm font-semibold text-muted-foreground">
+                Responsive breakpoints
+              </h3>
               <div className="flex flex-wrap gap-2 text-xs">
                 {[
-                  ["sm", "640"], ["md", "768"], ["lg", "1024"], ["xl", "1280"], ["2xl", "1536"],
+                  ["sm", "640"],
+                  ["md", "768"],
+                  ["lg", "1024"],
+                  ["xl", "1280"],
+                  ["2xl", "1536"],
                 ].map(([k, v]) => (
-                  <span key={k} className="rounded-lg border border-border bg-background px-3 py-1.5 font-mono">
+                  <span
+                    key={k}
+                    className="rounded-lg border border-border bg-background px-3 py-1.5 font-mono"
+                  >
                     <span className="text-primary font-semibold">{k}</span> · {v}px
                   </span>
                 ))}
@@ -320,11 +499,18 @@ function DesignSystem() {
           </Section>
 
           {/* Buttons */}
-          <Section id="buttons" eyebrow="Interactions" title="Buttons" description="Six variants covering marketing, product, admin, and destructive actions.">
+          <Section
+            id="buttons"
+            eyebrow="Interactions"
+            title="Buttons"
+            description="Six variants covering marketing, product, admin, and destructive actions."
+          >
             <div className="rounded-2xl border border-border bg-card p-6">
               <div className="flex flex-wrap gap-3">
                 <Button variant="hero">Hero action</Button>
-                <Button variant="ai"><Sparkles /> Ask AI</Button>
+                <Button variant="ai">
+                  <Sparkles /> Ask AI
+                </Button>
                 <Button>Default</Button>
                 <Button variant="secondary">Secondary</Button>
                 <Button variant="outline">Outline</Button>
@@ -339,8 +525,12 @@ function DesignSystem() {
                 <Button size="sm">Small</Button>
                 <Button>Default</Button>
                 <Button size="lg">Large</Button>
-                <Button size="xl" variant="hero">Extra large</Button>
-                <Button size="icon" variant="outline"><Plus /></Button>
+                <Button size="xl" variant="hero">
+                  Extra large
+                </Button>
+                <Button size="icon" variant="outline">
+                  <Plus />
+                </Button>
                 <Button disabled>Disabled</Button>
               </div>
             </div>
@@ -350,12 +540,24 @@ function DesignSystem() {
           <Section id="inputs" eyebrow="Forms" title="Inputs & controls">
             <div className="grid gap-6 lg:grid-cols-2">
               <div className="space-y-4 rounded-2xl border border-border bg-card p-6">
-                <div className="space-y-1.5"><Label>Email</Label><Input type="email" placeholder="you@vendor.com" /></div>
-                <div className="space-y-1.5"><Label>Password</Label><Input type="password" placeholder="••••••••" /></div>
-                <div className="space-y-1.5"><Label>Store name</Label><Input placeholder="Aurora Studios" /></div>
+                <div className="space-y-1.5">
+                  <Label>Email</Label>
+                  <Input type="email" placeholder="you@vendor.com" />
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Password</Label>
+                  <Input type="password" placeholder="••••••••" />
+                </div>
+                <div className="space-y-1.5">
+                  <Label>Store name</Label>
+                  <Input placeholder="Aurora Studios" />
+                </div>
                 <div className="space-y-1.5">
                   <Label>Category</Label>
-                  <Select><SelectTrigger><SelectValue placeholder="Choose a category" /></SelectTrigger>
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a category" />
+                    </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="electronics">Electronics</SelectItem>
                       <SelectItem value="fashion">Fashion</SelectItem>
@@ -363,23 +565,41 @@ function DesignSystem() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="space-y-1.5"><Label>Description</Label><Textarea placeholder="Tell buyers what makes this store special..." rows={3} /></div>
+                <div className="space-y-1.5">
+                  <Label>Description</Label>
+                  <Textarea placeholder="Tell buyers what makes this store special..." rows={3} />
+                </div>
                 <div className="flex items-center justify-between rounded-xl border border-border p-3">
-                  <div><p className="text-sm font-medium">Enable AI recommendations</p><p className="text-xs text-muted-foreground">Personalize your storefront with AI</p></div>
+                  <div>
+                    <p className="text-sm font-medium">Enable AI recommendations</p>
+                    <p className="text-xs text-muted-foreground">
+                      Personalize your storefront with AI
+                    </p>
+                  </div>
                   <Switch defaultChecked />
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="rounded-2xl border border-border bg-card p-6"><h3 className="mb-3 text-sm font-semibold text-muted-foreground">Search bar</h3><SearchBar /></div>
-                <div className="rounded-2xl border border-border bg-card p-6"><h3 className="mb-3 text-sm font-semibold text-muted-foreground">AI search</h3><AiSearch onAskAi={(q) => toast("Searching...", { description: q })} /></div>
                 <div className="rounded-2xl border border-border bg-card p-6">
-                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Status badges</h3>
+                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Search bar</h3>
+                  <SearchBar />
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-6">
+                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground">AI search</h3>
+                  <AiSearch onAskAi={(q) => toast("Searching...", { description: q })} />
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-6">
+                  <h3 className="mb-3 text-sm font-semibold text-muted-foreground">
+                    Status badges
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     <StatusBadge status="active" />
                     <StatusBadge status="pending" />
                     <StatusBadge status="failed" />
                     <StatusBadge status="draft" />
-                    <Badge variant="ai"><Sparkles className="size-3" /> AI pick</Badge>
+                    <Badge variant="ai">
+                      <Sparkles className="size-3" /> AI pick
+                    </Badge>
                     <Badge variant="outline">Outline</Badge>
                   </div>
                 </div>
@@ -391,19 +611,44 @@ function DesignSystem() {
           <Section id="search" eyebrow="AI" title="AI-powered discovery">
             <div className="grid gap-4 lg:grid-cols-3">
               <div className="lg:col-span-2 rounded-2xl border border-border bg-[image:var(--gradient-subtle)] p-6 shadow-[var(--shadow-card)]">
-                <AiSearch onAskAi={(q) => toast.success("AI is thinking...", { description: q || "Ask anything" })} />
+                <AiSearch
+                  onAskAi={(q) =>
+                    toast.success("AI is thinking...", { description: q || "Ask anything" })
+                  }
+                />
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {["Trending under $50", "Best for hot summer days", "Gift for a coffee lover", "Sustainable brands"].map((s) => (
-                    <button key={s} className="rounded-full border border-border bg-card px-3 py-1.5 text-xs transition hover:border-primary/40 hover:bg-accent">{s}</button>
+                  {[
+                    "Trending under $50",
+                    "Best for hot summer days",
+                    "Gift for a coffee lover",
+                    "Sustainable brands",
+                  ].map((s) => (
+                    <button
+                      key={s}
+                      className="rounded-full border border-border bg-card px-3 py-1.5 text-xs transition hover:border-primary/40 hover:bg-accent"
+                    >
+                      {s}
+                    </button>
                   ))}
                 </div>
               </div>
               <div className="rounded-2xl border border-border bg-card p-6">
-                <div className="flex items-center gap-2 text-sm font-semibold"><Sparkles className="size-4 text-primary" /> AI suggestions</div>
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <Sparkles className="size-4 text-primary" /> AI suggestions
+                </div>
                 <ul className="mt-3 space-y-2 text-sm">
-                  <li className="flex justify-between"><span>Wireless earbuds</span><span className="text-muted-foreground">+38%</span></li>
-                  <li className="flex justify-between"><span>Linen shirts</span><span className="text-muted-foreground">+21%</span></li>
-                  <li className="flex justify-between"><span>Ceramic mugs</span><span className="text-muted-foreground">+12%</span></li>
+                  <li className="flex justify-between">
+                    <span>Wireless earbuds</span>
+                    <span className="text-muted-foreground">+38%</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span>Linen shirts</span>
+                    <span className="text-muted-foreground">+21%</span>
+                  </li>
+                  <li className="flex justify-between">
+                    <span>Ceramic mugs</span>
+                    <span className="text-muted-foreground">+12%</span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -427,10 +672,43 @@ function DesignSystem() {
             <div>
               <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Products</h3>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-                <ProductCard title="Aurora Wireless Headphones" vendor="Nova Audio" price={129.99} originalPrice={179.99} rating={4.8} reviews={2411} image={headphones} badge={{ label: "AI pick", variant: "ai" }} />
-                <ProductCard title="Orbit Smart Watch — Purple Edition" vendor="Chrono Labs" price={249} rating={4.6} reviews={1287} image={watch} badge={{ label: "New", variant: "success" }} />
-                <ProductCard title="Handmade Ceramic Mug" vendor="Clay & Co." price={22} rating={4.9} reviews={532} image={mug} badge={{ label: "-20%", variant: "warning" }} />
-                <ProductCard title="Featherlight Running Sneakers" vendor="Stride" price={89.5} originalPrice={119} rating={4.7} reviews={3106} image={sneakers} />
+                <ProductCard
+                  title="Aurora Wireless Headphones"
+                  vendor="Nova Audio"
+                  price={129.99}
+                  originalPrice={179.99}
+                  rating={4.8}
+                  reviews={2411}
+                  image={headphones}
+                  badge={{ label: "AI pick", variant: "ai" }}
+                />
+                <ProductCard
+                  title="Orbit Smart Watch — Purple Edition"
+                  vendor="Chrono Labs"
+                  price={249}
+                  rating={4.6}
+                  reviews={1287}
+                  image={watch}
+                  badge={{ label: "New", variant: "success" }}
+                />
+                <ProductCard
+                  title="Handmade Ceramic Mug"
+                  vendor="Clay & Co."
+                  price={22}
+                  rating={4.9}
+                  reviews={532}
+                  image={mug}
+                  badge={{ label: "-20%", variant: "warning" }}
+                />
+                <ProductCard
+                  title="Featherlight Running Sneakers"
+                  vendor="Stride"
+                  price={89.5}
+                  originalPrice={119}
+                  rating={4.7}
+                  reviews={3106}
+                  image={sneakers}
+                />
               </div>
             </div>
           </Section>
@@ -444,7 +722,11 @@ function DesignSystem() {
               <DashboardCard label="AI conversions" value="1,842" delta={31.7} icon={TrendingUp} />
             </div>
             <div className="grid gap-4 lg:grid-cols-2">
-              <Card><CardHeader><CardTitle>Revenue trend</CardTitle><CardDescription>Last 7 months</CardDescription></CardHeader>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Revenue trend</CardTitle>
+                  <CardDescription>Last 7 months</CardDescription>
+                </CardHeader>
                 <CardContent>
                   <ChartContainer config={chartConfig} className="h-64 w-full">
                     <AreaChart data={chartData}>
@@ -458,12 +740,22 @@ function DesignSystem() {
                       <XAxis dataKey="m" tickLine={false} axisLine={false} />
                       <YAxis tickLine={false} axisLine={false} />
                       <ChartTooltip content={<ChartTooltipContent />} />
-                      <Area type="monotone" dataKey="sales" stroke="var(--color-sales)" fill="url(#fillSales)" strokeWidth={2} />
+                      <Area
+                        type="monotone"
+                        dataKey="sales"
+                        stroke="var(--color-sales)"
+                        fill="url(#fillSales)"
+                        strokeWidth={2}
+                      />
                     </AreaChart>
                   </ChartContainer>
                 </CardContent>
               </Card>
-              <Card><CardHeader><CardTitle>Orders per month</CardTitle><CardDescription>Volume overview</CardDescription></CardHeader>
+              <Card>
+                <CardHeader>
+                  <CardTitle>Orders per month</CardTitle>
+                  <CardDescription>Volume overview</CardDescription>
+                </CardHeader>
                 <CardContent>
                   <ChartContainer config={chartConfig} className="h-64 w-full">
                     <BarChart data={chartData}>
@@ -488,31 +780,76 @@ function DesignSystem() {
                   <p className="text-xs text-muted-foreground">Across all vendors</p>
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm"><Filter /> Filter</Button>
-                  <Button variant="hero" size="sm"><Plus /> New</Button>
+                  <Button variant="outline" size="sm">
+                    <Filter /> Filter
+                  </Button>
+                  <Button variant="hero" size="sm">
+                    <Plus /> New
+                  </Button>
                 </div>
               </div>
               <Table>
-                <TableHeader><TableRow>
-                  <TableHead>Order</TableHead><TableHead>Customer</TableHead>
-                  <TableHead>Vendor</TableHead><TableHead>Status</TableHead>
-                  <TableHead className="text-right">Total</TableHead><TableHead />
-                </TableRow></TableHeader>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Order</TableHead>
+                    <TableHead>Customer</TableHead>
+                    <TableHead>Vendor</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Total</TableHead>
+                    <TableHead />
+                  </TableRow>
+                </TableHeader>
                 <TableBody>
                   {[
-                    { id: "#A-2401", c: "Maya Patel", v: "Nova Audio", s: "active" as const, t: "$129.99" },
-                    { id: "#A-2402", c: "Leo Nakamura", v: "Chrono Labs", s: "pending" as const, t: "$249.00" },
-                    { id: "#A-2403", c: "Ada Reyes", v: "Clay & Co.", s: "active" as const, t: "$44.00" },
-                    { id: "#A-2404", c: "Jonas Weiss", v: "Stride", s: "failed" as const, t: "$89.50" },
-                    { id: "#A-2405", c: "Zara Ali", v: "Nova Audio", s: "draft" as const, t: "$32.00" },
+                    {
+                      id: "#A-2401",
+                      c: "Maya Patel",
+                      v: "Nova Audio",
+                      s: "active" as const,
+                      t: "$129.99",
+                    },
+                    {
+                      id: "#A-2402",
+                      c: "Leo Nakamura",
+                      v: "Chrono Labs",
+                      s: "pending" as const,
+                      t: "$249.00",
+                    },
+                    {
+                      id: "#A-2403",
+                      c: "Ada Reyes",
+                      v: "Clay & Co.",
+                      s: "active" as const,
+                      t: "$44.00",
+                    },
+                    {
+                      id: "#A-2404",
+                      c: "Jonas Weiss",
+                      v: "Stride",
+                      s: "failed" as const,
+                      t: "$89.50",
+                    },
+                    {
+                      id: "#A-2405",
+                      c: "Zara Ali",
+                      v: "Nova Audio",
+                      s: "draft" as const,
+                      t: "$32.00",
+                    },
                   ].map((r) => (
                     <TableRow key={r.id}>
                       <TableCell className="font-mono text-xs">{r.id}</TableCell>
                       <TableCell>{r.c}</TableCell>
                       <TableCell className="text-muted-foreground">{r.v}</TableCell>
-                      <TableCell><StatusBadge status={r.s} /></TableCell>
+                      <TableCell>
+                        <StatusBadge status={r.s} />
+                      </TableCell>
                       <TableCell className="text-right font-semibold">{r.t}</TableCell>
-                      <TableCell><Button size="icon" variant="ghost"><MoreHorizontal /></Button></TableCell>
+                      <TableCell>
+                        <Button size="icon" variant="ghost">
+                          <MoreHorizontal />
+                        </Button>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -520,12 +857,26 @@ function DesignSystem() {
               <div className="border-t border-border p-3">
                 <Pagination>
                   <PaginationContent>
-                    <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
-                    <PaginationItem><PaginationLink href="#" isActive>1</PaginationLink></PaginationItem>
-                    <PaginationItem><PaginationLink href="#">2</PaginationLink></PaginationItem>
-                    <PaginationItem><PaginationLink href="#">3</PaginationLink></PaginationItem>
-                    <PaginationItem><PaginationEllipsis /></PaginationItem>
-                    <PaginationItem><PaginationNext href="#" /></PaginationItem>
+                    <PaginationItem>
+                      <PaginationPrevious href="#" />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#" isActive>
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink href="#">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationEllipsis />
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationNext href="#" />
+                    </PaginationItem>
                   </PaginationContent>
                 </Pagination>
               </div>
@@ -536,41 +887,75 @@ function DesignSystem() {
           <Section id="overlays" eyebrow="Overlays" title="Modals, drawers & sheets">
             <div className="flex flex-wrap gap-3">
               <Dialog>
-                <DialogTrigger asChild><Button variant="hero">Open modal</Button></DialogTrigger>
+                <DialogTrigger asChild>
+                  <Button variant="hero">Open modal</Button>
+                </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Confirm vendor approval</DialogTitle>
-                    <DialogDescription>Approving grants full storefront access. You can revoke anytime.</DialogDescription>
+                    <DialogDescription>
+                      Approving grants full storefront access. You can revoke anytime.
+                    </DialogDescription>
                   </DialogHeader>
                   <div className="rounded-xl border border-border bg-accent/40 p-4 text-sm">
-                    <p><strong>Vendor:</strong> Aurora Studios</p>
-                    <p><strong>Category:</strong> Home & living</p>
+                    <p>
+                      <strong>Vendor:</strong> Aurora Studios
+                    </p>
+                    <p>
+                      <strong>Category:</strong> Home & living
+                    </p>
                   </div>
                   <DialogFooter>
                     <Button variant="ghost">Cancel</Button>
-                    <Button variant="success" onClick={() => toast.success("Vendor approved")}>Approve</Button>
+                    <Button variant="success" onClick={() => toast.success("Vendor approved")}>
+                      Approve
+                    </Button>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
 
               <Sheet>
-                <SheetTrigger asChild><Button variant="outline">Open drawer</Button></SheetTrigger>
+                <SheetTrigger asChild>
+                  <Button variant="outline">Open drawer</Button>
+                </SheetTrigger>
                 <SheetContent>
                   <SheetHeader>
                     <SheetTitle>Filter products</SheetTitle>
                     <SheetDescription>Refine by price, rating, and vendor.</SheetDescription>
                   </SheetHeader>
                   <div className="mt-4 space-y-4">
-                    <div className="space-y-1.5"><Label>Min price</Label><Input placeholder="$0" /></div>
-                    <div className="space-y-1.5"><Label>Max price</Label><Input placeholder="$500" /></div>
-                    <Button variant="hero" className="w-full">Apply filters</Button>
+                    <div className="space-y-1.5">
+                      <Label>Min price</Label>
+                      <Input placeholder="$0" />
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label>Max price</Label>
+                      <Input placeholder="$500" />
+                    </div>
+                    <Button variant="hero" className="w-full">
+                      Apply filters
+                    </Button>
                   </div>
                 </SheetContent>
               </Sheet>
 
-              <Button variant="secondary" onClick={() => toast("Order placed", { description: "Order #A-2406 · $184.50", action: { label: "View", onClick: () => {} } })}>Trigger toast</Button>
-              <Button variant="ghost" onClick={() => toast.success("Payout complete")}>Success toast</Button>
-              <Button variant="ghost" onClick={() => toast.error("Payment failed")}>Error toast</Button>
+              <Button
+                variant="secondary"
+                onClick={() =>
+                  toast("Order placed", {
+                    description: "Order #A-2406 · $184.50",
+                    action: { label: "View", onClick: () => {} },
+                  })
+                }
+              >
+                Trigger toast
+              </Button>
+              <Button variant="ghost" onClick={() => toast.success("Payout complete")}>
+                Success toast
+              </Button>
+              <Button variant="ghost" onClick={() => toast.error("Payment failed")}>
+                Error toast
+              </Button>
             </div>
           </Section>
 
@@ -579,18 +964,26 @@ function DesignSystem() {
             <div className="rounded-2xl border border-border bg-card p-6">
               <Breadcrumb>
                 <BreadcrumbList>
-                  <BreadcrumbItem><BreadcrumbLink href="#">Home</BreadcrumbLink></BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                  </BreadcrumbItem>
                   <BreadcrumbSeparator />
-                  <BreadcrumbItem><BreadcrumbLink href="#">Vendors</BreadcrumbLink></BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#">Vendors</BreadcrumbLink>
+                  </BreadcrumbItem>
                   <BreadcrumbSeparator />
-                  <BreadcrumbItem><BreadcrumbPage>Aurora Studios</BreadcrumbPage></BreadcrumbItem>
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Aurora Studios</BreadcrumbPage>
+                  </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
             </div>
 
             <div className="grid gap-4 lg:grid-cols-[240px_1fr]">
               <div className="rounded-2xl border border-border bg-card p-3">
-                <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Vendor console</p>
+                <p className="px-2 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Vendor console
+                </p>
                 <ul className="space-y-1 text-sm">
                   {[
                     { i: Home, l: "Overview", active: true },
@@ -601,8 +994,12 @@ function DesignSystem() {
                     { i: Settings, l: "Settings" },
                   ].map(({ i: Ico, l, active }) => (
                     <li key={l}>
-                      <a href="#" className={`flex items-center gap-3 rounded-lg px-3 py-2 transition ${active ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
-                        <Ico className="size-4" />{l}
+                      <a
+                        href="#"
+                        className={`flex items-center gap-3 rounded-lg px-3 py-2 transition ${active ? "bg-accent text-foreground font-medium" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
+                      >
+                        <Ico className="size-4" />
+                        {l}
                       </a>
                     </li>
                   ))}
@@ -616,10 +1013,18 @@ function DesignSystem() {
                     <TabsTrigger value="draft">Drafts</TabsTrigger>
                     <TabsTrigger value="archived">Archived</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="all" className="mt-4 text-sm text-muted-foreground">All products across vendors.</TabsContent>
-                  <TabsContent value="active" className="mt-4 text-sm text-muted-foreground">Active listings only.</TabsContent>
-                  <TabsContent value="draft" className="mt-4 text-sm text-muted-foreground">Drafts awaiting approval.</TabsContent>
-                  <TabsContent value="archived" className="mt-4 text-sm text-muted-foreground">Archived items.</TabsContent>
+                  <TabsContent value="all" className="mt-4 text-sm text-muted-foreground">
+                    All products across vendors.
+                  </TabsContent>
+                  <TabsContent value="active" className="mt-4 text-sm text-muted-foreground">
+                    Active listings only.
+                  </TabsContent>
+                  <TabsContent value="draft" className="mt-4 text-sm text-muted-foreground">
+                    Drafts awaiting approval.
+                  </TabsContent>
+                  <TabsContent value="archived" className="mt-4 text-sm text-muted-foreground">
+                    Archived items.
+                  </TabsContent>
                 </Tabs>
               </div>
             </div>
@@ -629,7 +1034,9 @@ function DesignSystem() {
           <Section id="feedback" eyebrow="Feedback" title="Skeletons & empty states">
             <div className="grid gap-4 lg:grid-cols-2">
               <div className="rounded-2xl border border-border bg-card p-6">
-                <h3 className="mb-3 text-sm font-semibold text-muted-foreground">Loading skeletons</h3>
+                <h3 className="mb-3 text-sm font-semibold text-muted-foreground">
+                  Loading skeletons
+                </h3>
                 <div className="grid grid-cols-2 gap-4">
                   {[0, 1].map((i) => (
                     <div key={i} className="space-y-2 rounded-xl border border-border p-3">
@@ -645,7 +1052,11 @@ function DesignSystem() {
                 icon={Inbox}
                 title="No orders yet"
                 description="When customers buy from your storefront, their orders will appear here in real time."
-                action={<Button variant="hero"><Plus /> Add product</Button>}
+                action={
+                  <Button variant="hero">
+                    <Plus /> Add product
+                  </Button>
+                }
               />
             </div>
           </Section>

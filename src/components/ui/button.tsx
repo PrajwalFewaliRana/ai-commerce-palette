@@ -18,8 +18,10 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         hero: "text-primary-foreground shadow-[var(--shadow-glow)] hover:brightness-110 [background-image:var(--gradient-primary)]",
         ai: "text-primary-foreground shadow-[var(--shadow-glow)] hover:brightness-110 [background-image:var(--gradient-ai)]",
-        success: "bg-[color:var(--success)] text-[color:var(--success-foreground)] shadow-sm hover:brightness-95",
-        warning: "bg-[color:var(--warning)] text-[color:var(--warning-foreground)] shadow-sm hover:brightness-95",
+        success:
+          "bg-[color:var(--success)] text-[color:var(--success-foreground)] shadow-sm hover:brightness-95",
+        warning:
+          "bg-[color:var(--warning)] text-[color:var(--warning-foreground)] shadow-sm hover:brightness-95",
       },
       size: {
         default: "h-9 px-4 py-2",

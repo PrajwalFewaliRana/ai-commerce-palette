@@ -3,7 +3,14 @@ import { PageHeader } from "@/components/ds/seller-shell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { DashboardCard } from "@/components/ds/dashboard-card";
 import { Package, AlertTriangle, PackageOpen, Boxes, Upload, Download, Plus } from "lucide-react";
 import { sellerProducts } from "@/lib/seller-data";
@@ -31,16 +38,27 @@ function InventoryPage() {
         subtitle="Track stock levels, receive alerts, and restock in bulk."
         actions={
           <>
-            <Button variant="outline"><Download className="size-4" /> Export</Button>
-            <Button variant="outline"><Upload className="size-4" /> Import CSV</Button>
-            <Button variant="hero"><Plus className="size-4" /> Restock</Button>
+            <Button variant="outline">
+              <Download className="size-4" /> Export
+            </Button>
+            <Button variant="outline">
+              <Upload className="size-4" /> Import CSV
+            </Button>
+            <Button variant="hero">
+              <Plus className="size-4" /> Restock
+            </Button>
           </>
         }
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <DashboardCard label="Total units" value={total.toLocaleString()} delta={4} icon={Boxes} />
-        <DashboardCard label="SKUs tracked" value={String(sellerProducts.length)} delta={2} icon={Package} />
+        <DashboardCard
+          label="SKUs tracked"
+          value={String(sellerProducts.length)}
+          delta={2}
+          icon={Package}
+        />
         <DashboardCard label="Low stock" value={String(low)} delta={-1} icon={AlertTriangle} />
         <DashboardCard label="Out of stock" value={String(out)} delta={0} icon={PackageOpen} />
       </div>
@@ -68,16 +86,26 @@ function InventoryPage() {
                 <TableCell className="font-mono text-xs">{p.sku}</TableCell>
                 <TableCell>
                   <div className="flex items-center gap-3">
-                    <div className="size-9 shrink-0 rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${p.image})` }} />
+                    <img
+                      src={p.image}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="size-9 shrink-0 rounded-lg object-cover"
+                    />
                     <span className="line-clamp-1 text-sm font-medium">{p.title}</span>
                   </div>
                 </TableCell>
                 <TableCell className="text-right font-semibold">{p.stock}</TableCell>
-                <TableCell className="text-right text-muted-foreground">{Math.min(p.stock, Math.floor(p.stock / 5))}</TableCell>
+                <TableCell className="text-right text-muted-foreground">
+                  {Math.min(p.stock, Math.floor(p.stock / 5))}
+                </TableCell>
                 <TableCell className="text-right text-muted-foreground">10</TableCell>
                 <TableCell>{stockBadge(p.stock)}</TableCell>
                 <TableCell className="text-right">
-                  <Button variant="outline" size="sm">Restock</Button>
+                  <Button variant="outline" size="sm">
+                    Restock
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

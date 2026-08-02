@@ -9,7 +9,10 @@ export const Route = createFileRoute("/auth/verify-email")({
   head: () => ({
     meta: [
       { title: "Verify your email — Nexa" },
-      { name: "description", content: "Enter the 6-digit code we sent to your inbox to verify your account." },
+      {
+        name: "description",
+        content: "Enter the 6-digit code we sent to your inbox to verify your account.",
+      },
     ],
   }),
   component: VerifyEmailPage,

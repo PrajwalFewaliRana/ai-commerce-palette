@@ -10,10 +10,16 @@ import { adminNotifications } from "@/lib/admin-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/dashboard/admin/notifications")({
-  head: () => ({ meta: [
-    { title: "Notifications — Nexa Admin" },
-    { name: "description", content: "Operational alerts for moderation, seller verification, payouts, AI systems and platform settings." },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: "Notifications — Nexa Admin" },
+      {
+        name: "description",
+        content:
+          "Operational alerts for moderation, seller verification, payouts, AI systems and platform settings.",
+      },
+    ],
+  }),
   component: AdminNotifications,
 });
 
@@ -38,10 +44,11 @@ function AdminNotifications() {
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return adminNotifications.filter((n) =>
-      (channel === "all" || n.channel === channel) &&
-      (severity === "all" || n.severity === severity) &&
-      (!q || n.title.toLowerCase().includes(q) || n.body.toLowerCase().includes(q)),
+    return adminNotifications.filter(
+      (n) =>
+        (channel === "all" || n.channel === channel) &&
+        (severity === "all" || n.severity === severity) &&
+        (!q || n.title.toLowerCase().includes(q) || n.body.toLowerCase().includes(q)),
     );
   }, [query, channel, severity]);
 
@@ -50,7 +57,11 @@ function AdminNotifications() {
       <PageHeader
         title="Notifications"
         subtitle={`${adminNotifications.filter((n) => n.unread).length} unread operational alerts`}
-        actions={<Button variant="outline"><CheckCheck className="size-4" /> Mark all read</Button>}
+        actions={
+          <Button variant="outline">
+            <CheckCheck className="size-4" /> Mark all read
+          </Button>
+        }
       />
 
       <Panel>
@@ -68,7 +79,9 @@ function AdminNotifications() {
         </div>
         <DataToolbar query={query} onQuery={setQuery} placeholder="Search alerts...">
           <FilterSelect
-            label="Severity" value={severity} onChange={setSeverity}
+            label="Severity"
+            value={severity}
+            onChange={setSeverity}
             options={[
               { value: "all", label: "All severities" },
               { value: "critical", label: "Critical" },
@@ -87,7 +100,9 @@ function AdminNotifications() {
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="text-sm font-semibold">{n.title}</p>
-                    <Badge variant="secondary" className="text-[10px] capitalize">{n.channel}</Badge>
+                    <Badge variant="secondary" className="text-[10px] capitalize">
+                      {n.channel}
+                    </Badge>
                     {n.unread && <span className="size-1.5 rounded-full bg-primary" />}
                   </div>
                   <p className="mt-1 text-sm text-muted-foreground">{n.body}</p>

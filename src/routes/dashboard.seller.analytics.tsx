@@ -3,11 +3,33 @@ import { AiCard, PageHeader } from "@/components/ds/seller-shell";
 import { DashboardCard } from "@/components/ds/dashboard-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import {
-  Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart,
-  ResponsiveContainer, Tooltip, XAxis, YAxis,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 import { DollarSign, Eye, ShoppingCart, Users, Sparkles, TrendingUp } from "lucide-react";
 import { revenueSeries, trafficSources, sellerProducts } from "@/lib/seller-data";
@@ -38,14 +60,18 @@ function AnalyticsPage() {
         actions={
           <>
             <Select defaultValue="7d">
-              <SelectTrigger className="w-40"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="w-40">
+                <SelectValue />
+              </SelectTrigger>
               <SelectContent>
                 <SelectItem value="7d">Last 7 days</SelectItem>
                 <SelectItem value="30d">Last 30 days</SelectItem>
                 <SelectItem value="90d">Last 90 days</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="hero"><Sparkles className="size-4" /> AI insights</Button>
+            <Button variant="hero">
+              <Sparkles className="size-4" /> AI insights
+            </Button>
           </>
         }
       />
@@ -65,34 +91,81 @@ function AnalyticsPage() {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={funnelSeries}>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-                <XAxis dataKey="day" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12 }} />
-                <Line type="monotone" dataKey="views" stroke="var(--primary)" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="add" stroke="var(--primary-glow)" strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="checkout" stroke="var(--success)" strokeWidth={2} dot={false} />
+                <XAxis
+                  dataKey="day"
+                  stroke="var(--muted-foreground)"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis
+                  stroke="var(--muted-foreground)"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--popover)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 12,
+                    fontSize: 12,
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="views"
+                  stroke="var(--primary)"
+                  strokeWidth={2}
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="add"
+                  stroke="var(--primary-glow)"
+                  strokeWidth={2}
+                  dot={false}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="checkout"
+                  stroke="var(--success)"
+                  strokeWidth={2}
+                  dot={false}
+                />
               </LineChart>
             </ResponsiveContainer>
           </div>
         </section>
 
-        <AiCard title="AI Sales Insights" description="Forecast + recommendations for the next 30 days.">
+        <AiCard
+          title="AI Sales Insights"
+          description="Forecast + recommendations for the next 30 days."
+        >
           <ul className="space-y-3 text-sm">
             <li className="flex gap-2">
               <TrendingUp className="mt-0.5 size-4 shrink-0 text-[color:var(--success)]" />
-              <span>Projected revenue next 30d: <b>$34.8K</b> (+44% vs prev.)</span>
+              <span>
+                Projected revenue next 30d: <b>$34.8K</b> (+44% vs prev.)
+              </span>
             </li>
             <li className="flex gap-2">
               <Sparkles className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span>Push <b>Studio Headphones ANC</b> to homepage — AI search matches surged 3.2×.</span>
+              <span>
+                Push <b>Studio Headphones ANC</b> to homepage — AI search matches surged 3.2×.
+              </span>
             </li>
             <li className="flex gap-2">
               <Sparkles className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span>Bundle <b>Sneakers + Watch</b> for a 12% attach-rate lift based on co-view data.</span>
+              <span>
+                Bundle <b>Sneakers + Watch</b> for a 12% attach-rate lift based on co-view data.
+              </span>
             </li>
             <li className="flex gap-2">
               <Sparkles className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span>Drop <b>SPRING20</b> — reactivating expired code could recover $1.4K in Q3.</span>
+              <span>
+                Drop <b>SPRING20</b> — reactivating expired code could recover $1.4K in Q3.
+              </span>
             </li>
           </ul>
         </AiCard>
@@ -111,10 +184,34 @@ function AnalyticsPage() {
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-                <XAxis dataKey="day" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12 }} />
-                <Area type="monotone" dataKey="revenue" stroke="var(--primary)" fill="url(#revA)" strokeWidth={2} />
+                <XAxis
+                  dataKey="day"
+                  stroke="var(--muted-foreground)"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis
+                  stroke="var(--muted-foreground)"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--popover)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 12,
+                    fontSize: 12,
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="revenue"
+                  stroke="var(--primary)"
+                  fill="url(#revA)"
+                  strokeWidth={2}
+                />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -126,9 +223,30 @@ function AnalyticsPage() {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={trafficSources} layout="vertical">
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" horizontal={false} />
-                <XAxis type="number" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis type="category" dataKey="source" stroke="var(--muted-foreground)" fontSize={12} tickLine={false} axisLine={false} width={80} />
-                <Tooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12 }} />
+                <XAxis
+                  type="number"
+                  stroke="var(--muted-foreground)"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                />
+                <YAxis
+                  type="category"
+                  dataKey="source"
+                  stroke="var(--muted-foreground)"
+                  fontSize={12}
+                  tickLine={false}
+                  axisLine={false}
+                  width={80}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--popover)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 12,
+                    fontSize: 12,
+                  }}
+                />
                 <Bar dataKey="visits" fill="var(--primary)" radius={[0, 8, 8, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -156,14 +274,24 @@ function AnalyticsPage() {
               <TableRow key={p.id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
-                    <div className="size-9 shrink-0 rounded-lg bg-cover bg-center" style={{ backgroundImage: `url(${p.image})` }} />
+                    <img
+                      src={p.image}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="size-9 shrink-0 rounded-lg object-cover"
+                    />
                     <span className="line-clamp-1 text-sm font-medium">{p.title}</span>
                   </div>
                 </TableCell>
                 <TableCell className="text-right">{p.sold.toLocaleString()}</TableCell>
-                <TableCell className="text-right font-semibold">${(p.sold * p.price).toLocaleString()}</TableCell>
+                <TableCell className="text-right font-semibold">
+                  ${(p.sold * p.price).toLocaleString()}
+                </TableCell>
                 <TableCell className="text-right">★ {p.rating}</TableCell>
-                <TableCell><Badge variant="success">+{Math.floor(Math.random() * 20 + 4)}%</Badge></TableCell>
+                <TableCell>
+                  <Badge variant="success">+{Math.floor(Math.random() * 20 + 4)}%</Badge>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

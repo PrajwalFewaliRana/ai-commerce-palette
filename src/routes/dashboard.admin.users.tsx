@@ -6,21 +6,45 @@ import { DashboardCard } from "@/components/ds/dashboard-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Users, UserPlus, UserX, Store, Download, Ban, CheckCircle2, ArrowUpDown } from "lucide-react";
+import {
+  Users,
+  UserPlus,
+  UserX,
+  Store,
+  Download,
+  Ban,
+  CheckCircle2,
+  ArrowUpDown,
+} from "lucide-react";
 import { adminUsers, type UserStatus } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/dashboard/admin/users")({
-  head: () => ({ meta: [
-    { title: "User Management — Nexa Admin" },
-    { name: "description", content: "Search, filter, sort and moderate every customer, seller and admin account on Nexa." },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: "User Management — Nexa Admin" },
+      {
+        name: "description",
+        content:
+          "Search, filter, sort and moderate every customer, seller and admin account on Nexa.",
+      },
+    ],
+  }),
   component: UserManagement,
 });
 
 const statusVariant: Record<UserStatus, "success" | "warning" | "destructive"> = {
-  active: "success", pending: "warning", suspended: "destructive",
+  active: "success",
+  pending: "warning",
+  suspended: "destructive",
 };
 
 function UserManagement() {
@@ -37,11 +61,15 @@ function UserManagement() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const rows = adminUsers.filter((u) =>
-      (role === "all" || u.role === role) &&
-      (status === "all" || u.status === status) &&
-      (country === "all" || u.country === country) &&
-      (!q || u.name.toLowerCase().includes(q) || u.email.includes(q) || u.id.toLowerCase().includes(q)),
+    const rows = adminUsers.filter(
+      (u) =>
+        (role === "all" || u.role === role) &&
+        (status === "all" || u.status === status) &&
+        (country === "all" || u.country === country) &&
+        (!q ||
+          u.name.toLowerCase().includes(q) ||
+          u.email.includes(q) ||
+          u.id.toLowerCase().includes(q)),
     );
     return [...rows].sort((a, b) => (sortDesc ? b.spent - a.spent : a.spent - b.spent));
   }, [query, role, status, country, sortDesc]);
@@ -54,7 +82,11 @@ function UserManagement() {
       <PageHeader
         title="User management"
         subtitle={`${adminUsers.length.toLocaleString()} accounts in scope · customers, sellers and admins`}
-        actions={<Button variant="outline"><Download className="size-4" /> Export</Button>}
+        actions={
+          <Button variant="outline">
+            <Download className="size-4" /> Export
+          </Button>
+        }
       />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -66,7 +98,13 @@ function UserManagement() {
 
       <Panel className="mt-6">
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 pb-0">
-          <Tabs value={role} onValueChange={(v) => { setRole(v); setPage(1); }}>
+          <Tabs
+            value={role}
+            onValueChange={(v) => {
+              setRole(v);
+              setPage(1);
+            }}
+          >
             <TabsList>
               <TabsTrigger value="all">All</TabsTrigger>
               <TabsTrigger value="customer">Customers</TabsTrigger>
@@ -77,15 +115,31 @@ function UserManagement() {
           {selected.length > 0 && (
             <div className="flex items-center gap-2 text-xs">
               <span className="text-muted-foreground">{selected.length} selected</span>
-              <Button size="sm" variant="outline"><CheckCircle2 className="size-3.5" /> Activate</Button>
-              <Button size="sm" variant="outline" className="text-destructive"><Ban className="size-3.5" /> Suspend</Button>
+              <Button size="sm" variant="outline">
+                <CheckCircle2 className="size-3.5" /> Activate
+              </Button>
+              <Button size="sm" variant="outline" className="text-destructive">
+                <Ban className="size-3.5" /> Suspend
+              </Button>
             </div>
           )}
         </div>
 
-        <DataToolbar query={query} onQuery={(v) => { setQuery(v); setPage(1); }} placeholder="Search by name, email or user ID...">
+        <DataToolbar
+          query={query}
+          onQuery={(v) => {
+            setQuery(v);
+            setPage(1);
+          }}
+          placeholder="Search by name, email or user ID..."
+        >
           <FilterSelect
-            label="Status" value={status} onChange={(v) => { setStatus(v); setPage(1); }}
+            label="Status"
+            value={status}
+            onChange={(v) => {
+              setStatus(v);
+              setPage(1);
+            }}
             options={[
               { value: "all", label: "All statuses" },
               { value: "active", label: "Active" },
@@ -94,8 +148,16 @@ function UserManagement() {
             ]}
           />
           <FilterSelect
-            label="Country" value={country} onChange={(v) => { setCountry(v); setPage(1); }}
-            options={[{ value: "all", label: "All countries" }, ...countries.map((c) => ({ value: c, label: c }))]}
+            label="Country"
+            value={country}
+            onChange={(v) => {
+              setCountry(v);
+              setPage(1);
+            }}
+            options={[
+              { value: "all", label: "All countries" },
+              ...countries.map((c) => ({ value: c, label: c })),
+            ]}
           />
         </DataToolbar>
 
@@ -107,7 +169,11 @@ function UserManagement() {
                   <Checkbox
                     checked={allChecked}
                     onCheckedChange={(v) =>
-                      setSelected(v ? Array.from(new Set([...selected, ...pageRows.map((r) => r.id)])) : selected.filter((id) => !pageRows.some((r) => r.id === id)))
+                      setSelected(
+                        v
+                          ? Array.from(new Set([...selected, ...pageRows.map((r) => r.id)]))
+                          : selected.filter((id) => !pageRows.some((r) => r.id === id)),
+                      )
                     }
                   />
                 </TableHead>
@@ -118,7 +184,10 @@ function UserManagement() {
                 <TableHead>Joined</TableHead>
                 <TableHead className="text-right">Orders</TableHead>
                 <TableHead className="text-right">
-                  <button className="inline-flex items-center gap-1 hover:text-foreground" onClick={() => setSortDesc(!sortDesc)}>
+                  <button
+                    className="inline-flex items-center gap-1 hover:text-foreground"
+                    onClick={() => setSortDesc(!sortDesc)}
+                  >
                     Spent <ArrowUpDown className="size-3.5" />
                   </button>
                 </TableHead>
@@ -130,13 +199,18 @@ function UserManagement() {
                   <TableCell>
                     <Checkbox
                       checked={selected.includes(u.id)}
-                      onCheckedChange={(v) => setSelected(v ? [...selected, u.id] : selected.filter((id) => id !== u.id))}
+                      onCheckedChange={(v) =>
+                        setSelected(v ? [...selected, u.id] : selected.filter((id) => id !== u.id))
+                      }
                     />
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-accent text-xs font-semibold">
-                        {u.name.split(" ").map((n) => n[0]).join("")}
+                        {u.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
                       </div>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium">{u.name}</p>
@@ -144,17 +218,32 @@ function UserManagement() {
                       </div>
                     </div>
                   </TableCell>
-                  <TableCell><Badge variant={u.role === "admin" ? "ai" : "secondary"} className="capitalize">{u.role}</Badge></TableCell>
-                  <TableCell><Badge variant={statusVariant[u.status]} className="capitalize">{u.status}</Badge></TableCell>
+                  <TableCell>
+                    <Badge variant={u.role === "admin" ? "ai" : "secondary"} className="capitalize">
+                      {u.role}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={statusVariant[u.status]} className="capitalize">
+                      {u.status}
+                    </Badge>
+                  </TableCell>
                   <TableCell className="text-muted-foreground">{u.country}</TableCell>
-                  <TableCell className="whitespace-nowrap text-muted-foreground">{u.joined}</TableCell>
+                  <TableCell className="whitespace-nowrap text-muted-foreground">
+                    {u.joined}
+                  </TableCell>
                   <TableCell className="text-right">{u.orders}</TableCell>
-                  <TableCell className="text-right font-semibold">${u.spent.toLocaleString()}</TableCell>
+                  <TableCell className="text-right font-semibold">
+                    ${u.spent.toLocaleString()}
+                  </TableCell>
                 </TableRow>
               ))}
               {pageRows.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={8} className="py-10 text-center text-sm text-muted-foreground">
+                  <TableCell
+                    colSpan={8}
+                    className="py-10 text-center text-sm text-muted-foreground"
+                  >
                     No users match these filters.
                   </TableCell>
                 </TableRow>
@@ -163,7 +252,13 @@ function UserManagement() {
           </Table>
         </div>
 
-        <Pager page={page} pageSize={pageSize} total={filtered.length} onPage={setPage} onPageSize={setPageSize} />
+        <Pager
+          page={page}
+          pageSize={pageSize}
+          total={filtered.length}
+          onPage={setPage}
+          onPageSize={setPageSize}
+        />
       </Panel>
     </>
   );

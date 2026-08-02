@@ -8,18 +8,23 @@ import { Check, Truck, MapPin } from "lucide-react";
 import { products, initialCart } from "@/lib/shop-data";
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [
-    { title: "Checkout — Nexa" },
-    { name: "description", content: "Complete your purchase securely on Nexa." },
-    { property: "og:title", content: "Checkout — Nexa" },
-    { property: "og:description", content: "Secure checkout on Nexa." },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: "Checkout — Nexa" },
+      { name: "description", content: "Complete your purchase securely on Nexa." },
+      { property: "og:title", content: "Checkout — Nexa" },
+      { property: "og:description", content: "Secure checkout on Nexa." },
+    ],
+  }),
   component: CheckoutPage,
 });
 
 function CheckoutPage() {
   const [shipping, setShipping] = useState("standard");
-  const rows = initialCart.map((i) => ({ ...i, product: products.find((p) => p.id === i.productId)! }));
+  const rows = initialCart.map((i) => ({
+    ...i,
+    product: products.find((p) => p.id === i.productId)!,
+  }));
   const subtotal = rows.reduce((s, r) => s + r.product.price * r.qty, 0);
   const ship = shipping === "express" ? 19 : subtotal > 100 ? 0 : 9;
   const tax = subtotal * 0.08;
@@ -71,7 +76,9 @@ function CheckoutPage() {
           </Section>
 
           <div className="flex flex-wrap justify-between gap-3">
-            <Button variant="ghost" asChild><Link to="/cart">← Back to cart</Link></Button>
+            <Button variant="ghost" asChild>
+              <Link to="/cart">← Back to cart</Link>
+            </Button>
             <Button variant="hero" size="lg" asChild>
               <Link to="/payment">Continue to payment</Link>
             </Button>
@@ -83,8 +90,16 @@ function CheckoutPage() {
           <ul className="mt-4 space-y-3">
             {rows.map((r) => (
               <li key={r.productId} className="flex items-center gap-3">
-                <div className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${r.product.image})` }}>
-                  <Badge variant="secondary" className="absolute -right-1 -top-1 h-5 min-w-5 justify-center p-1 text-[10px]">{r.qty}</Badge>
+                <div
+                  className="relative size-14 shrink-0 overflow-hidden rounded-xl bg-cover bg-center"
+                  style={{ backgroundImage: `url(${r.product.image})` }}
+                >
+                  <Badge
+                    variant="secondary"
+                    className="absolute -right-1 -top-1 h-5 min-w-5 justify-center p-1 text-[10px]"
+                  >
+                    {r.qty}
+                  </Badge>
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="line-clamp-1 text-sm font-medium">{r.product.title}</p>
@@ -99,7 +114,8 @@ function CheckoutPage() {
             <SumRow label="Shipping" value={ship === 0 ? "Free" : `$${ship.toFixed(2)}`} />
             <SumRow label="Tax" value={`$${tax.toFixed(2)}`} />
             <div className="flex items-center justify-between pt-2 text-base font-bold">
-              <span>Total</span><span>${total.toFixed(2)}</span>
+              <span>Total</span>
+              <span>${total.toFixed(2)}</span>
             </div>
           </div>
         </aside>
@@ -117,7 +133,9 @@ function Stepper({ current }: { current: number }) {
         const active = i === current;
         return (
           <li key={s} className="flex items-center gap-2">
-            <span className={`grid size-6 place-items-center rounded-full text-xs font-semibold ${done ? "bg-[color:var(--success)] text-white" : active ? "text-primary-foreground [background-image:var(--gradient-ai)]" : "border border-border bg-card text-muted-foreground"}`}>
+            <span
+              className={`grid size-6 place-items-center rounded-full text-xs font-semibold ${done ? "bg-[color:var(--success)] text-[color:var(--success-foreground)]" : active ? "text-primary-foreground [background-image:var(--gradient-ai)]" : "border border-border bg-card text-muted-foreground"}`}
+            >
               {done ? <Check className="size-3" /> : i + 1}
             </span>
             <span className={active ? "font-semibold" : "text-muted-foreground"}>{s}</span>
@@ -128,7 +146,15 @@ function Stepper({ current }: { current: number }) {
   );
 }
 
-function Section({ title, icon: Icon, children }: { title: string; icon?: typeof Truck; children: ReactNode }) {
+function Section({
+  title,
+  icon: Icon,
+  children,
+}: {
+  title: string;
+  icon?: typeof Truck;
+  children: ReactNode;
+}) {
   return (
     <section className="rounded-2xl border border-border bg-card p-6">
       <p className="mb-4 flex items-center gap-2 text-sm font-semibold">
@@ -140,9 +166,25 @@ function Section({ title, icon: Icon, children }: { title: string; icon?: typeof
   );
 }
 
-function ShippingOption({ selected, onSelect, title, desc, price }: { selected: boolean; onSelect: () => void; title: string; desc: string; price: string }) {
+function ShippingOption({
+  selected,
+  onSelect,
+  title,
+  desc,
+  price,
+}: {
+  selected: boolean;
+  onSelect: () => void;
+  title: string;
+  desc: string;
+  price: string;
+}) {
   return (
-    <button type="button" onClick={onSelect} className={`flex items-start justify-between rounded-xl border p-4 text-left transition ${selected ? "border-primary bg-primary/5 shadow-[var(--shadow-glow)]" : "border-border bg-background hover:border-primary/40"}`}>
+    <button
+      type="button"
+      onClick={onSelect}
+      className={`flex items-start justify-between rounded-xl border p-4 text-left transition ${selected ? "border-primary bg-primary/5 shadow-[var(--shadow-glow)]" : "border-border bg-background hover:border-primary/40"}`}
+    >
       <div>
         <p className="text-sm font-semibold">{title}</p>
         <p className="text-xs text-muted-foreground">{desc}</p>
@@ -153,5 +195,10 @@ function ShippingOption({ selected, onSelect, title, desc, price }: { selected: 
 }
 
 function SumRow({ label, value }: { label: string; value: string }) {
-  return <div className="flex items-center justify-between text-muted-foreground"><span>{label}</span><span className="font-medium text-foreground">{value}</span></div>;
+  return (
+    <div className="flex items-center justify-between text-muted-foreground">
+      <span>{label}</span>
+      <span className="font-medium text-foreground">{value}</span>
+    </div>
+  );
 }
