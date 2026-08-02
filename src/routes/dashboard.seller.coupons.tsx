@@ -4,9 +4,29 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Plus, Copy, Trash2, Pencil } from "lucide-react";
 import { coupons } from "@/lib/seller-data";
 
@@ -48,26 +68,49 @@ function CouponsPage() {
           <TableBody>
             {coupons.map((c) => (
               <TableRow key={c.code}>
-                <TableCell><code className="rounded bg-muted px-2 py-1 font-mono text-xs font-semibold">{c.code}</code></TableCell>
+                <TableCell>
+                  <code className="rounded bg-muted px-2 py-1 font-mono text-xs font-semibold">
+                    {c.code}
+                  </code>
+                </TableCell>
                 <TableCell className="capitalize text-sm">{c.type}</TableCell>
                 <TableCell className="text-right font-semibold">
-                  {c.type === "percent" ? `${c.value}%` : c.type === "amount" ? `$${c.value}` : "Free ship"}
+                  {c.type === "percent"
+                    ? `${c.value}%`
+                    : c.type === "amount"
+                      ? `$${c.value}`
+                      : "Free ship"}
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-col gap-1">
-                    <span className="text-xs text-muted-foreground">{c.redemptions} / {c.limit}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {c.redemptions} / {c.limit}
+                    </span>
                     <div className="h-1.5 w-32 overflow-hidden rounded-full bg-muted">
-                      <div className="h-full [background-image:var(--gradient-ai)]" style={{ width: `${Math.min(100, (c.redemptions / c.limit) * 100)}%` }} />
+                      <div
+                        className="h-full [background-image:var(--gradient-ai)]"
+                        style={{ width: `${Math.min(100, (c.redemptions / c.limit) * 100)}%` }}
+                      />
                     </div>
                   </div>
                 </TableCell>
                 <TableCell className="text-sm">{c.expiresOn}</TableCell>
-                <TableCell><Badge variant={statusVariant[c.status]} className="capitalize">{c.status}</Badge></TableCell>
+                <TableCell>
+                  <Badge variant={statusVariant[c.status]} className="capitalize">
+                    {c.status}
+                  </Badge>
+                </TableCell>
                 <TableCell className="text-right">
                   <div className="flex justify-end gap-1">
-                    <Button variant="ghost" size="icon"><Copy className="size-4" /></Button>
-                    <Button variant="ghost" size="icon"><Pencil className="size-4" /></Button>
-                    <Button variant="ghost" size="icon"><Trash2 className="size-4 text-destructive" /></Button>
+                    <Button variant="ghost" size="icon">
+                      <Copy className="size-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <Pencil className="size-4" />
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <Trash2 className="size-4 text-destructive" />
+                    </Button>
                   </div>
                 </TableCell>
               </TableRow>
@@ -93,7 +136,9 @@ function NewCouponDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="hero"><Plus className="size-4" /> New coupon</Button>
+        <Button variant="hero">
+          <Plus className="size-4" /> New coupon
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -108,7 +153,9 @@ function NewCouponDialog() {
             <div>
               <Label>Type</Label>
               <Select defaultValue="percent">
-                <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+                <SelectTrigger className="mt-1">
+                  <SelectValue />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="percent">Percent off</SelectItem>
                   <SelectItem value="amount">Amount off</SelectItem>
@@ -122,8 +169,14 @@ function NewCouponDialog() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <div><Label>Usage limit</Label><Input type="number" placeholder="1000" className="mt-1" /></div>
-            <div><Label>Expires</Label><Input type="date" className="mt-1" /></div>
+            <div>
+              <Label>Usage limit</Label>
+              <Input type="number" placeholder="1000" className="mt-1" />
+            </div>
+            <div>
+              <Label>Expires</Label>
+              <Input type="date" className="mt-1" />
+            </div>
           </div>
         </div>
         <DialogFooter>

@@ -62,7 +62,10 @@ export function ProductCard({
         <p className="text-xs text-muted-foreground">{vendor}</p>
         <h3 className="line-clamp-2 text-sm font-semibold leading-tight">{title}</h3>
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
-          <Star aria-hidden="true" className="size-3.5 fill-[color:var(--warning)] text-[color:var(--warning)]" />
+          <Star
+            aria-hidden="true"
+            className="size-3.5 fill-[color:var(--warning)] text-[color:var(--warning)]"
+          />
           <span className="font-medium text-foreground">{rating}</span>
           <span>
             <span className="sr-only">rating from </span>({reviews}

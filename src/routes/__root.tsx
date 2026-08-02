@@ -90,10 +90,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Nexa DS — AI Multi-Vendor Commerce Design System" },
-      { name: "description", content: "A complete, reusable design language for AI-powered multi-vendor e-commerce platforms." },
+      {
+        name: "description",
+        content:
+          "A complete, reusable design language for AI-powered multi-vendor e-commerce platforms.",
+      },
       { name: "author", content: "Nexa" },
       { property: "og:title", content: "Nexa DS — AI Multi-Vendor Commerce Design System" },
-      { property: "og:description", content: "Tokens, components, and patterns for AI-powered multi-vendor e-commerce." },
+      {
+        property: "og:description",
+        content: "Tokens, components, and patterns for AI-powered multi-vendor e-commerce.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },

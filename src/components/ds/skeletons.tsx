@@ -40,7 +40,13 @@ export function ProductCardSkeleton() {
   );
 }
 
-export function ProductGridSkeleton({ count = 8, className }: { count?: number; className?: string }) {
+export function ProductGridSkeleton({
+  count = 8,
+  className,
+}: {
+  count?: number;
+  className?: string;
+}) {
   return (
     <Shell
       label="Loading products"
@@ -55,10 +61,7 @@ export function ProductGridSkeleton({ count = 8, className }: { count?: number; 
 
 export function CardGridSkeleton({ count = 4, className }: { count?: number; className?: string }) {
   return (
-    <Shell
-      label="Loading"
-      className={cn("grid gap-4 sm:grid-cols-2 lg:grid-cols-4", className)}
-    >
+    <Shell label="Loading" className={cn("grid gap-4 sm:grid-cols-2 lg:grid-cols-4", className)}>
       {Array.from({ length: count }).map((_, i) => (
         <div key={i} className="space-y-3 rounded-2xl border border-border bg-card p-5">
           <Skeleton className="h-3 w-24" />

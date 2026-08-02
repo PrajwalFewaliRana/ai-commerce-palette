@@ -124,7 +124,10 @@ export function SellerShell() {
         Skip to content
       </a>
       {/* Sidebar - desktop */}
-      <aside aria-label="Seller navigation" className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-border/60 bg-card/50 lg:block">
+      <aside
+        aria-label="Seller navigation"
+        className="fixed inset-y-0 left-0 z-30 hidden w-64 border-r border-border/60 bg-card/50 lg:block"
+      >
         <SidebarInner pathname={pathname} />
       </aside>
 
@@ -137,7 +140,12 @@ export function SellerShell() {
             className="animate-fade-in fixed inset-0 z-40 bg-background/70 backdrop-blur lg:hidden"
             onClick={() => setMobileOpen(false)}
           />
-          <aside role="dialog" aria-modal="true" aria-label="Seller navigation" className="animate-slide-in-left fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-card lg:hidden">
+          <aside
+            role="dialog"
+            aria-modal="true"
+            aria-label="Seller navigation"
+            className="animate-slide-in-left fixed inset-y-0 left-0 z-50 w-72 border-r border-border bg-card lg:hidden"
+          >
             <SidebarInner pathname={pathname} onNavigate={() => setMobileOpen(false)} />
           </aside>
         </>

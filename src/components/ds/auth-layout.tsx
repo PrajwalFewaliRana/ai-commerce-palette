@@ -74,7 +74,9 @@ function DefaultAside() {
             "Instant side-by-side comparisons",
           ].map((f) => (
             <div key={f} className="flex items-center gap-2 text-sm text-primary-foreground/90">
-              <span className="grid size-5 place-items-center rounded-full bg-primary-foreground/20">✓</span>
+              <span className="grid size-5 place-items-center rounded-full bg-primary-foreground/20">
+                ✓
+              </span>
               {f}
             </div>
           ))}

@@ -3,13 +3,7 @@ import { Sparkles, ShoppingCart, Heart, Bell, User, Menu, ArrowUp, Moon, Sun } f
 import { useEffect, useState, type ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { aiSuggestions } from "@/lib/shop-data";
 import { ShoppingAssistant } from "@/components/ds/ai/assistant";
@@ -55,7 +49,11 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
-        <Link to="/" aria-label="Nexa home" className="inline-flex items-center gap-2 text-lg font-semibold">
+        <Link
+          to="/"
+          aria-label="Nexa home"
+          className="inline-flex items-center gap-2 text-lg font-semibold"
+        >
           <span className="grid size-8 place-items-center rounded-lg text-primary-foreground [background-image:var(--gradient-ai)]">
             <Sparkles aria-hidden="true" className="size-4" />
           </span>
@@ -139,7 +137,11 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             aria-pressed={dark}
             aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
           >
-            {dark ? <Sun aria-hidden="true" className="size-4" /> : <Moon aria-hidden="true" className="size-4" />}
+            {dark ? (
+              <Sun aria-hidden="true" className="size-4" />
+            ) : (
+              <Moon aria-hidden="true" className="size-4" />
+            )}
           </Button>
           <Link
             to="/notifications"
@@ -147,7 +149,10 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
             <Bell aria-hidden="true" className="size-4" />
-            <span aria-hidden="true" className="absolute right-2 top-2 size-1.5 rounded-full bg-primary" />
+            <span
+              aria-hidden="true"
+              className="absolute right-2 top-2 size-1.5 rounded-full bg-primary"
+            />
           </Link>
           <Link
             to="/wishlist"
