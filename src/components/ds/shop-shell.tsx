@@ -28,6 +28,31 @@ function useDarkMode() {
   return { dark, toggle };
 }
 
+const MOBILE_LINKS: [string, string][] = [
+  ["Home", "/"],
+  ["Categories", "/categories"],
+  ["All products", "/products"],
+  ["Wishlist", "/wishlist"],
+  ["Cart", "/cart"],
+  ["Orders", "/orders"],
+  ["Notifications", "/notifications"],
+  ["Your account", "/dashboard/customer"],
+];
+
+function _unusedDarkMode() {
+  const [dark, setDark] = useState(false);
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setDark(isDark);
+  }, []);
+  const toggle = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+  };
+  return { dark, toggle };
+}
+
 export function ShopNav({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const { dark, toggle } = useDarkMode();
