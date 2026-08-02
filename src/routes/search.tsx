@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Filter, Wand2 } from "lucide-react";
 import { aiSuggestions } from "@/lib/shop-data";
+import { EmptyState } from "@/components/ds/empty-state";
+import { SearchX } from "lucide-react";
 
 export const Route = createFileRoute("/search")({
   validateSearch: (s: Record<string, unknown>) => ({ q: typeof s.q === "string" ? s.q : "" }),
@@ -65,19 +67,33 @@ function SearchPage() {
       </AiPanel>
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-foreground">
+        <p aria-live="polite" className="text-sm text-muted-foreground">
           Showing {ranked.length} results, sorted by AI relevance
         </p>
         <Button variant="outline" size="sm">
-          <Filter className="size-4" /> Refine
+          <Filter aria-hidden="true" className="size-4" /> Refine
         </Button>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {ranked.map((item) => (
-          <RecommendationCard key={item.product.id} item={item} />
-        ))}
-      </div>
+      {ranked.length ? (
+        <div className="animate-fade-in mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          {ranked.map((item) => (
+            <RecommendationCard key={item.product.id} item={item} />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          className="mt-4"
+          icon={SearchX}
+          title="No matches for that sentence"
+          description="Try loosening the budget, or describe the use case instead of the product name."
+          action={
+            <Button asChild variant="ai" size="sm">
+              <Link to="/products">Browse all products</Link>
+            </Button>
+          }
+        />
+      )}
 
       <div className="mt-10 rounded-2xl border border-border/60 bg-accent/40 p-6">
         <p className="text-sm font-semibold">Try refining your search</p>
