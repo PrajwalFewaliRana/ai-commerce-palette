@@ -3,6 +3,13 @@ import { Sparkles, ShoppingCart, Heart, Bell, User, Menu, ArrowUp, Moon, Sun } f
 import { useEffect, useState, type ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { aiSuggestions } from "@/lib/shop-data";
 import { ShoppingAssistant } from "@/components/ds/ai/assistant";
@@ -27,6 +34,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [q, setQ] = useState("");
   const [focus, setFocus] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const submit = () => {
     const term = q.trim();
@@ -36,22 +44,22 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
-        <Link to="/" className="inline-flex items-center gap-2 text-lg font-semibold">
+        <Link to="/" aria-label="Nexa home" className="inline-flex items-center gap-2 text-lg font-semibold">
           <span className="grid size-8 place-items-center rounded-lg text-primary-foreground [background-image:var(--gradient-ai)]">
-            <Sparkles className="size-4" />
+            <Sparkles aria-hidden="true" className="size-4" />
           </span>
           <span className="hidden sm:inline">Nexa</span>
         </Link>
 
         {!compact && (
-          <div className="relative hidden flex-1 md:block">
+          <search className="relative hidden min-w-0 flex-1 md:block">
             <div
               className={cn(
-                "flex items-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-1.5 transition",
+                "flex min-w-0 items-center gap-2 rounded-2xl border border-border/60 bg-card px-3 py-1.5 transition",
                 focus && "border-primary/50 shadow-[var(--shadow-glow)]",
               )}
             >
-              <Sparkles className="size-4 shrink-0 text-primary" />
+              <Sparkles aria-hidden="true" className="size-4 shrink-0 text-primary" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
@@ -59,40 +67,42 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
                 onBlur={() => setTimeout(() => setFocus(false), 120)}
                 onKeyDown={(e) => e.key === "Enter" && submit()}
                 placeholder="Ask AI: 'wireless headphones under $200 with great bass'"
+                aria-label="Search products with AI"
                 className="min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none placeholder:text-muted-foreground"
               />
               <button
                 type="button"
                 onClick={submit}
                 className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-primary-foreground [background-image:var(--gradient-ai)]"
-                aria-label="Ask AI"
+                aria-label="Search with AI"
               >
-                <ArrowUp className="size-4" />
+                <ArrowUp aria-hidden="true" className="size-4" />
               </button>
             </div>
             {focus && (
-              <div className="absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-border bg-popover shadow-[var(--shadow-lg)]">
+              <div className="animate-fade-in absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-border bg-popover shadow-[var(--shadow-lg)]">
                 <p className="border-b border-border/60 px-4 py-2 text-xs uppercase tracking-wide text-muted-foreground">
                   Try asking
                 </p>
                 {aiSuggestions.map((s) => (
                   <button
                     key={s}
+                    type="button"
                     className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm hover:bg-accent"
                     onMouseDown={() => {
                       setQ(s);
                       navigate({ to: "/search", search: { q: s } as never });
                     }}
                   >
-                    <Sparkles className="size-3.5 text-primary" /> {s}
+                    <Sparkles aria-hidden="true" className="size-3.5 text-primary" /> {s}
                   </button>
                 ))}
               </div>
             )}
-          </div>
+          </search>
         )}
 
-        <nav className="ml-auto flex items-center gap-1">
+        <nav aria-label="Main" className="ml-auto flex items-center gap-1">
           <Link
             to="/categories"
             className={cn(
@@ -111,29 +121,39 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
           >
             Deals
           </Link>
-          <Button variant="ghost" size="icon" onClick={toggle} aria-label="Toggle theme">
-            {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggle}
+            aria-pressed={dark}
+            aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+          >
+            {dark ? <Sun aria-hidden="true" className="size-4" /> : <Moon aria-hidden="true" className="size-4" />}
           </Button>
           <Link
             to="/notifications"
+            aria-label="Notifications, unread"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
-            <Bell className="size-4" />
-            <span className="absolute right-2 top-2 size-1.5 rounded-full bg-primary" />
+            <Bell aria-hidden="true" className="size-4" />
+            <span aria-hidden="true" className="absolute right-2 top-2 size-1.5 rounded-full bg-primary" />
           </Link>
           <Link
             to="/wishlist"
+            aria-label="Wishlist"
             className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
           >
-            <Heart className="size-4" />
+            <Heart aria-hidden="true" className="size-4" />
           </Link>
           <Link
             to="/cart"
+            aria-label="Cart, 2 items"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
-            <ShoppingCart className="size-4" />
+            <ShoppingCart aria-hidden="true" className="size-4" />
             <Badge
               variant="ai"
+              aria-hidden="true"
               className="absolute -right-1 -top-1 h-4 min-w-4 justify-center px-1 text-[10px]"
             >
               2
@@ -141,39 +161,65 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
           </Link>
           <Link
             to="/dashboard/customer"
+            aria-label="Your account"
             className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
           >
-            <User className="size-4" />
+            <User aria-hidden="true" className="size-4" />
           </Link>
-          <Button variant="ghost" size="icon" className="lg:hidden">
-            <Menu className="size-4" />
-          </Button>
+          <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
+                <Menu aria-hidden="true" className="size-4" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[18rem] p-0">
+              <SheetHeader className="border-b border-border/60 px-5 py-4 text-left">
+                <SheetTitle>Browse Nexa</SheetTitle>
+              </SheetHeader>
+              <nav aria-label="Mobile" className="space-y-1 p-3 text-sm">
+                {MOBILE_LINKS.map(([label, to]) => (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "flex min-h-11 items-center rounded-xl px-3 font-medium text-muted-foreground transition hover:bg-accent hover:text-foreground",
+                      pathname === to && "bg-accent text-foreground",
+                    )}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </nav>
+            </SheetContent>
+          </Sheet>
         </nav>
       </div>
 
       {!compact && (
-        <div className="border-t border-border/40 bg-background/50 md:hidden">
+        <search className="block border-t border-border/40 bg-background/50 md:hidden">
           <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2">
             <div className="flex flex-1 items-center gap-2 rounded-xl border border-border/60 bg-card px-3">
-              <Sparkles className="size-4 shrink-0 text-primary" />
+              <Sparkles aria-hidden="true" className="size-4 shrink-0 text-primary" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && submit()}
                 placeholder="Ask AI what you need..."
+                aria-label="Search products with AI"
                 className="min-w-0 flex-1 bg-transparent py-2 text-sm outline-none placeholder:text-muted-foreground"
               />
             </div>
             <button
               type="button"
               onClick={submit}
-              className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl text-primary-foreground [background-image:var(--gradient-ai)]"
-              aria-label="Ask AI"
+              className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl text-primary-foreground [background-image:var(--gradient-ai)]"
+              aria-label="Search with AI"
             >
-              <ArrowUp className="size-4" />
+              <ArrowUp aria-hidden="true" className="size-4" />
             </button>
           </div>
-        </div>
+        </search>
       )}
     </header>
   );
