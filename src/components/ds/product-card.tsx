@@ -59,9 +59,9 @@ export function ProductCard({
         </button>
       </div>
       <div className="space-y-2 p-4">
-        <p className="text-xs text-muted-foreground">{vendor}</p>
-        <h3 className="line-clamp-2 text-sm font-semibold leading-tight">{title}</h3>
-        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+        <p className="text-small font-medium text-muted-foreground">{vendor}</p>
+        <h3 className="line-clamp-2 text-h6 font-semibold">{title}</h3>
+        <div className="flex items-center gap-1 text-small text-muted-foreground">
           <Star
             aria-hidden="true"
             className="size-3.5 fill-[color:var(--warning)] text-[color:var(--warning)]"
@@ -74,9 +74,9 @@ export function ProductCard({
         </div>
         <div className="flex items-end justify-between pt-1">
           <div className="flex items-baseline gap-2">
-            <span className="text-lg font-bold">${price.toFixed(2)}</span>
+            <span className="text-h4 font-bold">${price.toFixed(2)}</span>
             {originalPrice && (
-              <s className="text-xs text-muted-foreground">
+              <s className="text-caption text-muted-foreground">
                 <span className="sr-only">was </span>${originalPrice.toFixed(2)}
               </s>
             )}
