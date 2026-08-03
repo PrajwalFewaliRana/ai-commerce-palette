@@ -292,7 +292,7 @@ function LandingPage() {
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-24 -z-0 h-[520px] w-[720px] -translate-x-1/2 rounded-full opacity-40 blur-3xl [background-image:var(--gradient-ai)]"
+          className="pointer-events-none absolute left-1/2 top-24 -z-0 h-[520px] w-[720px] -translate-x-1/2 rounded-full opacity-70 blur-3xl [background-image:var(--gradient-ambient)]"
         />
         <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:pt-28">
           <div className="mx-auto max-w-3xl text-center animate-fade-in">
@@ -315,7 +315,7 @@ function LandingPage() {
           <div className="relative mx-auto mt-10 max-w-3xl animate-fade-in">
             <div
               aria-hidden
-              className="absolute -inset-1 rounded-3xl opacity-60 blur-xl [background-image:var(--gradient-ai)]"
+              className="absolute -inset-1 rounded-3xl opacity-70 blur-xl [background-image:var(--gradient-ambient)]"
             />
             <div className="relative rounded-3xl border border-border/60 bg-card p-3 shadow-[var(--shadow-lg)]">
               <div className="flex items-center gap-3 rounded-2xl bg-background/60 px-4 py-2">
@@ -452,7 +452,7 @@ function LandingPage() {
         <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-lg)] sm:p-14">
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-40 blur-3xl [background-image:var(--gradient-ai)]"
+            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-70 blur-3xl [background-image:var(--gradient-ambient)]"
           />
           <div className="relative grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-center">
             <div>
