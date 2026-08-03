@@ -21,10 +21,10 @@ export function DashboardCard({ label, value, delta, icon: Icon, className }: Da
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <p className="text-caption font-medium uppercase tracking-[0.1em] text-muted-foreground">
             {label}
           </p>
-          <p className="mt-2 text-3xl font-bold tracking-tight">{value}</p>
+          <p className="mt-2 text-h3 font-bold tabular-nums">{value}</p>
         </div>
         <div className="grid size-10 place-items-center rounded-xl bg-accent text-accent-foreground">
           <Icon className="size-5" />

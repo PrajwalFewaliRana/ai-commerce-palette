@@ -299,13 +299,13 @@ function LandingPage() {
             <Badge variant="ai" className="mb-6 gap-1.5">
               <Sparkles className="size-3.5" /> AI shopping, reimagined
             </Badge>
-            <h1 className="text-balance text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="display-title text-balance text-4xl sm:text-hero lg:text-hero-lg">
               Find Exactly What You Need —{" "}
               <span className="bg-clip-text text-transparent [background-image:var(--gradient-ai)]">
                 Powered by AI
               </span>
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
+            <p className="mx-auto mt-6 max-w-2xl text-pretty text-body text-muted-foreground sm:text-body-lg">
               Describe what you're looking for in natural language and let AI recommend the perfect
               products from thousands of sellers.
             </p>
@@ -459,10 +459,10 @@ function LandingPage() {
               <Badge variant="ai" className="mb-4">
                 For sellers
               </Badge>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="display-title text-3xl sm:text-h2">
                 Sell smarter with AI on your side
               </h2>
-              <p className="mt-3 max-w-xl text-muted-foreground">
+              <p className="mt-4 max-w-xl text-body text-muted-foreground">
                 Launch your storefront in minutes. Get AI-generated listings, buyer-intent insights,
                 and payouts twice a month.
               </p>
@@ -615,9 +615,11 @@ function SectionHeader({
 }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
-      {desc && <p className="mt-3 text-muted-foreground">{desc}</p>}
+      <p className="text-caption font-medium uppercase tracking-[0.16em] text-muted-foreground">
+        {eyebrow}
+      </p>
+      <h2 className="display-title mt-3 text-3xl sm:text-h2">{title}</h2>
+      {desc && <p className="mt-4 text-body text-muted-foreground">{desc}</p>}
     </div>
   );
 }
