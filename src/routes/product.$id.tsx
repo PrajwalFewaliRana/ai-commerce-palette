@@ -94,7 +94,7 @@ function ProductDetailsPage() {
               by <span className="font-medium text-foreground">{product.vendor}</span>
             </span>
           </div>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight">{product.title}</h1>
+          <h1 className="mt-2 text-h2 font-bold">{product.title}</h1>
           <div className="mt-3 flex items-center gap-2 text-sm">
             <Star className="size-4 fill-[color:var(--warning)] text-[color:var(--warning)]" />
             <span className="font-semibold">{product.rating}</span>
@@ -103,14 +103,14 @@ function ProductDetailsPage() {
             </span>
           </div>
           <div className="mt-6 flex items-baseline gap-3">
-            <span className="text-4xl font-bold">${product.price.toFixed(2)}</span>
+            <span className="text-h1 font-bold tabular-nums">${product.price.toFixed(2)}</span>
             {product.originalPrice && (
               <span className="text-lg text-muted-foreground line-through">
                 ${product.originalPrice.toFixed(2)}
               </span>
             )}
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-4 text-[0.9375rem] leading-[1.7] text-muted-foreground">
             {product.description}
           </p>
 
@@ -151,7 +151,7 @@ function ProductDetailsPage() {
       </div>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-bold tracking-tight">Frequently bought together</h2>
+        <h2 className="text-h4 font-semibold">Frequently bought together</h2>
         <div className="mt-4 rounded-2xl border border-border bg-card p-6">
           <div className="flex flex-wrap items-center gap-4">
             {[product, ...fbt].map((p, i) => (
