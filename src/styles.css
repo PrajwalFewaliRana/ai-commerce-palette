@@ -349,6 +349,14 @@
 }
 
 /* Skip-to-content link: visually hidden until focused. */
+/* Marketing display type — DM Serif Display. Never used in dashboards or forms. */
+@utility display-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
 @utility skip-link {
   position: fixed;
   top: 0.5rem;
