@@ -21,7 +21,7 @@ export const Route = createFileRoute("/design-system/typography")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: TypographyDocs;
+  component: TypographyDocs,
 });
 
 type Token = {
@@ -133,7 +133,7 @@ function TokenRow({ token }: { token: Token }) {
 function ThemePanel({ theme }: { theme: "light" | "dark" }) {
   return (
     <section
-      className={`${theme === "dark" ? "dark" : ""} overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-card)]`}
+      className={`${theme === "dark" ? "dark" : "light"} overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-card)]`}
     >
       <header className="flex items-center justify-between gap-3 border-b border-border bg-card px-5 py-4">
         <div>
