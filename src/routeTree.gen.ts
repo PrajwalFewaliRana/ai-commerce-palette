@@ -23,6 +23,7 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
+import { Route as DesignSystemTypographyRouteImport } from './routes/design-system.typography'
 import { Route as DashboardSellerRouteImport } from './routes/dashboard.seller'
 import { Route as DashboardCustomerRouteImport } from './routes/dashboard.customer'
 import { Route as DashboardAdminRouteImport } from './routes/dashboard.admin'
@@ -120,6 +121,11 @@ const OrdersIdRoute = OrdersIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => OrdersRoute,
+} as any)
+const DesignSystemTypographyRoute = DesignSystemTypographyRouteImport.update({
+  id: '/design-system/typography',
+  path: '/design-system/typography',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardSellerRoute = DashboardSellerRouteImport.update({
   id: '/dashboard/seller',
@@ -285,6 +291,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
+  '/design-system/typography': typeof DesignSystemTypographyRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
@@ -326,6 +333,7 @@ export interface FileRoutesByTo {
   '/auth/verify-email': typeof AuthVerifyEmailRoute
   '/category/$slug': typeof CategorySlugRoute
   '/dashboard/customer': typeof DashboardCustomerRoute
+  '/design-system/typography': typeof DesignSystemTypographyRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
@@ -370,6 +378,7 @@ export interface FileRoutesById {
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/customer': typeof DashboardCustomerRoute
   '/dashboard/seller': typeof DashboardSellerRouteWithChildren
+  '/design-system/typography': typeof DesignSystemTypographyRoute
   '/orders/$id': typeof OrdersIdRoute
   '/product/$id': typeof ProductIdRoute
   '/dashboard/admin/categories': typeof DashboardAdminCategoriesRoute
@@ -415,6 +424,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin'
     | '/dashboard/customer'
     | '/dashboard/seller'
+    | '/design-system/typography'
     | '/orders/$id'
     | '/product/$id'
     | '/dashboard/admin/categories'
@@ -456,6 +466,7 @@ export interface FileRouteTypes {
     | '/auth/verify-email'
     | '/category/$slug'
     | '/dashboard/customer'
+    | '/design-system/typography'
     | '/orders/$id'
     | '/product/$id'
     | '/dashboard/admin/categories'
@@ -499,6 +510,7 @@ export interface FileRouteTypes {
     | '/dashboard/admin'
     | '/dashboard/customer'
     | '/dashboard/seller'
+    | '/design-system/typography'
     | '/orders/$id'
     | '/product/$id'
     | '/dashboard/admin/categories'
@@ -543,6 +555,7 @@ export interface RootRouteChildren {
   DashboardAdminRoute: typeof DashboardAdminRouteWithChildren
   DashboardCustomerRoute: typeof DashboardCustomerRoute
   DashboardSellerRoute: typeof DashboardSellerRouteWithChildren
+  DesignSystemTypographyRoute: typeof DesignSystemTypographyRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
@@ -645,6 +658,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/orders/$id'
       preLoaderRoute: typeof OrdersIdRouteImport
       parentRoute: typeof OrdersRoute
+    }
+    '/design-system/typography': {
+      id: '/design-system/typography'
+      path: '/design-system/typography'
+      fullPath: '/design-system/typography'
+      preLoaderRoute: typeof DesignSystemTypographyRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/dashboard/seller': {
       id: '/dashboard/seller'
@@ -927,6 +947,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardAdminRoute: DashboardAdminRouteWithChildren,
   DashboardCustomerRoute: DashboardCustomerRoute,
   DashboardSellerRoute: DashboardSellerRouteWithChildren,
+  DesignSystemTypographyRoute: DesignSystemTypographyRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
