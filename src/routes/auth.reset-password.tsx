@@ -5,8 +5,10 @@ import { AuthLayout } from "@/components/ds/auth-layout";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { PasswordStrength, scorePassword } from "@/components/ds/password-strength";
 import { Button } from "@/components/ui/button";
+import { updatePassword } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth/reset-password")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Set a new password — Nexa" },
@@ -23,16 +25,27 @@ function ResetPasswordPage() {
   const [show, setShow] = useState(false);
   const [done, setDone] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [busy, setBusy] = useState(false);
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (scorePassword(password) < 3) next.password = "Choose a stronger password.";
     if (password !== confirm) next.confirm = "Passwords do not match.";
     setErrors(next);
-    if (Object.keys(next).length === 0) {
+    if (Object.keys(next).length > 0) return;
+
+    setBusy(true);
+    try {
+      await updatePassword(password);
       setDone(true);
       setTimeout(() => navigate({ to: "/auth/login" }), 1600);
+    } catch (err) {
+      setErrors({
+        password: err instanceof Error ? err.message : "Could not update your password.",
+      });
+    } finally {
+      setBusy(false);
     }
   }
 
