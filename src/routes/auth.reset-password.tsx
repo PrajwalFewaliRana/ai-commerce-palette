@@ -98,7 +98,7 @@ function ResetPasswordPage() {
           success={confirm.length > 0 && confirm === password}
           autoComplete="new-password"
         />
-        <Button type="submit" variant="hero" size="lg" className="w-full">
+        <Button type="submit" variant="hero" size="lg" className="w-full" disabled={busy}>
           Update password
         </Button>
       </form>
