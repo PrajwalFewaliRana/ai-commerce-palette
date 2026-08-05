@@ -1,7 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AdminShell } from "@/components/ds/admin-shell";
+import { requireRole } from "@/lib/auth";
 
 export const Route = createFileRoute("/dashboard/admin")({
+  ssr: false,
+  beforeLoad: async () => {
+    await requireRole("admin");
+  },
   head: () => ({
     meta: [
       { title: "Admin Console — Nexa" },
