@@ -18,8 +18,13 @@ import {
 import { orders, products, notifications } from "@/lib/shop-data";
 import { RecommendationRow } from "@/components/ds/ai/recommendation-card";
 import { parseQuery, rankProducts } from "@/lib/ai-mock";
+import { requireUser } from "@/lib/auth";
 
 export const Route = createFileRoute("/dashboard/customer")({
+  ssr: false,
+  beforeLoad: async () => {
+    await requireUser();
+  },
   head: () => ({
     meta: [
       { title: "Customer Dashboard — Nexa" },

@@ -1,12 +1,13 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { Mail, Lock, User, Eye, EyeOff, ShoppingBag, Store } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, ShoppingBag, Store, Loader2 } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { PasswordStrength, scorePassword } from "@/components/ds/password-strength";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { resolveHomePath, signInWithGoogle, signUpWithEmail } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth/register")({
   head: () => ({
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/auth/register")({
       },
     ],
   }),
+  ssr: false,
   component: RegisterPage,
 });
 
@@ -33,8 +35,9 @@ function RegisterPage() {
   const [show, setShow] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [busy, setBusy] = useState<"email" | "google" | null>(null);
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!name.trim()) next.name = "Please enter your name.";
@@ -43,7 +46,35 @@ function RegisterPage() {
     if (password !== confirm) next.confirm = "Passwords do not match.";
     if (!agreed) next.agreed = "You must accept the terms.";
     setErrors(next);
-    if (Object.keys(next).length === 0) navigate({ to: "/auth/verify-email" });
+    if (Object.keys(next).length > 0) return;
+
+    setBusy("email");
+    try {
+      const { user } = await signUpWithEmail({
+        email,
+        password,
+        accountType: role,
+        name: name.trim(),
+      });
+      navigate({
+        to: user ? await resolveHomePath(user.id) : `/dashboard/${role}`,
+        replace: true,
+      });
+    } catch (err) {
+      setErrors({ email: err instanceof Error ? err.message : "Could not create your account." });
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function onGoogle() {
+    setBusy("google");
+    try {
+      await signInWithGoogle(role);
+    } catch (err) {
+      setErrors({ email: err instanceof Error ? err.message : "Google sign-up failed." });
+      setBusy(null);
+    }
   }
 
   return (
@@ -82,7 +113,12 @@ function RegisterPage() {
         })}
       </div>
 
-      <GoogleButton label={`Sign up with Google`} />
+      <GoogleButton
+        label="Sign up with Google"
+        onClick={onGoogle}
+        loading={busy === "google"}
+        disabled={busy !== null}
+      />
       <OrDivider />
 
       <form onSubmit={onSubmit} className="space-y-4">
@@ -152,8 +188,8 @@ function RegisterPage() {
         </label>
         {errors.agreed && <p className="text-xs text-destructive">{errors.agreed}</p>}
 
-        <Button type="submit" variant="hero" size="lg" className="w-full">
-          Create account
+        <Button type="submit" variant="hero" size="lg" className="w-full" disabled={busy !== null}>
+          {busy === "email" && <Loader2 className="size-4 animate-spin" />} Create account
         </Button>
       </form>
     </AuthLayout>

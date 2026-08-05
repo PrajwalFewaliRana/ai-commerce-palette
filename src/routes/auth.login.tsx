@@ -1,11 +1,12 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ShoppingBag, Store, ShieldCheck } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
+import { resolveHomePath, signInWithEmail, signInWithGoogle } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth/login")({
   head: () => ({
@@ -14,25 +15,49 @@ export const Route = createFileRoute("/auth/login")({
       { name: "description", content: "Sign in to your Nexa account to shop smarter with AI." },
     ],
   }),
+  ssr: false,
   component: LoginPage,
 });
 
-type Role = "customer" | "seller" | "admin";
-
 function LoginPage() {
   const navigate = useNavigate();
+  const { isAuthenticated, homePath, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<Role>("customer");
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState<"email" | "google" | null>(null);
 
-  function onSubmit(e: React.FormEvent) {
+  // Already signed in → straight to the right dashboard.
+  useEffect(() => {
+    if (!loading && isAuthenticated) navigate({ to: homePath, replace: true });
+  }, [loading, isAuthenticated, homePath, navigate]);
+
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.includes("@")) return setError("Please enter a valid email address.");
     if (password.length < 6) return setError("Password must be at least 6 characters.");
     setError(null);
-    navigate({ to: `/dashboard/${role}` });
+    setBusy("email");
+    try {
+      const { user } = await signInWithEmail(email, password);
+      navigate({ to: user ? await resolveHomePath(user.id) : "/dashboard/customer", replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not sign in.");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function onGoogle() {
+    setError(null);
+    setBusy("google");
+    try {
+      await signInWithGoogle();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google sign-in failed.");
+      setBusy(null);
+    }
   }
 
   return (
@@ -48,7 +73,7 @@ function LoginPage() {
         </>
       }
     >
-      <GoogleButton />
+      <GoogleButton onClick={onGoogle} loading={busy === "google"} disabled={busy !== null} />
       <OrDivider />
       <form onSubmit={onSubmit} className="space-y-4">
         <FloatingInput
@@ -75,11 +100,6 @@ function LoginPage() {
           }
         />
 
-        <div>
-          <p className="mb-2 text-xs font-medium text-muted-foreground">Sign in as</p>
-          <RoleTabs value={role} onChange={setRole} />
-        </div>
-
         <div className="flex items-center justify-between text-sm">
           <label className="inline-flex items-center gap-2 text-muted-foreground">
             <input
@@ -99,42 +119,19 @@ function LoginPage() {
           </p>
         )}
 
-        <Button type="submit" variant="hero" size="lg" className="w-full">
-          Sign in
+        <Button
+          type="submit"
+          variant="hero"
+          size="lg"
+          className="w-full"
+          disabled={busy !== null}
+        >
+          {busy === "email" && <Loader2 className="size-4 animate-spin" />} Sign in
         </Button>
+        <p className="text-center text-caption text-muted-foreground">
+          You'll land on the right dashboard automatically — customer, seller or admin.
+        </p>
       </form>
     </AuthLayout>
-  );
-}
-
-function RoleTabs({ value, onChange }: { value: Role; onChange: (r: Role) => void }) {
-  const options: { id: Role; label: string; icon: typeof ShoppingBag }[] = [
-    { id: "customer", label: "Customer", icon: ShoppingBag },
-    { id: "seller", label: "Seller", icon: Store },
-    { id: "admin", label: "Admin", icon: ShieldCheck },
-  ];
-  return (
-    <div className="grid grid-cols-3 gap-2 rounded-xl border border-border bg-muted/50 p-1">
-      {options.map((o) => {
-        const Icon = o.icon;
-        const active = value === o.id;
-        return (
-          <button
-            key={o.id}
-            type="button"
-            onClick={() => onChange(o.id)}
-            className={cn(
-              "inline-flex items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-xs font-medium transition",
-              active
-                ? "bg-card text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            <Icon className="size-3.5" />
-            {o.label}
-          </button>
-        );
-      })}
-    </div>
   );
 }

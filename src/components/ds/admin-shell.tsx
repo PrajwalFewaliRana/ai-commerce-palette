@@ -14,7 +14,6 @@ import {
   Search,
   Moon,
   Sun,
-  LogOut,
   Menu,
   ChevronDown,
   ChevronLeft,
@@ -23,6 +22,7 @@ import {
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { SignOutButton } from "@/components/ds/sign-out-button";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -209,11 +209,7 @@ export function AdminShell() {
                 </div>
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/auth/login" aria-label="Sign out">
-                  <LogOut className="size-4" />
-                </Link>
-              </Button>
+              <SignOutButton />
             </div>
           </div>
         </header>

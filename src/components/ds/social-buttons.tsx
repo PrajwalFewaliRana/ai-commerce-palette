@@ -1,9 +1,27 @@
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function GoogleButton({ label = "Continue with Google" }: { label?: string }) {
+export function GoogleButton({
+  label = "Continue with Google",
+  onClick,
+  loading = false,
+  disabled = false,
+}: {
+  label?: string;
+  onClick?: () => void;
+  loading?: boolean;
+  disabled?: boolean;
+}) {
   return (
-    <Button variant="outline" size="lg" className="w-full gap-2 font-medium" type="button">
-      <GoogleIcon /> {label}
+    <Button
+      variant="outline"
+      size="lg"
+      className="w-full gap-2 font-medium"
+      type="button"
+      onClick={onClick}
+      disabled={disabled || loading}
+    >
+      {loading ? <Loader2 className="size-4 animate-spin" /> : <GoogleIcon />} {label}
     </Button>
   );
 }
