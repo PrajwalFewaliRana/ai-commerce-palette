@@ -4,8 +4,10 @@ import { Mail, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { Button } from "@/components/ui/button";
+import { sendPasswordReset } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth/forgot-password")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Reset your password — Nexa" },
@@ -19,12 +21,21 @@ function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | undefined>();
+  const [busy, setBusy] = useState(false);
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.includes("@")) return setError("Enter a valid email.");
     setError(undefined);
-    setSent(true);
+    setBusy(true);
+    try {
+      await sendPasswordReset(email);
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not send the reset link.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -68,8 +79,8 @@ function ForgotPasswordPage() {
             error={error}
             autoComplete="email"
           />
-          <Button type="submit" variant="hero" size="lg" className="w-full">
-            Send reset link
+          <Button type="submit" variant="hero" size="lg" className="w-full" disabled={busy}>
+            {busy ? "Sending…" : "Send reset link"}
           </Button>
         </form>
       )}
