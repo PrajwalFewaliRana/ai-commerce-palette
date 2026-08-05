@@ -14,7 +14,6 @@ import {
   Search,
   Moon,
   Sun,
-  LogOut,
   Menu,
   ChevronDown,
   ChevronLeft,

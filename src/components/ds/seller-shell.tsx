@@ -13,7 +13,6 @@ import {
   Search,
   Moon,
   Sun,
-  LogOut,
   Menu,
   ChevronDown,
 } from "lucide-react";
