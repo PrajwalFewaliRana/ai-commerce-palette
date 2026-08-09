@@ -16,9 +16,11 @@ export function RoleRoute({
   allowedRoles: AppRole[];
   children: ReactNode;
 }) {
-  const { roles, isLoading, homePath } = useAuthContext();
+  const { roles, isLoading, isAuthenticated, homePath } = useAuthContext();
 
-  if (isLoading) return <RoutePendingSkeleton />;
+  // ProtectedRoute owns the unauthenticated case; redirecting here too would
+  // ping-pong between the role home and /login.
+  if (isLoading || !isAuthenticated) return <RoutePendingSkeleton />;
   if (!roles.some((r) => allowedRoles.includes(r))) return <Navigate to={homePath} replace />;
   return <>{children}</>;
 }
