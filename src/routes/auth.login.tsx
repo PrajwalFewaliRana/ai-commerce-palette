@@ -7,6 +7,7 @@ import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { resolveHomePath, signInWithEmail, signInWithGoogle } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/auth/login")({
   head: () => ({
