@@ -24,8 +24,10 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!blocked || sent.current) return;
+    if (window.location.pathname.startsWith("/login")) return;
     sent.current = true;
-    void navigate({ to: "/login", search: { redirect: requested.current }, replace: true });
+    const target = window.location.pathname + window.location.search;
+    void navigate({ to: "/login", search: { redirect: target }, replace: true });
   }, [blocked, navigate]);
 
   if (isLoading || blocked) return <RoutePendingSkeleton />;
