@@ -4,11 +4,17 @@ import type { ReactNode } from "react";
 import { useAuthContext } from "@/context/auth-context";
 import { RoutePendingSkeleton } from "@/components/ds/skeletons";
 
-/** Only same-origin, absolute in-app paths may be used as a redirect target. */
+/**
+ * Only same-origin, absolute in-app paths may be used as a redirect target.
+ * Auth pages are rejected so a redirect target can never nest inside itself.
+ */
 export function safeRedirect(value: unknown): string | null {
-  return typeof value === "string" && value.startsWith("/") && !value.startsWith("//")
-    ? value
-    : null;
+  if (typeof value !== "string") return null;
+  if (!value.startsWith("/") || value.startsWith("//")) return null;
+  const path = value.split("?")[0];
+  const authOnly = ["/login", "/register", "/forgot-password", "/reset-password", "/verify-email"];
+  if (authOnly.includes(path)) return null;
+  return value;
 }
 
 /**
