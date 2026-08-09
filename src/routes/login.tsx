@@ -1,16 +1,18 @@
-import { PublicRoute } from "@/guards";
+import { PublicRoute, safeRedirect } from "@/guards";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/use-auth";
 import { resolveHomePath, signInWithEmail, signInWithGoogle } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/login")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    redirect: safeRedirect(search.redirect) ?? undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Sign in — Nexa" },
@@ -27,17 +29,12 @@ export const Route = createFileRoute("/login")({
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { isAuthenticated, homePath, loading } = useAuth();
+  const { redirect } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<"email" | "google" | null>(null);
-
-  // Already signed in → straight to the right dashboard.
-  useEffect(() => {
-    if (!loading && isAuthenticated) navigate({ to: homePath, replace: true });
-  }, [loading, isAuthenticated, homePath, navigate]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -47,7 +44,8 @@ function LoginPage() {
     setBusy("email");
     try {
       const { user } = await signInWithEmail(email, password);
-      navigate({ to: user ? await resolveHomePath(user.id) : "/customer/dashboard", replace: true });
+      const home = user ? await resolveHomePath(user.id) : "/customer/dashboard";
+      navigate({ to: redirect ?? home, replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not sign in.");
     } finally {
@@ -62,8 +60,9 @@ function LoginPage() {
       const result = await signInWithGoogle();
       if ("redirected" in result && result.redirected) return;
       const { data } = await supabase.auth.getUser();
+      const home = data.user ? await resolveHomePath(data.user.id) : "/customer/dashboard";
       navigate({
-        to: data.user ? await resolveHomePath(data.user.id) : "/customer/dashboard",
+        to: redirect ?? home,
         replace: true,
       });
     } catch (err) {
