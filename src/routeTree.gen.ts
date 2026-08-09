@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
 import { Route as ShowcaseRouteImport } from './routes/showcase'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as SellerRouteImport } from './routes/seller'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -26,6 +27,7 @@ import { Route as CustomerIndexRouteImport } from './routes/customer.index'
 import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as SellerReviewsRouteImport } from './routes/seller.reviews'
+import { Route as SellerProfileRouteImport } from './routes/seller.profile'
 import { Route as SellerOrdersRouteImport } from './routes/seller.orders'
 import { Route as SellerInventoryRouteImport } from './routes/seller.inventory'
 import { Route as SellerDashboardRouteImport } from './routes/seller.dashboard'
@@ -54,7 +56,9 @@ import { Route as AdminCategoriesRouteImport } from './routes/admin.categories'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as SellerProductsIndexRouteImport } from './routes/seller.products.index'
 import { Route as CustomerOrdersIndexRouteImport } from './routes/customer.orders.index'
+import { Route as SellerProductsNewRouteImport } from './routes/seller.products.new'
 import { Route as CustomerOrdersIdRouteImport } from './routes/customer.orders.$id'
+import { Route as SellerProductsIdEditRouteImport } from './routes/seller.products.$id.edit'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -64,6 +68,11 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
 const ShowcaseRoute = ShowcaseRouteImport.update({
   id: '/showcase',
   path: '/showcase',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellerRoute = SellerRouteImport.update({
@@ -139,6 +148,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const SellerReviewsRoute = SellerReviewsRouteImport.update({
   id: '/reviews',
   path: '/reviews',
+  getParentRoute: () => SellerRoute,
+} as any)
+const SellerProfileRoute = SellerProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => SellerRoute,
 } as any)
 const SellerOrdersRoute = SellerOrdersRouteImport.update({
@@ -281,10 +295,20 @@ const CustomerOrdersIndexRoute = CustomerOrdersIndexRouteImport.update({
   path: '/orders/',
   getParentRoute: () => CustomerRoute,
 } as any)
+const SellerProductsNewRoute = SellerProductsNewRouteImport.update({
+  id: '/products/new',
+  path: '/products/new',
+  getParentRoute: () => SellerRoute,
+} as any)
 const CustomerOrdersIdRoute = CustomerOrdersIdRouteImport.update({
   id: '/orders/$id',
   path: '/orders/$id',
   getParentRoute: () => CustomerRoute,
+} as any)
+const SellerProductsIdEditRoute = SellerProductsIdEditRouteImport.update({
+  id: '/products/$id/edit',
+  path: '/products/$id/edit',
+  getParentRoute: () => SellerRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -297,6 +321,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/seller': typeof SellerRouteWithChildren
+  '/shop': typeof ShopRoute
   '/showcase': typeof ShowcaseRoute
   '/verify-email': typeof VerifyEmailRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -325,6 +350,7 @@ export interface FileRoutesByFullPath {
   '/seller/dashboard': typeof SellerDashboardRoute
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
+  '/seller/profile': typeof SellerProfileRoute
   '/seller/reviews': typeof SellerReviewsRoute
   '/admin/': typeof AdminIndexRoute
   '/categories/': typeof CategoriesIndexRoute
@@ -332,8 +358,10 @@ export interface FileRoutesByFullPath {
   '/products/': typeof ProductsIndexRoute
   '/seller/': typeof SellerIndexRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
+  '/seller/products/new': typeof SellerProductsNewRoute
   '/customer/orders/': typeof CustomerOrdersIndexRoute
   '/seller/products/': typeof SellerProductsIndexRoute
+  '/seller/products/$id/edit': typeof SellerProductsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -342,6 +370,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
+  '/shop': typeof ShopRoute
   '/showcase': typeof ShowcaseRoute
   '/verify-email': typeof VerifyEmailRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -370,6 +399,7 @@ export interface FileRoutesByTo {
   '/seller/dashboard': typeof SellerDashboardRoute
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
+  '/seller/profile': typeof SellerProfileRoute
   '/seller/reviews': typeof SellerReviewsRoute
   '/admin': typeof AdminIndexRoute
   '/categories': typeof CategoriesIndexRoute
@@ -377,8 +407,10 @@ export interface FileRoutesByTo {
   '/products': typeof ProductsIndexRoute
   '/seller': typeof SellerIndexRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
+  '/seller/products/new': typeof SellerProductsNewRoute
   '/customer/orders': typeof CustomerOrdersIndexRoute
   '/seller/products': typeof SellerProductsIndexRoute
+  '/seller/products/$id/edit': typeof SellerProductsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -391,6 +423,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/seller': typeof SellerRouteWithChildren
+  '/shop': typeof ShopRoute
   '/showcase': typeof ShowcaseRoute
   '/verify-email': typeof VerifyEmailRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
@@ -419,6 +452,7 @@ export interface FileRoutesById {
   '/seller/dashboard': typeof SellerDashboardRoute
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
+  '/seller/profile': typeof SellerProfileRoute
   '/seller/reviews': typeof SellerReviewsRoute
   '/admin/': typeof AdminIndexRoute
   '/categories/': typeof CategoriesIndexRoute
@@ -426,8 +460,10 @@ export interface FileRoutesById {
   '/products/': typeof ProductsIndexRoute
   '/seller/': typeof SellerIndexRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
+  '/seller/products/new': typeof SellerProductsNewRoute
   '/customer/orders/': typeof CustomerOrdersIndexRoute
   '/seller/products/': typeof SellerProductsIndexRoute
+  '/seller/products/$id/edit': typeof SellerProductsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -441,6 +477,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/search'
     | '/seller'
+    | '/shop'
     | '/showcase'
     | '/verify-email'
     | '/admin/analytics'
@@ -469,6 +506,7 @@ export interface FileRouteTypes {
     | '/seller/dashboard'
     | '/seller/inventory'
     | '/seller/orders'
+    | '/seller/profile'
     | '/seller/reviews'
     | '/admin/'
     | '/categories/'
@@ -476,8 +514,10 @@ export interface FileRouteTypes {
     | '/products/'
     | '/seller/'
     | '/customer/orders/$id'
+    | '/seller/products/new'
     | '/customer/orders/'
     | '/seller/products/'
+    | '/seller/products/$id/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -486,6 +526,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/reset-password'
     | '/search'
+    | '/shop'
     | '/showcase'
     | '/verify-email'
     | '/admin/analytics'
@@ -514,6 +555,7 @@ export interface FileRouteTypes {
     | '/seller/dashboard'
     | '/seller/inventory'
     | '/seller/orders'
+    | '/seller/profile'
     | '/seller/reviews'
     | '/admin'
     | '/categories'
@@ -521,8 +563,10 @@ export interface FileRouteTypes {
     | '/products'
     | '/seller'
     | '/customer/orders/$id'
+    | '/seller/products/new'
     | '/customer/orders'
     | '/seller/products'
+    | '/seller/products/$id/edit'
   id:
     | '__root__'
     | '/'
@@ -534,6 +578,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/search'
     | '/seller'
+    | '/shop'
     | '/showcase'
     | '/verify-email'
     | '/admin/analytics'
@@ -562,6 +607,7 @@ export interface FileRouteTypes {
     | '/seller/dashboard'
     | '/seller/inventory'
     | '/seller/orders'
+    | '/seller/profile'
     | '/seller/reviews'
     | '/admin/'
     | '/categories/'
@@ -569,8 +615,10 @@ export interface FileRouteTypes {
     | '/products/'
     | '/seller/'
     | '/customer/orders/$id'
+    | '/seller/products/new'
     | '/customer/orders/'
     | '/seller/products/'
+    | '/seller/products/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -583,6 +631,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SearchRoute: typeof SearchRoute
   SellerRoute: typeof SellerRouteWithChildren
+  ShopRoute: typeof ShopRoute
   ShowcaseRoute: typeof ShowcaseRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   CategoriesCategoryRoute: typeof CategoriesCategoryRoute
@@ -606,6 +655,13 @@ declare module '@tanstack/react-router' {
       path: '/showcase'
       fullPath: '/showcase'
       preLoaderRoute: typeof ShowcaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/seller': {
@@ -711,6 +767,13 @@ declare module '@tanstack/react-router' {
       path: '/reviews'
       fullPath: '/seller/reviews'
       preLoaderRoute: typeof SellerReviewsRouteImport
+      parentRoute: typeof SellerRoute
+    }
+    '/seller/profile': {
+      id: '/seller/profile'
+      path: '/profile'
+      fullPath: '/seller/profile'
+      preLoaderRoute: typeof SellerProfileRouteImport
       parentRoute: typeof SellerRoute
     }
     '/seller/orders': {
@@ -909,12 +972,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CustomerOrdersIndexRouteImport
       parentRoute: typeof CustomerRoute
     }
+    '/seller/products/new': {
+      id: '/seller/products/new'
+      path: '/products/new'
+      fullPath: '/seller/products/new'
+      preLoaderRoute: typeof SellerProductsNewRouteImport
+      parentRoute: typeof SellerRoute
+    }
     '/customer/orders/$id': {
       id: '/customer/orders/$id'
       path: '/orders/$id'
       fullPath: '/customer/orders/$id'
       preLoaderRoute: typeof CustomerOrdersIdRouteImport
       parentRoute: typeof CustomerRoute
+    }
+    '/seller/products/$id/edit': {
+      id: '/seller/products/$id/edit'
+      path: '/products/$id/edit'
+      fullPath: '/seller/products/$id/edit'
+      preLoaderRoute: typeof SellerProductsIdEditRouteImport
+      parentRoute: typeof SellerRoute
     }
   }
 }
@@ -986,9 +1063,12 @@ interface SellerRouteChildren {
   SellerDashboardRoute: typeof SellerDashboardRoute
   SellerInventoryRoute: typeof SellerInventoryRoute
   SellerOrdersRoute: typeof SellerOrdersRoute
+  SellerProfileRoute: typeof SellerProfileRoute
   SellerReviewsRoute: typeof SellerReviewsRoute
   SellerIndexRoute: typeof SellerIndexRoute
+  SellerProductsNewRoute: typeof SellerProductsNewRoute
   SellerProductsIndexRoute: typeof SellerProductsIndexRoute
+  SellerProductsIdEditRoute: typeof SellerProductsIdEditRoute
 }
 
 const SellerRouteChildren: SellerRouteChildren = {
@@ -998,9 +1078,12 @@ const SellerRouteChildren: SellerRouteChildren = {
   SellerDashboardRoute: SellerDashboardRoute,
   SellerInventoryRoute: SellerInventoryRoute,
   SellerOrdersRoute: SellerOrdersRoute,
+  SellerProfileRoute: SellerProfileRoute,
   SellerReviewsRoute: SellerReviewsRoute,
   SellerIndexRoute: SellerIndexRoute,
+  SellerProductsNewRoute: SellerProductsNewRoute,
   SellerProductsIndexRoute: SellerProductsIndexRoute,
+  SellerProductsIdEditRoute: SellerProductsIdEditRoute,
 }
 
 const SellerRouteWithChildren =
@@ -1016,6 +1099,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SearchRoute: SearchRoute,
   SellerRoute: SellerRouteWithChildren,
+  ShopRoute: ShopRoute,
   ShowcaseRoute: ShowcaseRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   CategoriesCategoryRoute: CategoriesCategoryRoute,
