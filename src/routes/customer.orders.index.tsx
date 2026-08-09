@@ -12,7 +12,7 @@ const statusMap = {
   delivered: { variant: "success" as const, label: "Delivered" },
 };
 
-export const Route = createFileRoute("/customer/orders")({
+export const Route = createFileRoute("/customer/orders/")({
   head: () => ({
     meta: [
       { title: "Your Orders — Nexa" },

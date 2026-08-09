@@ -34,7 +34,7 @@ import { Plus, Search, Sparkles, Filter, Copy, Pencil, Trash2 } from "lucide-rea
 import { sellerProducts, type ListingStatus } from "@/lib/seller-data";
 import { AiDescriptionGenerator } from "@/components/ds/ai/description-generator";
 
-export const Route = createFileRoute("/seller/products")({
+export const Route = createFileRoute("/seller/products/")({
   head: () => ({ meta: [{ title: "Products — Seller · Nexa" }] }),
   component: ProductsPage,
 });

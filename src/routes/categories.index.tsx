@@ -3,7 +3,7 @@ import { ShopShell, Breadcrumbs } from "@/components/ds/shop-shell";
 import { CategoryCard } from "@/components/ds/category-card";
 import { categories } from "@/lib/shop-data";
 
-export const Route = createFileRoute("/categories")({
+export const Route = createFileRoute("/categories/")({
   head: () => ({
     meta: [
       { title: "Shop by Category — Nexa" },
