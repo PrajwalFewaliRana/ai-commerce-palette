@@ -7,6 +7,7 @@ import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { resolveHomePath, signInWithEmail, signInWithGoogle } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/auth/login")({
   head: () => ({
@@ -53,7 +54,13 @@ function LoginPage() {
     setError(null);
     setBusy("google");
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      if ("redirected" in result && result.redirected) return;
+      const { data } = await supabase.auth.getUser();
+      navigate({
+        to: data.user ? await resolveHomePath(data.user.id) : "/dashboard/customer",
+        replace: true,
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Google sign-in failed.");
       setBusy(null);
