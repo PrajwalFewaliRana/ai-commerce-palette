@@ -70,7 +70,14 @@ function RegisterPage() {
   async function onGoogle() {
     setBusy("google");
     try {
-      await signInWithGoogle(role);
+      const result = await signInWithGoogle(role);
+      // Full-page flow: the browser is already navigating away.
+      if ("redirected" in result && result.redirected) return;
+      const { data } = await supabase.auth.getUser();
+      navigate({
+        to: data.user ? await resolveHomePath(data.user.id) : `/dashboard/${role}`,
+        replace: true,
+      });
     } catch (err) {
       setErrors({ email: err instanceof Error ? err.message : "Google sign-up failed." });
       setBusy(null);
