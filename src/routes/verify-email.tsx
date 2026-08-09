@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/verify-email")({
+  ssr: false,
   head: () => ({
     meta: [
       { title: "Verify your email — Nexa" },
