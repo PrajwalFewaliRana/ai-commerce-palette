@@ -1,3 +1,4 @@
+import { PublicRoute } from "@/guards";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Mail, Lock, Eye, EyeOff, Loader2 } from "lucide-react";
@@ -17,7 +18,11 @@ export const Route = createFileRoute("/login")({
     ],
   }),
   ssr: false,
-  component: LoginPage,
+  component: () => (
+    <PublicRoute>
+      <LoginPage />
+    </PublicRoute>
+  ),
 });
 
 function LoginPage() {

@@ -18,13 +18,10 @@ import {
 import { orders, products, notifications } from "@/lib/shop-data";
 import { RecommendationRow } from "@/components/ds/ai/recommendation-card";
 import { parseQuery, rankProducts } from "@/lib/ai-mock";
-import { requireUser } from "@/lib/auth";
+import { RoleRoute } from "@/guards";
 
 export const Route = createFileRoute("/customer/dashboard")({
   ssr: false,
-  beforeLoad: async () => {
-    await requireUser();
-  },
   head: () => ({
     meta: [
       { title: "Customer Dashboard — Nexa" },
@@ -36,7 +33,11 @@ export const Route = createFileRoute("/customer/dashboard")({
       { property: "og:description", content: "Everything about your Nexa account, in one place." },
     ],
   }),
-  component: CustomerDashboardPage,
+  component: () => (
+    <RoleRoute allowedRoles={["customer"]}>
+      <CustomerDashboardPage />
+    </RoleRoute>
+  ),
 });
 
 const statusVariant = {

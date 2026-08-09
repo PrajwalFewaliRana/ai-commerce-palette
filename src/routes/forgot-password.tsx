@@ -1,3 +1,4 @@
+import { PublicRoute } from "@/guards";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, ArrowLeft, CheckCircle2 } from "lucide-react";
@@ -14,7 +15,11 @@ export const Route = createFileRoute("/forgot-password")({
       { name: "description", content: "Get a password reset link sent to your email." },
     ],
   }),
-  component: ForgotPasswordPage,
+  component: () => (
+    <PublicRoute>
+      <ForgotPasswordPage />
+    </PublicRoute>
+  ),
 });
 
 function ForgotPasswordPage() {
