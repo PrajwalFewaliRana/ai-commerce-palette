@@ -53,7 +53,13 @@ function LoginPage() {
     setError(null);
     setBusy("google");
     try {
-      await signInWithGoogle();
+      const result = await signInWithGoogle();
+      if ("redirected" in result && result.redirected) return;
+      const { data } = await supabase.auth.getUser();
+      navigate({
+        to: data.user ? await resolveHomePath(data.user.id) : "/dashboard/customer",
+        replace: true,
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Google sign-in failed.");
       setBusy(null);

@@ -8,6 +8,8 @@ import { PasswordStrength, scorePassword } from "@/components/ds/password-streng
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { resolveHomePath, signInWithGoogle, signUpWithEmail } from "@/lib/auth";
+import { supabase } from "@/integrations/supabase/client";
+import { becomeSeller } from "@/lib/account.functions";
 
 export const Route = createFileRoute("/auth/register")({
   head: () => ({
@@ -74,6 +76,13 @@ function RegisterPage() {
       // Full-page flow: the browser is already navigating away.
       if ("redirected" in result && result.redirected) return;
       const { data } = await supabase.auth.getUser();
+      if (data.user && role === "seller") {
+        try {
+          await becomeSeller({ data: {} });
+        } catch {
+          /* keep going as customer; the role can be upgraded later */
+        }
+      }
       navigate({
         to: data.user ? await resolveHomePath(data.user.id) : `/dashboard/${role}`,
         replace: true,
