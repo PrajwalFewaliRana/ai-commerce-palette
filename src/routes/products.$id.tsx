@@ -19,7 +19,7 @@ import {
   Check,
 } from "lucide-react";
 
-export const Route = createFileRoute("/product/$id")({
+export const Route = createFileRoute("/products/$id")({
   loader: ({ params }) => {
     const product = findProduct(params.id);
     if (!product) throw notFound();
@@ -116,7 +116,7 @@ function ProductDetailsPage() {
 
           <div className="mt-6 flex flex-wrap gap-2">
             <Button size="lg" variant="hero" asChild>
-              <Link to="/cart">
+              <Link to="/customer/cart">
                 <ShoppingCart /> Add to cart
               </Link>
             </Button>
@@ -124,7 +124,7 @@ function ProductDetailsPage() {
               <Heart /> Wishlist
             </Button>
             <Button size="lg" variant="ai" asChild>
-              <Link to="/checkout">Buy now</Link>
+              <Link to="/customer/checkout">Buy now</Link>
             </Button>
           </div>
 

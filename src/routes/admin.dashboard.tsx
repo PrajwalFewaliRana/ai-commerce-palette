@@ -47,7 +47,7 @@ import {
   adminOrders,
 } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/")({
+export const Route = createFileRoute("/admin/dashboard")({
   head: () => ({
     meta: [
       { title: "Platform Overview — Nexa Admin" },
@@ -265,7 +265,7 @@ function AdminOverview() {
             </li>
           </ul>
           <Button variant="ai" size="sm" className="mt-4 w-full" asChild>
-            <Link to="/dashboard/admin/revenue">
+            <Link to="/admin/analytics">
               Open revenue analytics <ArrowRight className="size-3.5" />
             </Link>
           </Button>
@@ -277,7 +277,7 @@ function AdminOverview() {
           title="Sellers awaiting verification"
           actions={
             <Link
-              to="/dashboard/admin/sellers"
+              to="/admin/sellers"
               className="text-xs font-medium text-primary hover:underline"
             >
               View all →
@@ -320,7 +320,7 @@ function AdminOverview() {
           title="Moderation queue"
           actions={
             <Link
-              to="/dashboard/admin/moderation"
+              to="/admin/products"
               className="text-xs font-medium text-primary hover:underline"
             >
               Review →

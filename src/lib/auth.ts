@@ -60,7 +60,7 @@ export async function signInWithGoogle(accountType?: AccountType) {
 
 export async function sendPasswordReset(email: string) {
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/auth/reset-password`,
+    redirectTo: `${window.location.origin}/reset-password`,
   });
   if (error) throw new Error(friendlyAuthError(error.message));
 }
@@ -77,9 +77,9 @@ export async function fetchRoles(userId: string): Promise<AppRole[]> {
 }
 
 export function homePathForRoles(roles: AppRole[]): string {
-  if (roles.includes("admin")) return "/dashboard/admin";
-  if (roles.includes("seller")) return "/dashboard/seller";
-  return "/dashboard/customer";
+  if (roles.includes("admin")) return "/admin/dashboard";
+  if (roles.includes("seller")) return "/seller/dashboard";
+  return "/customer/dashboard";
 }
 
 /** Where a signed-in user belongs, based on their granted roles. */
@@ -94,7 +94,7 @@ export async function signOut() {
 /** Use inside a client-only `beforeLoad` on protected routes. */
 export async function requireUser() {
   const { data, error } = await supabase.auth.getUser();
-  if (error || !data.user) throw redirect({ to: "/auth/login" });
+  if (error || !data.user) throw redirect({ to: "/login" });
   return data.user;
 }
 

@@ -6,7 +6,7 @@ import { FloatingInput } from "@/components/ds/floating-input";
 import { Button } from "@/components/ui/button";
 import { sendPasswordReset } from "@/lib/auth";
 
-export const Route = createFileRoute("/auth/forgot-password")({
+export const Route = createFileRoute("/forgot-password")({
   ssr: false,
   head: () => ({
     meta: [
@@ -48,7 +48,7 @@ function ForgotPasswordPage() {
       }
       footer={
         <Link
-          to="/auth/login"
+          to="/login"
           className="inline-flex items-center gap-1.5 text-primary hover:underline"
         >
           <ArrowLeft className="size-3.5" /> Back to sign in

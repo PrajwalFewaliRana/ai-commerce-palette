@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { findCategory, products } from "@/lib/shop-data";
 import { SlidersHorizontal } from "lucide-react";
 
-export const Route = createFileRoute("/category/$slug")({
+export const Route = createFileRoute("/categories/$category")({
   loader: ({ params }) => {
     const cat = findCategory(params.slug);
     if (!cat) throw notFound();
@@ -65,7 +65,7 @@ function CategoryPage() {
       {items.length ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {items.map((p) => (
-            <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
+            <Link key={p.id} to="/products/$id" params={{ id: p.id }}>
               <ProductCard {...p} />
             </Link>
           ))}

@@ -11,7 +11,7 @@ import { resolveHomePath, signInWithGoogle, signUpWithEmail } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 import { becomeSeller } from "@/lib/account.functions";
 
-export const Route = createFileRoute("/auth/register")({
+export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
       { title: "Create your account — Nexa" },
@@ -100,7 +100,7 @@ function RegisterPage() {
       footer={
         <>
           Already have an account?{" "}
-          <Link to="/auth/login" className="font-medium text-primary hover:underline">
+          <Link to="/login" className="font-medium text-primary hover:underline">
             Sign in
           </Link>
         </>

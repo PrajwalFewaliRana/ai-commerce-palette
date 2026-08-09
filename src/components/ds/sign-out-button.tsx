@@ -16,7 +16,7 @@ export function SignOutButton({
     await queryClient.cancelQueries();
     queryClient.clear();
     await signOut();
-    navigate({ to: "/auth/login", replace: true });
+    navigate({ to: "/login", replace: true });
   }
 
   if (variant === "labelled") {

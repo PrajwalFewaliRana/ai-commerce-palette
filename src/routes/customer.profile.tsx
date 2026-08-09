@@ -6,7 +6,7 @@ import { FloatingInput } from "@/components/ds/floating-input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { MapPin, CreditCard, Plus, Trash2 } from "lucide-react";
 
-export const Route = createFileRoute("/profile")({
+export const Route = createFileRoute("/customer/profile")({
   head: () => ({
     meta: [
       { title: "Your Profile — Nexa" },
@@ -24,7 +24,7 @@ function ProfilePage() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Dashboard", to: "/dashboard/customer" },
+          { label: "Dashboard", to: "/customer/dashboard" },
           { label: "Profile" },
         ]}
       />

@@ -9,7 +9,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { resolveHomePath, signInWithEmail, signInWithGoogle } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/auth/login")({
+export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Sign in — Nexa" },
@@ -42,7 +42,7 @@ function LoginPage() {
     setBusy("email");
     try {
       const { user } = await signInWithEmail(email, password);
-      navigate({ to: user ? await resolveHomePath(user.id) : "/dashboard/customer", replace: true });
+      navigate({ to: user ? await resolveHomePath(user.id) : "/customer/dashboard", replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not sign in.");
     } finally {
@@ -58,7 +58,7 @@ function LoginPage() {
       if ("redirected" in result && result.redirected) return;
       const { data } = await supabase.auth.getUser();
       navigate({
-        to: data.user ? await resolveHomePath(data.user.id) : "/dashboard/customer",
+        to: data.user ? await resolveHomePath(data.user.id) : "/customer/dashboard",
         replace: true,
       });
     } catch (err) {
@@ -74,7 +74,7 @@ function LoginPage() {
       footer={
         <>
           Don't have an account?{" "}
-          <Link to="/auth/register" className="font-medium text-primary hover:underline">
+          <Link to="/register" className="font-medium text-primary hover:underline">
             Create one
           </Link>
         </>
@@ -115,7 +115,7 @@ function LoginPage() {
             />
             Remember me
           </label>
-          <Link to="/auth/forgot-password" className="font-medium text-primary hover:underline">
+          <Link to="/forgot-password" className="font-medium text-primary hover:underline">
             Forgot password?
           </Link>
         </div>

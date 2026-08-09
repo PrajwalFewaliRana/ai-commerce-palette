@@ -34,7 +34,7 @@ import {
 import { DollarSign, Eye, ShoppingCart, Users, Sparkles, TrendingUp } from "lucide-react";
 import { revenueSeries, trafficSources, sellerProducts } from "@/lib/seller-data";
 
-export const Route = createFileRoute("/dashboard/seller/analytics")({
+export const Route = createFileRoute("/seller/analytics")({
   head: () => ({ meta: [{ title: "Analytics — Seller · Nexa" }] }),
   component: AnalyticsPage,
 });

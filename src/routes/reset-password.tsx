@@ -7,7 +7,7 @@ import { PasswordStrength, scorePassword } from "@/components/ds/password-streng
 import { Button } from "@/components/ui/button";
 import { updatePassword } from "@/lib/auth";
 
-export const Route = createFileRoute("/auth/reset-password")({
+export const Route = createFileRoute("/reset-password")({
   ssr: false,
   head: () => ({
     meta: [
@@ -39,7 +39,7 @@ function ResetPasswordPage() {
     try {
       await updatePassword(password);
       setDone(true);
-      setTimeout(() => navigate({ to: "/auth/login" }), 1600);
+      setTimeout(() => navigate({ to: "/login" }), 1600);
     } catch (err) {
       setErrors({
         password: err instanceof Error ? err.message : "Could not update your password.",
@@ -65,7 +65,7 @@ function ResetPasswordPage() {
       title="Set a new password"
       subtitle="Choose a strong password you haven't used before."
       footer={
-        <Link to="/auth/login" className="text-primary hover:underline">
+        <Link to="/login" className="text-primary hover:underline">
           Back to sign in
         </Link>
       }

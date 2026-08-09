@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { adminOrders, type AdminOrderStatus } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/orders")({
+export const Route = createFileRoute("/admin/orders")({
   head: () => ({
     meta: [
       { title: "Orders — Nexa Admin" },

@@ -9,7 +9,7 @@ import { AlertTriangle, Bell, CheckCircle2, Info, ShieldAlert, CheckCheck } from
 import { adminNotifications } from "@/lib/admin-data";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/dashboard/admin/notifications")({
+export const Route = createFileRoute("/admin/notifications")({
   head: () => ({
     meta: [
       { title: "Notifications — Nexa Admin" },

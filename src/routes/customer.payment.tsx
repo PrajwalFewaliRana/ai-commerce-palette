@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { CreditCard, Wallet, ShieldCheck, Lock, Check } from "lucide-react";
 
-export const Route = createFileRoute("/payment")({
+export const Route = createFileRoute("/customer/payment")({
   head: () => ({
     meta: [
       { title: "Payment — Nexa" },
@@ -21,7 +21,7 @@ function PaymentPage() {
   const [method, setMethod] = useState<"card" | "wallet" | "cod">("card");
   return (
     <ShopShell compactNav>
-      <Breadcrumbs items={[{ label: "Checkout", to: "/checkout" }, { label: "Payment" }]} />
+      <Breadcrumbs items={[{ label: "Checkout", to: "/customer/checkout" }, { label: "Payment" }]} />
       <Stepper current={2} />
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
@@ -83,10 +83,10 @@ function PaymentPage() {
 
           <div className="flex flex-wrap justify-between gap-3">
             <Button variant="ghost" asChild>
-              <Link to="/checkout">← Back</Link>
+              <Link to="/customer/checkout">← Back</Link>
             </Button>
             <Button variant="hero" size="lg" asChild>
-              <Link to="/orders/$id" params={{ id: "NX-10428" }}>
+              <Link to="/customer/orders/$id" params={{ id: "NX-10428" }}>
                 Pay & place order
               </Link>
             </Button>

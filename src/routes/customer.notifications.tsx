@@ -8,7 +8,7 @@ import { notifications } from "@/lib/shop-data";
 
 const iconFor = { order: Package, ai: Sparkles, deal: Tag, system: Settings2 } as const;
 
-export const Route = createFileRoute("/notifications")({
+export const Route = createFileRoute("/customer/notifications")({
   head: () => ({
     meta: [
       { title: "Notifications — Nexa" },

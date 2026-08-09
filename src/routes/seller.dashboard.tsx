@@ -39,7 +39,7 @@ import {
 import { revenueSeries, categoryMix, sellerOrders, sellerProducts } from "@/lib/seller-data";
 import { AiSellerInsights } from "@/components/ds/ai/seller-insights";
 
-export const Route = createFileRoute("/dashboard/seller/")({
+export const Route = createFileRoute("/seller/dashboard")({
   head: () => ({ meta: [{ title: "Seller Overview — Nexa" }] }),
   component: SellerOverview,
 });
@@ -229,7 +229,7 @@ function SellerOverview() {
             </li>
           </ul>
           <Button variant="ai" size="sm" className="mt-4 w-full" asChild>
-            <Link to="/dashboard/seller/analytics">
+            <Link to="/seller/analytics">
               View full analytics <ArrowRight className="size-3.5" />
             </Link>
           </Button>
@@ -245,7 +245,7 @@ function SellerOverview() {
           <div className="mb-3 flex items-center justify-between">
             <p className="text-sm font-semibold">Recent orders</p>
             <Link
-              to="/dashboard/seller/orders"
+              to="/seller/orders"
               className="text-xs font-medium text-primary hover:underline"
             >
               View all →
@@ -283,7 +283,7 @@ function SellerOverview() {
               <AlertTriangle className="size-4 text-[color:var(--warning)]" /> Low stock alerts
             </p>
             <Link
-              to="/dashboard/seller/inventory"
+              to="/seller/inventory"
               className="text-xs font-medium text-primary hover:underline"
             >
               Manage →
