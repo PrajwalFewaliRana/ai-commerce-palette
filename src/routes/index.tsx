@@ -260,10 +260,10 @@ function LandingPage() {
               {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </button>
             <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-              <Link to="/login">Login</Link>
+              <Link to="/auth/login">Login</Link>
             </Button>
             <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
-              <Link to="/register">Register</Link>
+              <Link to="/auth/register">Register</Link>
             </Button>
             <button
               className="relative grid size-9 place-items-center rounded-lg text-muted-foreground transition hover:bg-accent hover:text-foreground"
