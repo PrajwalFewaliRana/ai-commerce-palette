@@ -7,7 +7,7 @@ import { SlidersHorizontal } from "lucide-react";
 
 export const Route = createFileRoute("/categories/$category")({
   loader: ({ params }) => {
-    const cat = findCategory(params.slug);
+    const cat = findCategory(params.category);
     if (!cat) throw notFound();
     return { cat };
   },

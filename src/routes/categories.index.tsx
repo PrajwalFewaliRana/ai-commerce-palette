@@ -30,7 +30,7 @@ function CategoriesPage() {
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {categories.map((c) => (
-          <Link key={c.slug} to="/categories/$category" params={{ slug: c.slug }}>
+          <Link key={c.slug} to="/categories/$category" params={{ category: c.slug }}>
             <CategoryCard label={c.label} count={c.count} icon={c.icon} />
           </Link>
         ))}
