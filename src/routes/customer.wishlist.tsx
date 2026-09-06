@@ -34,13 +34,13 @@ function WishlistPage() {
           </p>
         </div>
         <Button variant="hero" asChild>
-          <Link to="/cart">Move all to cart</Link>
+          <Link to="/customer/cart">Move all to cart</Link>
         </Button>
       </div>
       {items.length ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {items.map((p) => (
-            <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
+            <Link key={p.id} to="/products/$id" params={{ id: p.id }}>
               <ProductCard {...p} />
             </Link>
           ))}

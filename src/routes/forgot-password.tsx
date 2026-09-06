@@ -37,7 +37,7 @@ function ForgotPasswordPage() {
       }
       footer={
         <Link
-          to="/auth/login"
+          to="/login"
           className="inline-flex items-center gap-1.5 text-primary hover:underline"
         >
           <ArrowLeft className="size-3.5" /> Back to sign in

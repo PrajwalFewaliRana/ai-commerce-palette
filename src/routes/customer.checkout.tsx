@@ -32,7 +32,7 @@ function CheckoutPage() {
 
   return (
     <ShopShell compactNav>
-      <Breadcrumbs items={[{ label: "Cart", to: "/cart" }, { label: "Checkout" }]} />
+      <Breadcrumbs items={[{ label: "Cart", to: "/customer/cart" }, { label: "Checkout" }]} />
       <Stepper current={1} />
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
@@ -77,10 +77,10 @@ function CheckoutPage() {
 
           <div className="flex flex-wrap justify-between gap-3">
             <Button variant="ghost" asChild>
-              <Link to="/cart">← Back to cart</Link>
+              <Link to="/customer/cart">← Back to cart</Link>
             </Button>
             <Button variant="hero" size="lg" asChild>
-              <Link to="/payment">Continue to payment</Link>
+              <Link to="/customer/payment">Continue to payment</Link>
             </Button>
           </div>
         </div>

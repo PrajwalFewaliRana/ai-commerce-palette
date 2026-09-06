@@ -42,7 +42,7 @@ function LoginPage() {
       footer={
         <>
           Don't have an account?{" "}
-          <Link to="/auth/register" className="font-medium text-primary hover:underline">
+          <Link to="/register" className="font-medium text-primary hover:underline">
             Create one
           </Link>
         </>
@@ -88,7 +88,7 @@ function LoginPage() {
             />
             Remember me
           </label>
-          <Link to="/auth/forgot-password" className="font-medium text-primary hover:underline">
+          <Link to="/forgot-password" className="font-medium text-primary hover:underline">
             Forgot password?
           </Link>
         </div>

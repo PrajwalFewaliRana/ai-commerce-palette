@@ -57,12 +57,12 @@ function CustomerDashboardPage() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" asChild>
-            <Link to="/profile">
+            <Link to="/customer/profile">
               <User className="size-4" /> Profile
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/notifications">
+            <Link to="/customer/notifications">
               <Bell className="size-4" /> Notifications
             </Link>
           </Button>
@@ -87,7 +87,7 @@ function CustomerDashboardPage() {
             <p className="flex items-center gap-2 text-sm font-semibold">
               <Truck className="size-4 text-primary" /> Active orders
             </p>
-            <Link to="/orders" className="text-xs font-medium text-primary hover:underline">
+            <Link to="/customer/orders" className="text-xs font-medium text-primary hover:underline">
               View all →
             </Link>
           </div>
@@ -95,7 +95,7 @@ function CustomerDashboardPage() {
             {active.map((o) => (
               <li key={o.id}>
                 <Link
-                  to="/orders/$id"
+                  to="/customer/orders/$id"
                   params={{ id: o.id }}
                   className="flex items-center gap-4 rounded-xl border border-border p-3 hover:border-primary/40"
                 >
@@ -125,7 +125,7 @@ function CustomerDashboardPage() {
             <p className="flex items-center gap-2 text-sm font-semibold">
               <Bell className="size-4 text-primary" /> Notifications
             </p>
-            <Link to="/notifications" className="text-xs font-medium text-primary hover:underline">
+            <Link to="/customer/notifications" className="text-xs font-medium text-primary hover:underline">
               View all →
             </Link>
           </div>
@@ -166,7 +166,7 @@ function CustomerDashboardPage() {
         />
         <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {picks.map((p) => (
-            <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
+            <Link key={p.id} to="/products/$id" params={{ id: p.id }}>
               <ProductCard {...p} />
             </Link>
           ))}

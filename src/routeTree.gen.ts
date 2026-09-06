@@ -15,12 +15,12 @@ import { Route as SellerRouteImport } from './routes/seller'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RegisterRouteImport } from './routes/register'
-import { Route as ProductsRouteImport } from './routes/products'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products.index'
+import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
 import { Route as SellerReviewsRouteImport } from './routes/seller.reviews'
 import { Route as SellerOrdersRouteImport } from './routes/seller.orders'
 import { Route as SellerInventoryRouteImport } from './routes/seller.inventory'
@@ -82,11 +82,6 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -97,11 +92,6 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CategoriesRoute = CategoriesRouteImport.update({
-  id: '/categories',
-  path: '/categories',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -110,6 +100,16 @@ const AdminRoute = AdminRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellerReviewsRoute = SellerReviewsRouteImport.update({
@@ -148,9 +148,9 @@ const SellerAnalyticsRoute = SellerAnalyticsRouteImport.update({
   getParentRoute: () => SellerRoute,
 } as any)
 const ProductsIdRoute = ProductsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => ProductsRoute,
+  id: '/products/$id',
+  path: '/products/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DesignSystemTypographyRoute = DesignSystemTypographyRouteImport.update({
   id: '/design-system/typography',
@@ -193,9 +193,9 @@ const CustomerCartRoute = CustomerCartRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriesCategoryRoute = CategoriesCategoryRouteImport.update({
-  id: '/$category',
-  path: '/$category',
-  getParentRoute: () => CategoriesRoute,
+  id: '/categories/$category',
+  path: '/categories/$category',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
@@ -266,10 +266,8 @@ const CustomerOrdersIdRoute = CustomerOrdersIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/categories': typeof CategoriesRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/products': typeof ProductsRouteWithChildren
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
@@ -303,6 +301,8 @@ export interface FileRoutesByFullPath {
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
   '/seller/reviews': typeof SellerReviewsRoute
+  '/categories/': typeof CategoriesIndexRoute
+  '/products/': typeof ProductsIndexRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
   '/customer/orders/': typeof CustomerOrdersIndexRoute
   '/seller/products/': typeof SellerProductsIndexRoute
@@ -310,10 +310,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/categories': typeof CategoriesRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/products': typeof ProductsRouteWithChildren
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
@@ -347,6 +345,8 @@ export interface FileRoutesByTo {
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
   '/seller/reviews': typeof SellerReviewsRoute
+  '/categories': typeof CategoriesIndexRoute
+  '/products': typeof ProductsIndexRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
   '/customer/orders': typeof CustomerOrdersIndexRoute
   '/seller/products': typeof SellerProductsIndexRoute
@@ -355,10 +355,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
-  '/categories': typeof CategoriesRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRoute
   '/login': typeof LoginRoute
-  '/products': typeof ProductsRouteWithChildren
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
@@ -392,6 +390,8 @@ export interface FileRoutesById {
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
   '/seller/reviews': typeof SellerReviewsRoute
+  '/categories/': typeof CategoriesIndexRoute
+  '/products/': typeof ProductsIndexRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
   '/customer/orders/': typeof CustomerOrdersIndexRoute
   '/seller/products/': typeof SellerProductsIndexRoute
@@ -401,10 +401,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
-    | '/categories'
     | '/forgot-password'
     | '/login'
-    | '/products'
     | '/register'
     | '/reset-password'
     | '/search'
@@ -438,6 +436,8 @@ export interface FileRouteTypes {
     | '/seller/inventory'
     | '/seller/orders'
     | '/seller/reviews'
+    | '/categories/'
+    | '/products/'
     | '/customer/orders/$id'
     | '/customer/orders/'
     | '/seller/products/'
@@ -445,10 +445,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
-    | '/categories'
     | '/forgot-password'
     | '/login'
-    | '/products'
     | '/register'
     | '/reset-password'
     | '/search'
@@ -482,6 +480,8 @@ export interface FileRouteTypes {
     | '/seller/inventory'
     | '/seller/orders'
     | '/seller/reviews'
+    | '/categories'
+    | '/products'
     | '/customer/orders/$id'
     | '/customer/orders'
     | '/seller/products'
@@ -489,10 +489,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
-    | '/categories'
     | '/forgot-password'
     | '/login'
-    | '/products'
     | '/register'
     | '/reset-password'
     | '/search'
@@ -526,6 +524,8 @@ export interface FileRouteTypes {
     | '/seller/inventory'
     | '/seller/orders'
     | '/seller/reviews'
+    | '/categories/'
+    | '/products/'
     | '/customer/orders/$id'
     | '/customer/orders/'
     | '/seller/products/'
@@ -534,16 +534,15 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
-  CategoriesRoute: typeof CategoriesRouteWithChildren
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   LoginRoute: typeof LoginRoute
-  ProductsRoute: typeof ProductsRouteWithChildren
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SearchRoute: typeof SearchRoute
   SellerRoute: typeof SellerRouteWithChildren
   ShowcaseRoute: typeof ShowcaseRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
+  CategoriesCategoryRoute: typeof CategoriesCategoryRoute
   CustomerCartRoute: typeof CustomerCartRoute
   CustomerCheckoutRoute: typeof CustomerCheckoutRoute
   CustomerDashboardRoute: typeof CustomerDashboardRoute
@@ -552,6 +551,9 @@ export interface RootRouteChildren {
   CustomerProfileRoute: typeof CustomerProfileRoute
   CustomerWishlistRoute: typeof CustomerWishlistRoute
   DesignSystemTypographyRoute: typeof DesignSystemTypographyRoute
+  ProductsIdRoute: typeof ProductsIdRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
   CustomerOrdersIdRoute: typeof CustomerOrdersIdRoute
   CustomerOrdersIndexRoute: typeof CustomerOrdersIndexRoute
 }
@@ -600,13 +602,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -621,13 +616,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/categories': {
-      id: '/categories'
-      path: '/categories'
-      fullPath: '/categories'
-      preLoaderRoute: typeof CategoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -640,6 +628,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products/'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories/'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/seller/reviews': {
@@ -693,10 +695,10 @@ declare module '@tanstack/react-router' {
     }
     '/products/$id': {
       id: '/products/$id'
-      path: '/$id'
+      path: '/products/$id'
       fullPath: '/products/$id'
       preLoaderRoute: typeof ProductsIdRouteImport
-      parentRoute: typeof ProductsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/design-system/typography': {
       id: '/design-system/typography'
@@ -756,10 +758,10 @@ declare module '@tanstack/react-router' {
     }
     '/categories/$category': {
       id: '/categories/$category'
-      path: '/$category'
+      path: '/categories/$category'
       fullPath: '/categories/$category'
       preLoaderRoute: typeof CategoriesCategoryRouteImport
-      parentRoute: typeof CategoriesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/admin/users': {
       id: '/admin/users'
@@ -883,30 +885,6 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface CategoriesRouteChildren {
-  CategoriesCategoryRoute: typeof CategoriesCategoryRoute
-}
-
-const CategoriesRouteChildren: CategoriesRouteChildren = {
-  CategoriesCategoryRoute: CategoriesCategoryRoute,
-}
-
-const CategoriesRouteWithChildren = CategoriesRoute._addFileChildren(
-  CategoriesRouteChildren,
-)
-
-interface ProductsRouteChildren {
-  ProductsIdRoute: typeof ProductsIdRoute
-}
-
-const ProductsRouteChildren: ProductsRouteChildren = {
-  ProductsIdRoute: ProductsIdRoute,
-}
-
-const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
-  ProductsRouteChildren,
-)
-
 interface SellerRouteChildren {
   SellerAnalyticsRoute: typeof SellerAnalyticsRoute
   SellerCouponsRoute: typeof SellerCouponsRoute
@@ -935,16 +913,15 @@ const SellerRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
-  CategoriesRoute: CategoriesRouteWithChildren,
   ForgotPasswordRoute: ForgotPasswordRoute,
   LoginRoute: LoginRoute,
-  ProductsRoute: ProductsRouteWithChildren,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SearchRoute: SearchRoute,
   SellerRoute: SellerRouteWithChildren,
   ShowcaseRoute: ShowcaseRoute,
   VerifyEmailRoute: VerifyEmailRoute,
+  CategoriesCategoryRoute: CategoriesCategoryRoute,
   CustomerCartRoute: CustomerCartRoute,
   CustomerCheckoutRoute: CustomerCheckoutRoute,
   CustomerDashboardRoute: CustomerDashboardRoute,
@@ -953,6 +930,9 @@ const rootRouteChildren: RootRouteChildren = {
   CustomerProfileRoute: CustomerProfileRoute,
   CustomerWishlistRoute: CustomerWishlistRoute,
   DesignSystemTypographyRoute: DesignSystemTypographyRoute,
+  ProductsIdRoute: ProductsIdRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
   CustomerOrdersIdRoute: CustomerOrdersIdRoute,
   CustomerOrdersIndexRoute: CustomerOrdersIndexRoute,
 }

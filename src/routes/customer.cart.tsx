@@ -68,7 +68,7 @@ function CartPage() {
                 <div className="min-w-0 flex-1">
                   <p className="text-xs text-muted-foreground">{r.product.vendor}</p>
                   <Link
-                    to="/product/$id"
+                    to="/products/$id"
                     params={{ id: r.product.id }}
                     className="line-clamp-2 text-sm font-semibold hover:text-primary"
                   >
@@ -141,7 +141,7 @@ function CartPage() {
               </Button>
             </div>
             <Button asChild variant="hero" size="lg" className="w-full">
-              <Link to="/checkout">Proceed to checkout</Link>
+              <Link to="/customer/checkout">Proceed to checkout</Link>
             </Button>
             <Link
               to="/products"

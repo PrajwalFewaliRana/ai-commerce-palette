@@ -51,7 +51,7 @@ function OrderTrackingPage() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Orders", to: "/orders" },
+          { label: "Orders", to: "/customer/orders" },
           { label: order.id },
         ]}
       />
@@ -128,7 +128,7 @@ function OrderTrackingPage() {
                 <div className="min-w-0 flex-1">
                   <p className="text-xs text-muted-foreground">{it.product.vendor}</p>
                   <Link
-                    to="/product/$id"
+                    to="/products/$id"
                     params={{ id: it.product.id }}
                     className="line-clamp-1 text-sm font-semibold hover:text-primary"
                   >
@@ -164,7 +164,7 @@ function OrderTrackingPage() {
             <MessageSquareText className="size-4" /> Contact vendor
           </Button>
           <Button variant="ghost" className="w-full" asChild>
-            <Link to="/orders">All orders</Link>
+            <Link to="/customer/orders">All orders</Link>
           </Button>
         </aside>
       </div>

@@ -26,11 +26,11 @@ const MOBILE_LINKS: [string, string][] = [
   ["Home", "/"],
   ["Categories", "/categories"],
   ["All products", "/products"],
-  ["Wishlist", "/wishlist"],
-  ["Cart", "/cart"],
-  ["Orders", "/orders"],
-  ["Notifications", "/notifications"],
-  ["Your account", "/dashboard/customer"],
+  ["Wishlist", "/customer/wishlist"],
+  ["Cart", "/customer/cart"],
+  ["Orders", "/customer/orders"],
+  ["Notifications", "/customer/notifications"],
+  ["Your account", "/customer/dashboard"],
 ];
 
 export function ShopNav({ compact = false }: { compact?: boolean }) {
@@ -144,7 +144,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             )}
           </Button>
           <Link
-            to="/notifications"
+            to="/customer/notifications"
             aria-label="Notifications, unread"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
@@ -155,14 +155,14 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             />
           </Link>
           <Link
-            to="/wishlist"
+            to="/customer/wishlist"
             aria-label="Wishlist"
             className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
           >
             <Heart aria-hidden="true" className="size-4" />
           </Link>
           <Link
-            to="/cart"
+            to="/customer/cart"
             aria-label="Cart, 2 items"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
@@ -176,7 +176,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             </Badge>
           </Link>
           <Link
-            to="/dashboard/customer"
+            to="/customer/dashboard"
             aria-label="Your account"
             className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
           >
@@ -261,24 +261,24 @@ export function ShopFooter() {
           links={[
             ["Categories", "/categories"],
             ["All products", "/products"],
-            ["Wishlist", "/wishlist"],
-            ["Cart", "/cart"],
+            ["Wishlist", "/customer/wishlist"],
+            ["Cart", "/customer/cart"],
           ]}
         />
         <FooterCol
           title="Account"
           links={[
-            ["Dashboard", "/dashboard/customer"],
-            ["Orders", "/orders"],
-            ["Profile", "/profile"],
-            ["Notifications", "/notifications"],
+            ["Dashboard", "/customer/dashboard"],
+            ["Orders", "/customer/orders"],
+            ["Profile", "/customer/profile"],
+            ["Notifications", "/customer/notifications"],
           ]}
         />
         <FooterCol
           title="Company"
           links={[
             ["About", "/"],
-            ["Become a seller", "/auth/register"],
+            ["Become a seller", "/register"],
             ["Help", "/"],
             ["Privacy", "/"],
           ]}

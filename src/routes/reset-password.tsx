@@ -32,7 +32,7 @@ function ResetPasswordPage() {
     setErrors(next);
     if (Object.keys(next).length === 0) {
       setDone(true);
-      setTimeout(() => navigate({ to: "/auth/login" }), 1600);
+      setTimeout(() => navigate({ to: "/login" }), 1600);
     }
   }
 
@@ -52,7 +52,7 @@ function ResetPasswordPage() {
       title="Set a new password"
       subtitle="Choose a strong password you haven't used before."
       footer={
-        <Link to="/auth/login" className="text-primary hover:underline">
+        <Link to="/login" className="text-primary hover:underline">
           Back to sign in
         </Link>
       }
