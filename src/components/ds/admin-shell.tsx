@@ -26,21 +26,21 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { to: "/dashboard/admin", label: "Overview", icon: LayoutDashboard, end: true },
-  { to: "/dashboard/admin/revenue", label: "Revenue analytics", icon: LineChart },
-  { to: "/dashboard/admin/users", label: "User management", icon: Users },
-  { to: "/dashboard/admin/sellers", label: "Seller verification", icon: ShieldCheck, badge: "12" },
+  { to: "/admin/dashboard", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/admin/analytics", label: "Revenue analytics", icon: LineChart },
+  { to: "/admin/users", label: "User management", icon: Users },
+  { to: "/admin/sellers", label: "Seller verification", icon: ShieldCheck, badge: "12" },
   {
-    to: "/dashboard/admin/moderation",
+    to: "/admin/products",
     label: "Product moderation",
     icon: PackageSearch,
     badge: "23",
   },
-  { to: "/dashboard/admin/categories", label: "Categories", icon: FolderTree },
-  { to: "/dashboard/admin/orders", label: "Orders", icon: ShoppingBag },
-  { to: "/dashboard/admin/reports", label: "Reports", icon: FileBarChart },
-  { to: "/dashboard/admin/notifications", label: "Notifications", icon: Bell },
-  { to: "/dashboard/admin/settings", label: "Settings", icon: Settings },
+  { to: "/admin/categories", label: "Categories", icon: FolderTree },
+  { to: "/admin/orders", label: "Orders", icon: ShoppingBag },
+  { to: "/admin/reports", label: "Reports", icon: FileBarChart },
+  { to: "/admin/notifications", label: "Notifications", icon: Bell },
+  { to: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
 function useDarkMode() {
@@ -107,7 +107,7 @@ function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?:
             23 listings and 4 stores need a human decision today.
           </p>
           <Button size="sm" variant="hero" className="mt-3 w-full" asChild>
-            <Link to="/dashboard/admin/moderation" onClick={onNavigate}>
+            <Link to="/admin/products" onClick={onNavigate}>
               Review queue
             </Link>
           </Button>
@@ -192,7 +192,7 @@ export function AdminShell() {
                 {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
               </Button>
               <Link
-                to="/dashboard/admin/notifications"
+                to="/admin/notifications"
                 aria-label="Notifications, unread"
                 className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
               >
@@ -210,7 +210,7 @@ export function AdminShell() {
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
               <Button variant="ghost" size="icon" asChild>
-                <Link to="/auth/login" aria-label="Sign out">
+                <Link to="/login" aria-label="Sign out">
                   <LogOut className="size-4" />
                 </Link>
               </Button>
