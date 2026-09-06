@@ -27,7 +27,7 @@ import { FloatingInput } from "@/components/ds/floating-input";
 import { FolderTree, Layers, EyeOff, Plus, CornerDownRight, Pencil } from "lucide-react";
 import { adminCategories } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/categories")({
+export const Route = createFileRoute("/admin/categories")({
   head: () => ({
     meta: [
       { title: "Category Management — Nexa Admin" },

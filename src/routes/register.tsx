@@ -8,7 +8,7 @@ import { PasswordStrength, scorePassword } from "@/components/ds/password-streng
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/auth/register")({
+export const Route = createFileRoute("/register")({
   head: () => ({
     meta: [
       { title: "Create your account — Nexa" },

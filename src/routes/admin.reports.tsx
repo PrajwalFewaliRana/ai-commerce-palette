@@ -15,7 +15,7 @@ import {
 import { FileBarChart, Download, Clock, Plus, Sparkles } from "lucide-react";
 import { adminReports } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/reports")({
+export const Route = createFileRoute("/admin/reports")({
   head: () => ({
     meta: [
       { title: "Reports — Nexa Admin" },

@@ -23,7 +23,7 @@ import {
 import { Search, Download, Filter } from "lucide-react";
 import { sellerOrders, type SellerOrderStatus } from "@/lib/seller-data";
 
-export const Route = createFileRoute("/dashboard/seller/orders")({
+export const Route = createFileRoute("/seller/orders")({
   head: () => ({ meta: [{ title: "Orders — Seller · Nexa" }] }),
   component: OrdersPage,
 });

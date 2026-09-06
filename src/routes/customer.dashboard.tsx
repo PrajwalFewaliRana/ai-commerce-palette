@@ -19,7 +19,7 @@ import { orders, products, notifications } from "@/lib/shop-data";
 import { RecommendationRow } from "@/components/ds/ai/recommendation-card";
 import { parseQuery, rankProducts } from "@/lib/ai-mock";
 
-export const Route = createFileRoute("/dashboard/customer")({
+export const Route = createFileRoute("/customer/dashboard")({
   head: () => ({
     meta: [
       { title: "Customer Dashboard — Nexa" },

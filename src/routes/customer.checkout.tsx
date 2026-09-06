@@ -7,7 +7,7 @@ import { FloatingInput } from "@/components/ds/floating-input";
 import { Check, Truck, MapPin } from "lucide-react";
 import { products, initialCart } from "@/lib/shop-data";
 
-export const Route = createFileRoute("/checkout")({
+export const Route = createFileRoute("/customer/checkout")({
   head: () => ({
     meta: [
       { title: "Checkout — Nexa" },

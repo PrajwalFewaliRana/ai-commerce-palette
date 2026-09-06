@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { adminUsers, type UserStatus } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/users")({
+export const Route = createFileRoute("/admin/users")({
   head: () => ({
     meta: [
       { title: "User Management — Nexa Admin" },

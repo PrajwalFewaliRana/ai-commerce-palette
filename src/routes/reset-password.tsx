@@ -6,7 +6,7 @@ import { FloatingInput } from "@/components/ds/floating-input";
 import { PasswordStrength, scorePassword } from "@/components/ds/password-strength";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/auth/reset-password")({
+export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
       { title: "Set a new password — Nexa" },

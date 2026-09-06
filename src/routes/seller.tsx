@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SellerShell } from "@/components/ds/seller-shell";
 
-export const Route = createFileRoute("/dashboard/seller")({
+export const Route = createFileRoute("/seller")({
   head: () => ({
     meta: [
       { title: "Seller Dashboard — Nexa" },

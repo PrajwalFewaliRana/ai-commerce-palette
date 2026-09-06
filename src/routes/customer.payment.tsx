@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { CreditCard, Wallet, ShieldCheck, Lock, Check } from "lucide-react";
 
-export const Route = createFileRoute("/payment")({
+export const Route = createFileRoute("/customer/payment")({
   head: () => ({
     meta: [
       { title: "Payment — Nexa" },
