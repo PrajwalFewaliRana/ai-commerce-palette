@@ -46,7 +46,7 @@ function LoginPage() {
     setError(null);
     try {
       const user = await login({ email, password, role: parseRole(role) ?? "CUSTOMER" });
-      navigate({ to: redirectTo ?? dashboardPathForRole(user.role), replace: true });
+      navigate({ to: (redirectTo ?? dashboardPathForRole(user.role)) as "/", replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not sign in.");
     }

@@ -12,6 +12,6 @@ import { dashboardPathForRole } from "@/lib/auth/roles";
 export function PublicRoute({ children }: { children: ReactNode }) {
   const { isLoading, user } = useAuth();
   if (isLoading) return <RoutePendingSkeleton />;
-  if (user) return <Navigate to={dashboardPathForRole(user.role)} replace />;
+  if (user) return <Navigate to={dashboardPathForRole(user.role) as "/"} replace />;
   return <>{children}</>;
 }
