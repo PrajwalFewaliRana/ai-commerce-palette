@@ -1,3 +1,4 @@
+import { PublicRoute } from "@/components/auth/public-route";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, Lock, User, Eye, EyeOff, ShoppingBag, Store } from "lucide-react";
@@ -18,7 +19,11 @@ export const Route = createFileRoute("/register")({
       },
     ],
   }),
-  component: RegisterPage,
+  component: () => (
+    <PublicRoute>
+      <RegisterPage />
+    </PublicRoute>
+  ),
 });
 
 type Role = "customer" | "seller";

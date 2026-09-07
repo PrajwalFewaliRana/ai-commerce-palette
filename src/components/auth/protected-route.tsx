@@ -1,5 +1,5 @@
 import { Navigate, useRouterState } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { RoleRoute } from "./role-route";
 import { RoutePendingSkeleton } from "@/components/ds/skeletons";
 import { useAuth } from "@/lib/auth/auth-context";
@@ -21,8 +21,15 @@ export function ProtectedRoute({
   const { isLoading, isAuthenticated } = useAuth();
   const href = useRouterState({ select: (s) => s.location.href });
 
+  // The address to return to is captured once, on first render, so a redirect
+  // never nests a previous /login?redirect=... value inside itself.
+  const intended = useRef(href);
+
   if (isLoading) return <RoutePendingSkeleton />;
-  if (!isAuthenticated) return <Navigate to="/login" search={{ redirect: href }} replace />;
+  if (!isAuthenticated) {
+    const target = intended.current.startsWith("/login") ? undefined : intended.current;
+    return <Navigate to="/login" search={target ? { redirect: target } : {}} replace />;
+  }
   if (allowedRoles) return <RoleRoute allowedRoles={allowedRoles}>{children}</RoleRoute>;
   return <>{children}</>;
 }

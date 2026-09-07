@@ -1,3 +1,4 @@
+import { PublicRoute } from "@/components/auth/public-route";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { MailCheck } from "lucide-react";
@@ -15,7 +16,11 @@ export const Route = createFileRoute("/verify-email")({
       },
     ],
   }),
-  component: VerifyEmailPage,
+  component: () => (
+    <PublicRoute>
+      <VerifyEmailPage />
+    </PublicRoute>
+  ),
 });
 
 function VerifyEmailPage() {

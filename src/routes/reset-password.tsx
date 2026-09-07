@@ -1,3 +1,4 @@
+import { PublicRoute } from "@/components/auth/public-route";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Lock, Eye, EyeOff, CheckCircle2 } from "lucide-react";
@@ -13,7 +14,11 @@ export const Route = createFileRoute("/reset-password")({
       { name: "description", content: "Choose a new password for your Nexa account." },
     ],
   }),
-  component: ResetPasswordPage,
+  component: () => (
+    <PublicRoute>
+      <ResetPasswordPage />
+    </PublicRoute>
+  ),
 });
 
 function ResetPasswordPage() {

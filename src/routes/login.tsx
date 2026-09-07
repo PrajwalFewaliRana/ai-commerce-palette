@@ -1,4 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { PublicRoute } from "@/components/auth/public-route";
+import { useAuth } from "@/lib/auth/auth-context";
+import { dashboardPathForRole, parseRole } from "@/lib/auth/roles";
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ShoppingBag, Store, ShieldCheck } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
@@ -14,25 +17,38 @@ export const Route = createFileRoute("/login")({
       { name: "description", content: "Sign in to your Nexa account to shop smarter with AI." },
     ],
   }),
-  component: LoginPage,
+  validateSearch: (search: Record<string, unknown>): { redirect?: string } =>
+    typeof search.redirect === "string" ? { redirect: search.redirect } : {},
+  component: () => (
+    <PublicRoute>
+      <LoginPage />
+    </PublicRoute>
+  ),
 });
 
 type Role = "customer" | "seller" | "admin";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const { redirect: redirectTo } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<Role>("customer");
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.includes("@")) return setError("Please enter a valid email address.");
     if (password.length < 6) return setError("Password must be at least 6 characters.");
     setError(null);
-    navigate({ to: `/dashboard/${role}` });
+    try {
+      const user = await login({ email, password, role: parseRole(role) ?? "CUSTOMER" });
+      navigate({ to: (redirectTo ?? dashboardPathForRole(user.role)) as "/", replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not sign in.");
+    }
   }
 
   return (
