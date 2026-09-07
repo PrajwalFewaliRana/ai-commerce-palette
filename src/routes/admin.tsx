@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AdminShell } from "@/components/ds/admin-shell";
+import { AdminLayout } from "@/layouts/admin-layout";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -20,5 +20,5 @@ export const Route = createFileRoute("/admin")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: AdminShell,
+  component: AdminLayout,
 });
