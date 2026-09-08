@@ -17,7 +17,7 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
       )}
     >
       <Link
-        to="/product/$id"
+        to="/products/$id"
         params={{ id: product.id }}
         className="relative block aspect-[4/3] overflow-hidden bg-muted"
       >
@@ -35,7 +35,7 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
       <div className="flex flex-1 flex-col gap-2 p-4">
         <p className="text-xs text-muted-foreground">{product.vendor}</p>
         <Link
-          to="/product/$id"
+          to="/products/$id"
           params={{ id: product.id }}
           className="line-clamp-2 text-sm font-semibold leading-tight hover:text-primary"
         >
@@ -66,7 +66,7 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
                 <ThumbsDown />
               </Button>
               <Button size="icon" variant="hero" aria-label="Add to cart" asChild>
-                <Link to="/cart">
+                <Link to="/customer/cart">
                   <ShoppingCart />
                 </Link>
               </Button>
