@@ -34,7 +34,7 @@ function WishlistPage() {
           </p>
         </div>
         <Button variant="hero" asChild>
-          <Link to="/cart">Move all to cart</Link>
+          <Link to="/customer/cart">Move all to cart</Link>
         </Button>
       </div>
       {items.length ? (

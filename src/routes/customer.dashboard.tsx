@@ -57,12 +57,12 @@ function CustomerDashboardPage() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" asChild>
-            <Link to="/profile">
+            <Link to="/customer/profile">
               <User className="size-4" /> Profile
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/notifications">
+            <Link to="/customer/notifications">
               <Bell className="size-4" /> Notifications
             </Link>
           </Button>
@@ -87,7 +87,7 @@ function CustomerDashboardPage() {
             <p className="flex items-center gap-2 text-sm font-semibold">
               <Truck className="size-4 text-primary" /> Active orders
             </p>
-            <Link to="/orders" className="text-xs font-medium text-primary hover:underline">
+            <Link to="/customer/orders" className="text-xs font-medium text-primary hover:underline">
               View all →
             </Link>
           </div>
@@ -125,7 +125,7 @@ function CustomerDashboardPage() {
             <p className="flex items-center gap-2 text-sm font-semibold">
               <Bell className="size-4 text-primary" /> Notifications
             </p>
-            <Link to="/notifications" className="text-xs font-medium text-primary hover:underline">
+            <Link to="/customer/notifications" className="text-xs font-medium text-primary hover:underline">
               View all →
             </Link>
           </div>

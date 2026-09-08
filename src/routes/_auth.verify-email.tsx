@@ -60,7 +60,7 @@ function VerifyEmailPage() {
       footer={
         <>
           Wrong email?{" "}
-          <Link to="/auth/register" className="text-primary hover:underline">
+          <Link to="/register" className="text-primary hover:underline">
             Start over
           </Link>
         </>

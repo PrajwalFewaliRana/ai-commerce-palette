@@ -46,7 +46,7 @@ function ProductListingPage() {
                 <li key={c.slug}>
                   <Link
                     to="/categories/$category"
-                    params={{ slug: c.slug }}
+                    params={{ category: c.slug }}
                     className="flex items-center justify-between rounded-lg px-2 py-1.5 text-muted-foreground hover:bg-accent hover:text-foreground"
                   >
                     <span>{c.label}</span>

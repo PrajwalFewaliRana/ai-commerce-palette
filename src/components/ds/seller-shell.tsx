@@ -183,7 +183,7 @@ export function SellerShell() {
                 {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
               </Button>
               <Link
-                to="/notifications"
+                to="/customer/notifications"
                 aria-label="Notifications, unread"
                 className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
               >
@@ -201,7 +201,7 @@ export function SellerShell() {
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
               <Button variant="ghost" size="icon" asChild>
-                <Link to="/auth/login" aria-label="Sign out">
+                <Link to="/login" aria-label="Sign out">
                   <LogOut className="size-4" />
                 </Link>
               </Button>

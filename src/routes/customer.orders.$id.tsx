@@ -51,7 +51,7 @@ function OrderTrackingPage() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Orders", to: "/orders" },
+          { label: "Orders", to: "/customer/orders" },
           { label: order.id },
         ]}
       />
@@ -164,7 +164,7 @@ function OrderTrackingPage() {
             <MessageSquareText className="size-4" /> Contact vendor
           </Button>
           <Button variant="ghost" className="w-full" asChild>
-            <Link to="/orders">All orders</Link>
+            <Link to="/customer/orders">All orders</Link>
           </Button>
         </aside>
       </div>

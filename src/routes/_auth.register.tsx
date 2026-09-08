@@ -43,7 +43,7 @@ function RegisterPage() {
     if (password !== confirm) next.confirm = "Passwords do not match.";
     if (!agreed) next.agreed = "You must accept the terms.";
     setErrors(next);
-    if (Object.keys(next).length === 0) navigate({ to: "/auth/verify-email" });
+    if (Object.keys(next).length === 0) navigate({ to: "/verify-email" });
   }
 
   return (
@@ -53,7 +53,7 @@ function RegisterPage() {
       footer={
         <>
           Already have an account?{" "}
-          <Link to="/auth/login" className="font-medium text-primary hover:underline">
+          <Link to="/login" className="font-medium text-primary hover:underline">
             Sign in
           </Link>
         </>

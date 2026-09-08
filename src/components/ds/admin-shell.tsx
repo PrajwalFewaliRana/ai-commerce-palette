@@ -210,7 +210,7 @@ export function AdminShell() {
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
               <Button variant="ghost" size="icon" asChild>
-                <Link to="/auth/login" aria-label="Sign out">
+                <Link to="/login" aria-label="Sign out">
                   <LogOut className="size-4" />
                 </Link>
               </Button>

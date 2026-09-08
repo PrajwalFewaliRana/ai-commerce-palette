@@ -141,7 +141,7 @@ function CartPage() {
               </Button>
             </div>
             <Button asChild variant="hero" size="lg" className="w-full">
-              <Link to="/checkout">Proceed to checkout</Link>
+              <Link to="/customer/checkout">Proceed to checkout</Link>
             </Button>
             <Link
               to="/products"

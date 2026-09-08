@@ -144,7 +144,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             )}
           </Button>
           <Link
-            to="/notifications"
+            to="/customer/notifications"
             aria-label="Notifications, unread"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
@@ -155,14 +155,14 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             />
           </Link>
           <Link
-            to="/wishlist"
+            to="/customer/wishlist"
             aria-label="Wishlist"
             className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
           >
             <Heart aria-hidden="true" className="size-4" />
           </Link>
           <Link
-            to="/cart"
+            to="/customer/cart"
             aria-label="Cart, 2 items"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
@@ -278,7 +278,7 @@ export function ShopFooter() {
           title="Company"
           links={[
             ["About", "/"],
-            ["Become a seller", "/auth/register"],
+            ["Become a seller", "/register"],
             ["Help", "/"],
             ["Privacy", "/"],
           ]}

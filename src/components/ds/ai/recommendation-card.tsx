@@ -66,7 +66,7 @@ export function RecommendationCard({ item, className }: { item: Ranked; classNam
                 <ThumbsDown />
               </Button>
               <Button size="icon" variant="hero" aria-label="Add to cart" asChild>
-                <Link to="/cart">
+                <Link to="/customer/cart">
                   <ShoppingCart />
                 </Link>
               </Button>
