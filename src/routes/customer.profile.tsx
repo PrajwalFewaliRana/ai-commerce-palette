@@ -24,7 +24,7 @@ function ProfilePage() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Dashboard", to: "/dashboard/customer" },
+          { label: "Dashboard", to: "/customer/dashboard" },
           { label: "Profile" },
         ]}
       />

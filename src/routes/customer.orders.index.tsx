@@ -46,7 +46,7 @@ function OrdersPage() {
             return (
               <Link
                 key={o.id}
-                to="/orders/$id"
+                to="/customer/orders/$id"
                 params={{ id: o.id }}
                 className="block rounded-2xl border border-border bg-card p-5 transition hover:border-primary/40 hover:shadow-[var(--shadow-md)]"
               >

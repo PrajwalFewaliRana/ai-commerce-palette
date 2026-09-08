@@ -45,7 +45,7 @@ function ProductListingPage() {
               {categories.map((c) => (
                 <li key={c.slug}>
                   <Link
-                    to="/category/$slug"
+                    to="/categories/$category"
                     params={{ slug: c.slug }}
                     className="flex items-center justify-between rounded-lg px-2 py-1.5 text-muted-foreground hover:bg-accent hover:text-foreground"
                   >
@@ -80,7 +80,7 @@ function ProductListingPage() {
 
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((p) => (
-            <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
+            <Link key={p.id} to="/products/$id" params={{ id: p.id }}>
               <ProductCard {...p} />
             </Link>
           ))}

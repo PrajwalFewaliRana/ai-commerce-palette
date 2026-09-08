@@ -86,7 +86,7 @@ function PaymentPage() {
               <Link to="/checkout">← Back</Link>
             </Button>
             <Button variant="hero" size="lg" asChild>
-              <Link to="/orders/$id" params={{ id: "NX-10428" }}>
+              <Link to="/customer/orders/$id" params={{ id: "NX-10428" }}>
                 Pay & place order
               </Link>
             </Button>

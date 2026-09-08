@@ -29,14 +29,14 @@ type NavItem = {
   end?: boolean;
 };
 const NAV: NavItem[] = [
-  { to: "/dashboard/seller", label: "Overview", icon: LayoutDashboard, end: true },
-  { to: "/dashboard/seller/products", label: "Products", icon: Package },
-  { to: "/dashboard/seller/inventory", label: "Inventory", icon: Warehouse },
-  { to: "/dashboard/seller/orders", label: "Orders", icon: ShoppingBag },
-  { to: "/dashboard/seller/coupons", label: "Coupons", icon: Tag },
-  { to: "/dashboard/seller/reviews", label: "Reviews", icon: Star },
-  { to: "/dashboard/seller/customers", label: "Customers", icon: Users },
-  { to: "/dashboard/seller/analytics", label: "Analytics", icon: BarChart3 },
+  { to: "/seller/dashboard", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/seller/products", label: "Products", icon: Package },
+  { to: "/seller/inventory", label: "Inventory", icon: Warehouse },
+  { to: "/seller/orders", label: "Orders", icon: ShoppingBag },
+  { to: "/seller/coupons", label: "Coupons", icon: Tag },
+  { to: "/seller/reviews", label: "Reviews", icon: Star },
+  { to: "/seller/customers", label: "Customers", icon: Users },
+  { to: "/seller/analytics", label: "Analytics", icon: BarChart3 },
 ];
 
 function useDarkMode() {

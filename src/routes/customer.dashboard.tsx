@@ -95,7 +95,7 @@ function CustomerDashboardPage() {
             {active.map((o) => (
               <li key={o.id}>
                 <Link
-                  to="/orders/$id"
+                  to="/customer/orders/$id"
                   params={{ id: o.id }}
                   className="flex items-center gap-4 rounded-xl border border-border p-3 hover:border-primary/40"
                 >
@@ -166,7 +166,7 @@ function CustomerDashboardPage() {
         />
         <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {picks.map((p) => (
-            <Link key={p.id} to="/product/$id" params={{ id: p.id }}>
+            <Link key={p.id} to="/products/$id" params={{ id: p.id }}>
               <ProductCard {...p} />
             </Link>
           ))}

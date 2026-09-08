@@ -50,7 +50,7 @@ function VerifyEmailPage() {
     const code = digits.join("");
     if (code.length < 6) return setError("Enter all 6 digits.");
     setError(null);
-    navigate({ to: "/dashboard/customer" });
+    navigate({ to: "/customer/dashboard" });
   }
 
   return (

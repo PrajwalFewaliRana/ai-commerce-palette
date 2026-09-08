@@ -30,7 +30,7 @@ const MOBILE_LINKS: [string, string][] = [
   ["Cart", "/cart"],
   ["Orders", "/orders"],
   ["Notifications", "/notifications"],
-  ["Your account", "/dashboard/customer"],
+  ["Your account", "/customer/dashboard"],
 ];
 
 export function ShopNav({ compact = false }: { compact?: boolean }) {
@@ -176,7 +176,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
             </Badge>
           </Link>
           <Link
-            to="/dashboard/customer"
+            to="/customer/dashboard"
             aria-label="Your account"
             className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
           >
@@ -268,7 +268,7 @@ export function ShopFooter() {
         <FooterCol
           title="Account"
           links={[
-            ["Dashboard", "/dashboard/customer"],
+            ["Dashboard", "/customer/dashboard"],
             ["Orders", "/orders"],
             ["Profile", "/profile"],
             ["Notifications", "/notifications"],

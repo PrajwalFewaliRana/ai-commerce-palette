@@ -45,7 +45,7 @@ function contextFor(pathname: string) {
       prompts: ["Where is my order?", "Can I still change the address?", "Start a return"],
     };
   }
-  if (pathname.startsWith("/dashboard/seller")) {
+  if (pathname.startsWith("/seller/dashboard")) {
     return {
       label: "Working on your store",
       prompts: [
@@ -176,7 +176,7 @@ export function ShoppingAssistant() {
                         {turn.results.map(({ product, score, reason }) => (
                           <li key={product.id}>
                             <Link
-                              to="/product/$id"
+                              to="/products/$id"
                               params={{ id: product.id }}
                               className="flex items-center gap-3 rounded-2xl border border-border bg-card p-2.5 transition hover:border-primary/40"
                             >

@@ -128,7 +128,7 @@ function OrderTrackingPage() {
                 <div className="min-w-0 flex-1">
                   <p className="text-xs text-muted-foreground">{it.product.vendor}</p>
                   <Link
-                    to="/product/$id"
+                    to="/products/$id"
                     params={{ id: it.product.id }}
                     className="line-clamp-1 text-sm font-semibold hover:text-primary"
                   >
