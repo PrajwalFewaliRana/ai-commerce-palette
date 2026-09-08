@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { findCategory, products } from "@/lib/shop-data";
 import { SlidersHorizontal } from "lucide-react";
 
-export const Route = createFileRoute("/category/$slug")({
+export const Route = createFileRoute("/_public/categories/$category")({
   loader: ({ params }) => {
-    const cat = findCategory(params.slug);
+    const cat = findCategory(params.category);
     if (!cat) throw notFound();
     return { cat };
   },

@@ -29,7 +29,7 @@ import {
 } from "recharts";
 import { gmvSeries, cohortRetention, topCategoriesByGmv, adminOrders } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/revenue")({
+export const Route = createFileRoute("/admin/revenue")({
   head: () => ({
     meta: [
       { title: "Revenue Analytics — Nexa Admin" },

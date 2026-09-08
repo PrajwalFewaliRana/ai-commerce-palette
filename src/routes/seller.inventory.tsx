@@ -15,7 +15,7 @@ import { DashboardCard } from "@/components/ds/dashboard-card";
 import { Package, AlertTriangle, PackageOpen, Boxes, Upload, Download, Plus } from "lucide-react";
 import { sellerProducts } from "@/lib/seller-data";
 
-export const Route = createFileRoute("/dashboard/seller/inventory")({
+export const Route = createFileRoute("/seller/inventory")({
   head: () => ({ meta: [{ title: "Inventory — Seller · Nexa" }] }),
   component: InventoryPage,
 });

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { products, initialWishlist } from "@/lib/shop-data";
 
-export const Route = createFileRoute("/wishlist")({
+export const Route = createFileRoute("/customer/wishlist")({
   head: () => ({
     meta: [
       { title: "Your Wishlist — Nexa" },

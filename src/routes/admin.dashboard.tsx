@@ -47,7 +47,7 @@ import {
   adminOrders,
 } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/")({
+export const Route = createFileRoute("/admin/dashboard")({
   head: () => ({
     meta: [
       { title: "Platform Overview — Nexa Admin" },

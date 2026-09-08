@@ -28,7 +28,7 @@ const statusIndex: Record<Order["status"], number> = {
   delivered: 4,
 };
 
-export const Route = createFileRoute("/orders/$id")({
+export const Route = createFileRoute("/customer/orders/$id")({
   loader: ({ params }): { order: Order } => ({ order: findOrder(params.id) }),
   head: ({ loaderData }) => ({
     meta: [

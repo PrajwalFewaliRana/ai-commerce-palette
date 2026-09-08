@@ -19,7 +19,7 @@ import {
   Check,
 } from "lucide-react";
 
-export const Route = createFileRoute("/product/$id")({
+export const Route = createFileRoute("/_public/products/$id")({
   loader: ({ params }) => {
     const product = findProduct(params.id);
     if (!product) throw notFound();

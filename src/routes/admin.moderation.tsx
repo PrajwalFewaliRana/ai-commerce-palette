@@ -18,7 +18,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PackageSearch, Flag, ShieldCheck, Trash2, Check, X, Sparkles } from "lucide-react";
 import { moderationQueue, type ModerationState } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/moderation")({
+export const Route = createFileRoute("/admin/moderation")({
   head: () => ({
     meta: [
       { title: "Product Moderation — Nexa Admin" },

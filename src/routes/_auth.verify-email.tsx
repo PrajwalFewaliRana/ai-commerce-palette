@@ -5,7 +5,7 @@ import { AuthLayout } from "@/components/ds/auth-layout";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/auth/verify-email")({
+export const Route = createFileRoute("/_auth/verify-email")({
   head: () => ({
     meta: [
       { title: "Verify your email — Nexa" },

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { SlidersHorizontal } from "lucide-react";
 import { products, categories } from "@/lib/shop-data";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/_public/products/")({
   head: () => ({
     meta: [
       { title: "All Products — Nexa" },

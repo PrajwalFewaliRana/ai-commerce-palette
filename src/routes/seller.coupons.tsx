@@ -30,7 +30,7 @@ import {
 import { Plus, Copy, Trash2, Pencil } from "lucide-react";
 import { coupons } from "@/lib/seller-data";
 
-export const Route = createFileRoute("/dashboard/seller/coupons")({
+export const Route = createFileRoute("/seller/coupons")({
   head: () => ({ meta: [{ title: "Coupons — Seller · Nexa" }] }),
   component: CouponsPage,
 });

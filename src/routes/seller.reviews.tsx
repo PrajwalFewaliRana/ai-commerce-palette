@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Star, ThumbsUp, ThumbsDown, MessageSquare, Sparkles } from "lucide-react";
 import { sellerReviews } from "@/lib/seller-data";
 
-export const Route = createFileRoute("/dashboard/seller/reviews")({
+export const Route = createFileRoute("/seller/reviews")({
   head: () => ({ meta: [{ title: "Reviews — Seller · Nexa" }] }),
   component: ReviewsPage,
 });

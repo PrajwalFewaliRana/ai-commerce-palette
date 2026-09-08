@@ -15,7 +15,7 @@ import {
 import { Users, UserPlus, Star, DollarSign, Search, Mail, Download } from "lucide-react";
 import { sellerCustomers } from "@/lib/seller-data";
 
-export const Route = createFileRoute("/dashboard/seller/customers")({
+export const Route = createFileRoute("/seller/customers")({
   head: () => ({ meta: [{ title: "Customers — Seller · Nexa" }] }),
   component: CustomersPage,
 });

@@ -11,7 +11,7 @@ import { aiSuggestions } from "@/lib/shop-data";
 import { EmptyState } from "@/components/ds/empty-state";
 import { SearchX } from "lucide-react";
 
-export const Route = createFileRoute("/search")({
+export const Route = createFileRoute("/_public/search")({
   validateSearch: (s: Record<string, unknown>) => ({ q: typeof s.q === "string" ? s.q : "" }),
   head: () => ({
     meta: [

@@ -7,7 +7,7 @@ import { EmptyState } from "@/components/ds/empty-state";
 import { Minus, Plus, Trash2, ShoppingBag, Sparkles, Tag } from "lucide-react";
 import { products, initialCart } from "@/lib/shop-data";
 
-export const Route = createFileRoute("/cart")({
+export const Route = createFileRoute("/customer/cart")({
   head: () => ({
     meta: [
       { title: "Shopping Cart — Nexa" },

@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Save } from "lucide-react";
 
-export const Route = createFileRoute("/dashboard/admin/settings")({
+export const Route = createFileRoute("/admin/settings")({
   head: () => ({
     meta: [
       { title: "Platform Settings — Nexa Admin" },

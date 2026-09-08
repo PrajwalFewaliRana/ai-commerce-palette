@@ -7,7 +7,7 @@ import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/auth/login")({
+export const Route = createFileRoute("/_auth/login")({
   head: () => ({
     meta: [
       { title: "Sign in — Nexa" },

@@ -39,7 +39,7 @@ import {
 import { revenueSeries, categoryMix, sellerOrders, sellerProducts } from "@/lib/seller-data";
 import { AiSellerInsights } from "@/components/ds/ai/seller-insights";
 
-export const Route = createFileRoute("/dashboard/seller/")({
+export const Route = createFileRoute("/seller/dashboard")({
   head: () => ({ meta: [{ title: "Seller Overview — Nexa" }] }),
   component: SellerOverview,
 });

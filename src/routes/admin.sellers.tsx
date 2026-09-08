@@ -26,7 +26,7 @@ import {
 import { ShieldCheck, ShieldAlert, Store, Clock, Check, X, FileText, Sparkles } from "lucide-react";
 import { sellerApplications, type SellerApplication } from "@/lib/admin-data";
 
-export const Route = createFileRoute("/dashboard/admin/sellers")({
+export const Route = createFileRoute("/admin/sellers")({
   head: () => ({
     meta: [
       { title: "Seller Verification — Nexa Admin" },

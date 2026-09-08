@@ -5,7 +5,7 @@ import { AuthLayout } from "@/components/ds/auth-layout";
 import { FloatingInput } from "@/components/ds/floating-input";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/auth/forgot-password")({
+export const Route = createFileRoute("/_auth/forgot-password")({
   head: () => ({
     meta: [
       { title: "Reset your password — Nexa" },
