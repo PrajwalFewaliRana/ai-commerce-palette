@@ -29,14 +29,14 @@ type NavItem = {
   end?: boolean;
 };
 const NAV: NavItem[] = [
-  { to: "/seller/dashboard", label: "Overview", icon: LayoutDashboard, end: true },
-  { to: "/seller/products", label: "Products", icon: Package },
-  { to: "/seller/inventory", label: "Inventory", icon: Warehouse },
-  { to: "/seller/orders", label: "Orders", icon: ShoppingBag },
-  { to: "/seller/coupons", label: "Coupons", icon: Tag },
-  { to: "/seller/reviews", label: "Reviews", icon: Star },
-  { to: "/seller/customers", label: "Customers", icon: Users },
-  { to: "/seller/analytics", label: "Analytics", icon: BarChart3 },
+  { to: "/dashboard/seller", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/dashboard/seller/products", label: "Products", icon: Package },
+  { to: "/dashboard/seller/inventory", label: "Inventory", icon: Warehouse },
+  { to: "/dashboard/seller/orders", label: "Orders", icon: ShoppingBag },
+  { to: "/dashboard/seller/coupons", label: "Coupons", icon: Tag },
+  { to: "/dashboard/seller/reviews", label: "Reviews", icon: Star },
+  { to: "/dashboard/seller/customers", label: "Customers", icon: Users },
+  { to: "/dashboard/seller/analytics", label: "Analytics", icon: BarChart3 },
 ];
 
 function useDarkMode() {
@@ -183,7 +183,7 @@ export function SellerShell() {
                 {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
               </Button>
               <Link
-                to="/customer/notifications"
+                to="/notifications"
                 aria-label="Notifications, unread"
                 className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
               >
@@ -201,7 +201,7 @@ export function SellerShell() {
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
               <Button variant="ghost" size="icon" asChild>
-                <Link to="/login" aria-label="Sign out">
+                <Link to="/auth/login" aria-label="Sign out">
                   <LogOut className="size-4" />
                 </Link>
               </Button>

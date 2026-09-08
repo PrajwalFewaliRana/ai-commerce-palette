@@ -28,7 +28,7 @@ export function DashboardShell({
               {role}
             </Badge>
             <Button asChild variant="ghost" size="sm">
-              <Link to="/login">
+              <Link to="/auth/login">
                 <LogOut className="size-4" /> Sign out
               </Link>
             </Button>
