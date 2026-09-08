@@ -15,7 +15,7 @@ interface Turn {
 
 /** Context-aware prompts so the assistant feels part of the page, not a bolted-on chatbot. */
 function contextFor(pathname: string) {
-  if (pathname.startsWith("/product/")) {
+  if (pathname.startsWith("/products/")) {
     return {
       label: "Helping you with this product",
       prompts: [
@@ -26,9 +26,9 @@ function contextFor(pathname: string) {
     };
   }
   if (
-    pathname.startsWith("/cart") ||
-    pathname.startsWith("/checkout") ||
-    pathname.startsWith("/payment")
+    pathname.startsWith("/customer/cart") ||
+    pathname.startsWith("/customer/checkout") ||
+    pathname.startsWith("/customer/payment")
   ) {
     return {
       label: "Reviewing your cart",
@@ -39,7 +39,7 @@ function contextFor(pathname: string) {
       ],
     };
   }
-  if (pathname.startsWith("/orders")) {
+  if (pathname.startsWith("/customer/orders")) {
     return {
       label: "Tracking your orders",
       prompts: ["Where is my order?", "Can I still change the address?", "Start a return"],

@@ -26,10 +26,10 @@ const MOBILE_LINKS: [string, string][] = [
   ["Home", "/"],
   ["Categories", "/categories"],
   ["All products", "/products"],
-  ["Wishlist", "/wishlist"],
-  ["Cart", "/cart"],
-  ["Orders", "/orders"],
-  ["Notifications", "/notifications"],
+  ["Wishlist", "/customer/wishlist"],
+  ["Cart", "/customer/cart"],
+  ["Orders", "/customer/orders"],
+  ["Notifications", "/customer/notifications"],
   ["Your account", "/customer/dashboard"],
 ];
 
@@ -261,17 +261,17 @@ export function ShopFooter() {
           links={[
             ["Categories", "/categories"],
             ["All products", "/products"],
-            ["Wishlist", "/wishlist"],
-            ["Cart", "/cart"],
+            ["Wishlist", "/customer/wishlist"],
+            ["Cart", "/customer/cart"],
           ]}
         />
         <FooterCol
           title="Account"
           links={[
             ["Dashboard", "/customer/dashboard"],
-            ["Orders", "/orders"],
-            ["Profile", "/profile"],
-            ["Notifications", "/notifications"],
+            ["Orders", "/customer/orders"],
+            ["Profile", "/customer/profile"],
+            ["Notifications", "/customer/notifications"],
           ]}
         />
         <FooterCol
