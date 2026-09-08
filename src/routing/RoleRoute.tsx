@@ -32,7 +32,7 @@ function RoleGate({
 }) {
   const { user } = useAuth();
   if (!hasAllowedRole(user?.role, allowedRoles)) {
-    return <Navigate to={roleHomePath(user?.role)} replace />;
+    return <Navigate to={roleHomePath(user?.role) as never} replace />;
   }
   return <>{children}</>;
 }

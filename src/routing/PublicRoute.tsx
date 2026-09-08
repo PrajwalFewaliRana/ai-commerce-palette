@@ -13,6 +13,6 @@ export function PublicRoute({ children, redirect }: { children: ReactNode; redir
   const { isAuthenticated, isLoading, user } = useAuth();
 
   if (isLoading) return <RoutePendingSkeleton />;
-  if (isAuthenticated) return <Navigate to={safeRedirect(redirect, user?.role)} replace />;
+  if (isAuthenticated) return <Navigate to={safeRedirect(redirect, user?.role) as never} replace />;
   return <>{children}</>;
 }
