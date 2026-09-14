@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShowcaseRouteImport } from './routes/showcase'
 import { Route as SellerRouteImport } from './routes/seller'
+import { Route as CustomerRouteImport } from './routes/customer'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/_auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CustomerIndexRouteImport } from './routes/customer.index'
 import { Route as SellerReviewsRouteImport } from './routes/seller.reviews'
 import { Route as SellerOrdersRouteImport } from './routes/seller.orders'
 import { Route as SellerInventoryRouteImport } from './routes/seller.inventory'
@@ -62,15 +65,29 @@ const SellerRoute = SellerRouteImport.update({
   path: '/seller',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CustomerRoute = CustomerRouteImport.update({
+  id: '/customer',
+  path: '/customer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/_auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const CustomerIndexRoute = CustomerIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const SellerReviewsRoute = SellerReviewsRouteImport.update({
   id: '/reviews',
@@ -113,39 +130,39 @@ const DesignSystemTypographyRoute = DesignSystemTypographyRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CustomerWishlistRoute = CustomerWishlistRouteImport.update({
-  id: '/customer/wishlist',
-  path: '/customer/wishlist',
-  getParentRoute: () => rootRouteImport,
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const CustomerProfileRoute = CustomerProfileRouteImport.update({
-  id: '/customer/profile',
-  path: '/customer/profile',
-  getParentRoute: () => rootRouteImport,
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const CustomerPaymentRoute = CustomerPaymentRouteImport.update({
-  id: '/customer/payment',
-  path: '/customer/payment',
-  getParentRoute: () => rootRouteImport,
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const CustomerNotificationsRoute = CustomerNotificationsRouteImport.update({
-  id: '/customer/notifications',
-  path: '/customer/notifications',
-  getParentRoute: () => rootRouteImport,
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const CustomerDashboardRoute = CustomerDashboardRouteImport.update({
-  id: '/customer/dashboard',
-  path: '/customer/dashboard',
-  getParentRoute: () => rootRouteImport,
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const CustomerCheckoutRoute = CustomerCheckoutRouteImport.update({
-  id: '/customer/checkout',
-  path: '/customer/checkout',
-  getParentRoute: () => rootRouteImport,
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const CustomerCartRoute = CustomerCartRouteImport.update({
-  id: '/customer/cart',
-  path: '/customer/cart',
-  getParentRoute: () => rootRouteImport,
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
@@ -203,29 +220,29 @@ const PublicSearchRoute = PublicSearchRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthVerifyEmailRoute = AuthVerifyEmailRouteImport.update({
-  id: '/_auth/verify-email',
+  id: '/verify-email',
   path: '/verify-email',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthRoute,
 } as any)
 const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
-  id: '/_auth/reset-password',
+  id: '/reset-password',
   path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthRoute,
 } as any)
 const AuthRegisterRoute = AuthRegisterRouteImport.update({
-  id: '/_auth/register',
+  id: '/register',
   path: '/register',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthRoute,
 } as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/_auth/login',
+  id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthRoute,
 } as any)
 const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
-  id: '/_auth/forgot-password',
+  id: '/forgot-password',
   path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthRoute,
 } as any)
 const SellerProductsIndexRoute = SellerProductsIndexRouteImport.update({
   id: '/products/',
@@ -233,9 +250,9 @@ const SellerProductsIndexRoute = SellerProductsIndexRouteImport.update({
   getParentRoute: () => SellerRoute,
 } as any)
 const CustomerOrdersIndexRoute = CustomerOrdersIndexRouteImport.update({
-  id: '/customer/orders/',
-  path: '/customer/orders/',
-  getParentRoute: () => rootRouteImport,
+  id: '/orders/',
+  path: '/orders/',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const PublicProductsIndexRoute = PublicProductsIndexRouteImport.update({
   id: '/_public/products/',
@@ -248,9 +265,9 @@ const PublicCategoriesIndexRoute = PublicCategoriesIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CustomerOrdersIdRoute = CustomerOrdersIdRouteImport.update({
-  id: '/customer/orders/$id',
-  path: '/customer/orders/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/orders/$id',
+  path: '/orders/$id',
+  getParentRoute: () => CustomerRoute,
 } as any)
 const PublicProductsIdRoute = PublicProductsIdRouteImport.update({
   id: '/_public/products/$id',
@@ -267,6 +284,7 @@ const PublicCategoriesCategoryRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/customer': typeof CustomerRouteWithChildren
   '/seller': typeof SellerRouteWithChildren
   '/showcase': typeof ShowcaseRoute
   '/forgot-password': typeof AuthForgotPasswordRoute
@@ -300,6 +318,7 @@ export interface FileRoutesByFullPath {
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
   '/seller/reviews': typeof SellerReviewsRoute
+  '/customer/': typeof CustomerIndexRoute
   '/categories/$category': typeof PublicCategoriesCategoryRoute
   '/products/$id': typeof PublicProductsIdRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
@@ -344,6 +363,7 @@ export interface FileRoutesByTo {
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
   '/seller/reviews': typeof SellerReviewsRoute
+  '/customer': typeof CustomerIndexRoute
   '/categories/$category': typeof PublicCategoriesCategoryRoute
   '/products/$id': typeof PublicProductsIdRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
@@ -355,7 +375,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_auth': typeof AuthRouteWithChildren
   '/admin': typeof AdminRouteWithChildren
+  '/customer': typeof CustomerRouteWithChildren
   '/seller': typeof SellerRouteWithChildren
   '/showcase': typeof ShowcaseRoute
   '/_auth/forgot-password': typeof AuthForgotPasswordRoute
@@ -389,6 +411,7 @@ export interface FileRoutesById {
   '/seller/inventory': typeof SellerInventoryRoute
   '/seller/orders': typeof SellerOrdersRoute
   '/seller/reviews': typeof SellerReviewsRoute
+  '/customer/': typeof CustomerIndexRoute
   '/_public/categories/$category': typeof PublicCategoriesCategoryRoute
   '/_public/products/$id': typeof PublicProductsIdRoute
   '/customer/orders/$id': typeof CustomerOrdersIdRoute
@@ -402,6 +425,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/customer'
     | '/seller'
     | '/showcase'
     | '/forgot-password'
@@ -435,6 +459,7 @@ export interface FileRouteTypes {
     | '/seller/inventory'
     | '/seller/orders'
     | '/seller/reviews'
+    | '/customer/'
     | '/categories/$category'
     | '/products/$id'
     | '/customer/orders/$id'
@@ -479,6 +504,7 @@ export interface FileRouteTypes {
     | '/seller/inventory'
     | '/seller/orders'
     | '/seller/reviews'
+    | '/customer'
     | '/categories/$category'
     | '/products/$id'
     | '/customer/orders/$id'
@@ -489,7 +515,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_auth'
     | '/admin'
+    | '/customer'
     | '/seller'
     | '/showcase'
     | '/_auth/forgot-password'
@@ -523,6 +551,7 @@ export interface FileRouteTypes {
     | '/seller/inventory'
     | '/seller/orders'
     | '/seller/reviews'
+    | '/customer/'
     | '/_public/categories/$category'
     | '/_public/products/$id'
     | '/customer/orders/$id'
@@ -534,29 +563,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
+  CustomerRoute: typeof CustomerRouteWithChildren
   SellerRoute: typeof SellerRouteWithChildren
   ShowcaseRoute: typeof ShowcaseRoute
-  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
-  AuthLoginRoute: typeof AuthLoginRoute
-  AuthRegisterRoute: typeof AuthRegisterRoute
-  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
-  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   PublicSearchRoute: typeof PublicSearchRoute
-  CustomerCartRoute: typeof CustomerCartRoute
-  CustomerCheckoutRoute: typeof CustomerCheckoutRoute
-  CustomerDashboardRoute: typeof CustomerDashboardRoute
-  CustomerNotificationsRoute: typeof CustomerNotificationsRoute
-  CustomerPaymentRoute: typeof CustomerPaymentRoute
-  CustomerProfileRoute: typeof CustomerProfileRoute
-  CustomerWishlistRoute: typeof CustomerWishlistRoute
   DesignSystemTypographyRoute: typeof DesignSystemTypographyRoute
   PublicCategoriesCategoryRoute: typeof PublicCategoriesCategoryRoute
   PublicProductsIdRoute: typeof PublicProductsIdRoute
-  CustomerOrdersIdRoute: typeof CustomerOrdersIdRoute
   PublicCategoriesIndexRoute: typeof PublicCategoriesIndexRoute
   PublicProductsIndexRoute: typeof PublicProductsIndexRoute
-  CustomerOrdersIndexRoute: typeof CustomerOrdersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -575,11 +592,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SellerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/customer': {
+      id: '/customer'
+      path: '/customer'
+      fullPath: '/customer'
+      preLoaderRoute: typeof CustomerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -588,6 +619,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/customer/': {
+      id: '/customer/'
+      path: '/'
+      fullPath: '/customer/'
+      preLoaderRoute: typeof CustomerIndexRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/seller/reviews': {
       id: '/seller/reviews'
@@ -647,52 +685,52 @@ declare module '@tanstack/react-router' {
     }
     '/customer/wishlist': {
       id: '/customer/wishlist'
-      path: '/customer/wishlist'
+      path: '/wishlist'
       fullPath: '/customer/wishlist'
       preLoaderRoute: typeof CustomerWishlistRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/customer/profile': {
       id: '/customer/profile'
-      path: '/customer/profile'
+      path: '/profile'
       fullPath: '/customer/profile'
       preLoaderRoute: typeof CustomerProfileRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/customer/payment': {
       id: '/customer/payment'
-      path: '/customer/payment'
+      path: '/payment'
       fullPath: '/customer/payment'
       preLoaderRoute: typeof CustomerPaymentRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/customer/notifications': {
       id: '/customer/notifications'
-      path: '/customer/notifications'
+      path: '/notifications'
       fullPath: '/customer/notifications'
       preLoaderRoute: typeof CustomerNotificationsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/customer/dashboard': {
       id: '/customer/dashboard'
-      path: '/customer/dashboard'
+      path: '/dashboard'
       fullPath: '/customer/dashboard'
       preLoaderRoute: typeof CustomerDashboardRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/customer/checkout': {
       id: '/customer/checkout'
-      path: '/customer/checkout'
+      path: '/checkout'
       fullPath: '/customer/checkout'
       preLoaderRoute: typeof CustomerCheckoutRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/customer/cart': {
       id: '/customer/cart'
-      path: '/customer/cart'
+      path: '/cart'
       fullPath: '/customer/cart'
       preLoaderRoute: typeof CustomerCartRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/admin/users': {
       id: '/admin/users'
@@ -776,35 +814,35 @@ declare module '@tanstack/react-router' {
       path: '/verify-email'
       fullPath: '/verify-email'
       preLoaderRoute: typeof AuthVerifyEmailRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/reset-password': {
       id: '/_auth/reset-password'
       path: '/reset-password'
       fullPath: '/reset-password'
       preLoaderRoute: typeof AuthResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/register': {
       id: '/_auth/register'
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof AuthRegisterRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/_auth/forgot-password': {
       id: '/_auth/forgot-password'
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof AuthForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/seller/products/': {
       id: '/seller/products/'
@@ -815,10 +853,10 @@ declare module '@tanstack/react-router' {
     }
     '/customer/orders/': {
       id: '/customer/orders/'
-      path: '/customer/orders'
+      path: '/orders'
       fullPath: '/customer/orders/'
       preLoaderRoute: typeof CustomerOrdersIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/_public/products/': {
       id: '/_public/products/'
@@ -836,10 +874,10 @@ declare module '@tanstack/react-router' {
     }
     '/customer/orders/$id': {
       id: '/customer/orders/$id'
-      path: '/customer/orders/$id'
+      path: '/orders/$id'
       fullPath: '/customer/orders/$id'
       preLoaderRoute: typeof CustomerOrdersIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CustomerRoute
     }
     '/_public/products/$id': {
       id: '/_public/products/$id'
@@ -857,6 +895,24 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AuthRouteChildren {
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterRoute: typeof AuthRegisterRoute
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute
+  AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterRoute: AuthRegisterRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
+  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface AdminRouteChildren {
   AdminCategoriesRoute: typeof AdminCategoriesRoute
@@ -886,6 +942,36 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface CustomerRouteChildren {
+  CustomerCartRoute: typeof CustomerCartRoute
+  CustomerCheckoutRoute: typeof CustomerCheckoutRoute
+  CustomerDashboardRoute: typeof CustomerDashboardRoute
+  CustomerNotificationsRoute: typeof CustomerNotificationsRoute
+  CustomerPaymentRoute: typeof CustomerPaymentRoute
+  CustomerProfileRoute: typeof CustomerProfileRoute
+  CustomerWishlistRoute: typeof CustomerWishlistRoute
+  CustomerIndexRoute: typeof CustomerIndexRoute
+  CustomerOrdersIdRoute: typeof CustomerOrdersIdRoute
+  CustomerOrdersIndexRoute: typeof CustomerOrdersIndexRoute
+}
+
+const CustomerRouteChildren: CustomerRouteChildren = {
+  CustomerCartRoute: CustomerCartRoute,
+  CustomerCheckoutRoute: CustomerCheckoutRoute,
+  CustomerDashboardRoute: CustomerDashboardRoute,
+  CustomerNotificationsRoute: CustomerNotificationsRoute,
+  CustomerPaymentRoute: CustomerPaymentRoute,
+  CustomerProfileRoute: CustomerProfileRoute,
+  CustomerWishlistRoute: CustomerWishlistRoute,
+  CustomerIndexRoute: CustomerIndexRoute,
+  CustomerOrdersIdRoute: CustomerOrdersIdRoute,
+  CustomerOrdersIndexRoute: CustomerOrdersIndexRoute,
+}
+
+const CustomerRouteWithChildren = CustomerRoute._addFileChildren(
+  CustomerRouteChildren,
+)
+
 interface SellerRouteChildren {
   SellerAnalyticsRoute: typeof SellerAnalyticsRoute
   SellerCouponsRoute: typeof SellerCouponsRoute
@@ -913,29 +999,17 @@ const SellerRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
+  CustomerRoute: CustomerRouteWithChildren,
   SellerRoute: SellerRouteWithChildren,
   ShowcaseRoute: ShowcaseRoute,
-  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
-  AuthLoginRoute: AuthLoginRoute,
-  AuthRegisterRoute: AuthRegisterRoute,
-  AuthResetPasswordRoute: AuthResetPasswordRoute,
-  AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   PublicSearchRoute: PublicSearchRoute,
-  CustomerCartRoute: CustomerCartRoute,
-  CustomerCheckoutRoute: CustomerCheckoutRoute,
-  CustomerDashboardRoute: CustomerDashboardRoute,
-  CustomerNotificationsRoute: CustomerNotificationsRoute,
-  CustomerPaymentRoute: CustomerPaymentRoute,
-  CustomerProfileRoute: CustomerProfileRoute,
-  CustomerWishlistRoute: CustomerWishlistRoute,
   DesignSystemTypographyRoute: DesignSystemTypographyRoute,
   PublicCategoriesCategoryRoute: PublicCategoriesCategoryRoute,
   PublicProductsIdRoute: PublicProductsIdRoute,
-  CustomerOrdersIdRoute: CustomerOrdersIdRoute,
   PublicCategoriesIndexRoute: PublicCategoriesIndexRoute,
   PublicProductsIndexRoute: PublicProductsIndexRoute,
-  CustomerOrdersIndexRoute: CustomerOrdersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

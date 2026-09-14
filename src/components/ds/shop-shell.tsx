@@ -1,5 +1,16 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Sparkles, ShoppingCart, Heart, Bell, User, Menu, ArrowUp, Moon, Sun } from "lucide-react";
+import {
+  Sparkles,
+  ShoppingCart,
+  Heart,
+  Bell,
+  User,
+  Menu,
+  ArrowUp,
+  Moon,
+  Sun,
+  LogOut,
+} from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,6 +18,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { cn } from "@/lib/utils";
 import { aiSuggestions } from "@/lib/shop-data";
 import { ShoppingAssistant } from "@/components/ds/ai/assistant";
+import { useAuth } from "@/lib/auth/auth-context";
+import { roleHomePath } from "@/lib/auth/roles";
 
 function useDarkMode() {
   const [dark, setDark] = useState(false);
@@ -22,20 +35,28 @@ function useDarkMode() {
   return { dark, toggle };
 }
 
-const MOBILE_LINKS: [string, string][] = [
-  ["Home", "/"],
-  ["Categories", "/categories"],
-  ["All products", "/products"],
-  ["Wishlist", "/customer/wishlist"],
-  ["Cart", "/customer/cart"],
-  ["Orders", "/customer/orders"],
-  ["Notifications", "/customer/notifications"],
-  ["Your account", "/customer/dashboard"],
-];
-
 export function ShopNav({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const { dark, toggle } = useDarkMode();
+  const { user, isAuthenticated, logout } = useAuth();
+
+  const mobileLinks: [string, string][] = [
+    ["Home", isAuthenticated ? roleHomePath(user?.role) : "/"],
+    ["Categories", "/categories"],
+    ["All products", "/products"],
+    ...(isAuthenticated
+      ? ([
+          ["Wishlist", "/customer/wishlist"],
+          ["Cart", "/customer/cart"],
+          ["Orders", "/customer/orders"],
+          ["Notifications", "/customer/notifications"],
+          ["Your account", "/customer/dashboard"],
+        ] as [string, string][])
+      : ([
+          ["Sign in", "/login"],
+          ["Create account", "/register"],
+        ] as [string, string][])),
+  ];
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [q, setQ] = useState("");
   const [focus, setFocus] = useState(false);
@@ -143,24 +164,28 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               <Moon aria-hidden="true" className="size-4" />
             )}
           </Button>
-          <Link
-            to="/customer/notifications"
-            aria-label="Notifications, unread"
-            className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
-          >
-            <Bell aria-hidden="true" className="size-4" />
-            <span
-              aria-hidden="true"
-              className="absolute right-2 top-2 size-1.5 rounded-full bg-primary"
-            />
-          </Link>
-          <Link
-            to="/customer/wishlist"
-            aria-label="Wishlist"
-            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
-          >
-            <Heart aria-hidden="true" className="size-4" />
-          </Link>
+          {isAuthenticated && (
+            <>
+              <Link
+                to="/customer/notifications"
+                aria-label="Notifications, unread"
+                className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
+              >
+                <Bell aria-hidden="true" className="size-4" />
+                <span
+                  aria-hidden="true"
+                  className="absolute right-2 top-2 size-1.5 rounded-full bg-primary"
+                />
+              </Link>
+              <Link
+                to="/customer/wishlist"
+                aria-label="Wishlist"
+                className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+              >
+                <Heart aria-hidden="true" className="size-4" />
+              </Link>
+            </>
+          )}
           <Link
             to="/customer/cart"
             aria-label="Cart, 2 items"
@@ -175,13 +200,34 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               2
             </Badge>
           </Link>
-          <Link
-            to="/customer/dashboard"
-            aria-label="Your account"
-            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
-          >
-            <User aria-hidden="true" className="size-4" />
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/customer/dashboard"
+                aria-label="Your account"
+                className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+              >
+                <User aria-hidden="true" className="size-4" />
+              </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Sign out"
+                onClick={() => void logout().then(() => navigate({ to: "/" }))}
+              >
+                <LogOut aria-hidden="true" className="size-4" />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Link to="/login">Sign in</Link>
+              </Button>
+              <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
+                <Link to="/register">Register</Link>
+              </Button>
+            </>
+          )}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
@@ -193,7 +239,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
                 <SheetTitle>Browse Nexa</SheetTitle>
               </SheetHeader>
               <nav aria-label="Mobile" className="space-y-1 p-3 text-sm">
-                {MOBILE_LINKS.map(([label, to]) => (
+                {mobileLinks.map(([label, to]) => (
                   <Link
                     key={to}
                     to={to}

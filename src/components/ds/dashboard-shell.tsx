@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, LogOut } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { SignOutButton } from "@/components/ds/sign-out-button";
 
 export function DashboardShell({
   role,
@@ -27,11 +27,7 @@ export function DashboardShell({
             <Badge variant="ai" className="capitalize">
               {role}
             </Badge>
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/login">
-                <LogOut className="size-4" /> Sign out
-              </Link>
-            </Button>
+            <SignOutButton />
           </div>
         </div>
       </header>

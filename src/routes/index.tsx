@@ -32,6 +32,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/lib/auth/auth-context";
+import { roleHomePath } from "@/lib/auth/roles";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -211,6 +213,7 @@ const faqs = [
 
 function LandingPage() {
   const [dark, setDark] = useState(false);
+  const { user, isAuthenticated } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -259,12 +262,20 @@ function LandingPage() {
             >
               {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
             </button>
-            <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-              <Link to="/login">Login</Link>
-            </Button>
-            <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
-              <Link to="/register">Register</Link>
-            </Button>
+            {isAuthenticated ? (
+              <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
+                <Link to={roleHomePath(user?.role) as never}>Dashboard</Link>
+              </Button>
+            ) : (
+              <>
+                <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                  <Link to="/login">Login</Link>
+                </Button>
+                <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
+                  <Link to="/register">Register</Link>
+                </Button>
+              </>
+            )}
             <button
               className="relative grid size-9 place-items-center rounded-lg text-muted-foreground transition hover:bg-accent hover:text-foreground"
               aria-label="Cart"

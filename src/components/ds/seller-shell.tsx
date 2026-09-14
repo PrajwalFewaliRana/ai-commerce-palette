@@ -18,6 +18,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
+import { SignOutIconButton } from "@/components/ds/sign-out-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -200,11 +201,7 @@ export function SellerShell() {
                 </div>
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/login" aria-label="Sign out">
-                  <LogOut className="size-4" />
-                </Link>
-              </Button>
+              <SignOutIconButton />
             </div>
           </div>
         </header>

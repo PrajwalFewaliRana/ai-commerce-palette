@@ -7,6 +7,8 @@ import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { PasswordStrength, scorePassword } from "@/components/ds/password-strength";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth/auth-context";
+import { roleHomePath, type Role as AuthRole } from "@/lib/auth/roles";
 
 export const Route = createFileRoute("/_auth/register")({
   head: () => ({
@@ -34,7 +36,9 @@ function RegisterPage() {
   const [agreed, setAgreed] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function onSubmit(e: React.FormEvent) {
+  const { register } = useAuth();
+
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!name.trim()) next.name = "Please enter your name.";
@@ -43,7 +47,10 @@ function RegisterPage() {
     if (password !== confirm) next.confirm = "Passwords do not match.";
     if (!agreed) next.agreed = "You must accept the terms.";
     setErrors(next);
-    if (Object.keys(next).length === 0) navigate({ to: "/verify-email" });
+    if (Object.keys(next).length > 0) return;
+    const authRole = role.toUpperCase() as AuthRole;
+    await register({ email, password, name: name.trim(), role: authRole });
+    navigate({ to: roleHomePath(authRole) as never });
   }
 
   return (

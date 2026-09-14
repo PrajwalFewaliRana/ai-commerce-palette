@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AdminShell } from "@/components/ds/admin-shell";
+import { RoleRoute } from "@/routing/RoleRoute";
+
+function AdminArea() {
+  return (
+    <RoleRoute allowedRoles={["ADMIN"]}>
+      <AdminShell />
+    </RoleRoute>
+  );
+}
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -20,5 +29,5 @@ export const Route = createFileRoute("/admin")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: AdminShell,
+  component: AdminArea,
 });

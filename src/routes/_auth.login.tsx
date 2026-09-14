@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ShoppingBag, Store, ShieldCheck } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
@@ -6,6 +6,8 @@ import { FloatingInput } from "@/components/ds/floating-input";
 import { GoogleButton, OrDivider } from "@/components/ds/social-buttons";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth/auth-context";
+import { safeRedirect, type Role as AuthRole } from "@/lib/auth/roles";
 
 export const Route = createFileRoute("/_auth/login")({
   head: () => ({
@@ -26,13 +28,17 @@ function LoginPage() {
   const [role, setRole] = useState<Role>("customer");
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
+  const { redirect } = useSearch({ strict: false }) as { redirect?: string };
 
-  function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.includes("@")) return setError("Please enter a valid email address.");
     if (password.length < 6) return setError("Password must be at least 6 characters.");
     setError(null);
-    navigate({ to: `/dashboard/${role}` });
+    const authRole = role.toUpperCase() as AuthRole;
+    await login({ email, password, role: authRole });
+    navigate({ to: safeRedirect(redirect, authRole) as never });
   }
 
   return (

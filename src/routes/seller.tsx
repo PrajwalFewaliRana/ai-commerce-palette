@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SellerShell } from "@/components/ds/seller-shell";
+import { RoleRoute } from "@/routing/RoleRoute";
+
+function SellerArea() {
+  return (
+    <RoleRoute allowedRoles={["SELLER"]}>
+      <SellerShell />
+    </RoleRoute>
+  );
+}
 
 export const Route = createFileRoute("/seller")({
   head: () => ({
@@ -12,5 +21,5 @@ export const Route = createFileRoute("/seller")({
       },
     ],
   }),
-  component: SellerShell,
+  component: SellerArea,
 });
