@@ -218,7 +218,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
                 <SheetTitle>Browse Nexa</SheetTitle>
               </SheetHeader>
               <nav aria-label="Mobile" className="space-y-1 p-3 text-sm">
-                {MOBILE_LINKS.map(([label, to]) => (
+                {mobileLinks.map(([label, to]) => (
                   <Link
                     key={to}
                     to={to}
