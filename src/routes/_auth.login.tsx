@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 import { Mail, Lock, Eye, EyeOff, ShoppingBag, Store, ShieldCheck } from "lucide-react";
 import { AuthLayout } from "@/components/ds/auth-layout";
@@ -10,9 +10,6 @@ import { useAuth } from "@/lib/auth/auth-context";
 import { safeRedirect, type Role as AuthRole } from "@/lib/auth/roles";
 
 export const Route = createFileRoute("/_auth/login")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    redirect: typeof search.redirect === "string" ? search.redirect : undefined,
-  }),
   head: () => ({
     meta: [
       { title: "Sign in — Nexa" },
@@ -32,7 +29,7 @@ function LoginPage() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { login } = useAuth();
-  const { redirect } = Route.useSearch();
+  const { redirect } = useSearch({ strict: false }) as { redirect?: string };
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
