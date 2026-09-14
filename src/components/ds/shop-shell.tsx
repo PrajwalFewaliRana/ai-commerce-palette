@@ -200,13 +200,34 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               2
             </Badge>
           </Link>
-          <Link
-            to="/customer/dashboard"
-            aria-label="Your account"
-            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
-          >
-            <User aria-hidden="true" className="size-4" />
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link
+                to="/customer/dashboard"
+                aria-label="Your account"
+                className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+              >
+                <User aria-hidden="true" className="size-4" />
+              </Link>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Sign out"
+                onClick={() => void logout().then(() => navigate({ to: "/" }))}
+              >
+                <LogOut aria-hidden="true" className="size-4" />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Link to="/login">Sign in</Link>
+              </Button>
+              <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
+                <Link to="/register">Register</Link>
+              </Button>
+            </>
+          )}
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
