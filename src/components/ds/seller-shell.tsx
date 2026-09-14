@@ -18,6 +18,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
+import { SignOutIconButton } from "@/components/ds/sign-out-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

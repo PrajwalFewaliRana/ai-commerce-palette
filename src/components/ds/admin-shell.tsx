@@ -1,4 +1,5 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { SignOutIconButton } from "@/components/ds/sign-out-button";
 import {
   Sparkles,
   LayoutDashboard,
