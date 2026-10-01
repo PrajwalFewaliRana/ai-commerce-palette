@@ -39,12 +39,20 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const { dark, toggle } = useDarkMode();
   const { user, isAuthenticated, logout } = useAuth();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isCustomerArea = pathname === "/customer" || pathname.startsWith("/customer/");
+  const showCustomerNavigation = isAuthenticated || isCustomerArea;
+  const homePath = isCustomerArea
+    ? "/customer/dashboard"
+    : isAuthenticated
+      ? roleHomePath(user?.role)
+      : "/";
 
   const mobileLinks: [string, string][] = [
-    ["Home", isAuthenticated ? roleHomePath(user?.role) : "/"],
+    ["Home", homePath],
     ["Categories", "/categories"],
     ["All products", "/products"],
-    ...(isAuthenticated
+    ...(showCustomerNavigation
       ? ([
           ["Wishlist", "/customer/wishlist"],
           ["Cart", "/customer/cart"],
@@ -57,7 +65,6 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
           ["Create account", "/register"],
         ] as [string, string][])),
   ];
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [q, setQ] = useState("");
   const [focus, setFocus] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,7 +78,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
-          to="/"
+          to={homePath as never}
           aria-label="Nexa home"
           className="inline-flex items-center gap-2 text-lg font-semibold"
         >
@@ -164,7 +171,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               <Moon aria-hidden="true" className="size-4" />
             )}
           </Button>
-          {isAuthenticated && (
+          {showCustomerNavigation && (
             <>
               <Link
                 to="/customer/notifications"
@@ -200,7 +207,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               2
             </Badge>
           </Link>
-          {isAuthenticated ? (
+          {showCustomerNavigation ? (
             <>
               <Link
                 to="/customer/dashboard"
@@ -209,14 +216,16 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               >
                 <User aria-hidden="true" className="size-4" />
               </Link>
-              <Button
-                variant="ghost"
-                size="icon"
-                aria-label="Sign out"
-                onClick={() => void logout().then(() => navigate({ to: "/" }))}
-              >
-                <LogOut aria-hidden="true" className="size-4" />
-              </Button>
+              {isAuthenticated && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Sign out"
+                  onClick={() => void logout().then(() => navigate({ to: "/" }))}
+                >
+                  <LogOut aria-hidden="true" className="size-4" />
+                </Button>
+              )}
             </>
           ) : (
             <>
@@ -241,7 +250,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               <nav aria-label="Mobile" className="space-y-1 p-3 text-sm">
                 {mobileLinks.map(([label, to]) => (
                   <Link
-                    key={to}
+                    key={label}
                     to={to}
                     onClick={() => setMenuOpen(false)}
                     className={cn(
@@ -374,6 +383,9 @@ export function ShopShell({ children, compactNav }: { children: ReactNode; compa
 }
 
 export function Breadcrumbs({ items }: { items: { label: string; to?: string }[] }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isCustomerArea = pathname === "/customer" || pathname.startsWith("/customer/");
+
   return (
     <nav
       aria-label="Breadcrumb"
@@ -382,7 +394,12 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
       {items.map((item, i) => (
         <span key={i} className="inline-flex items-center gap-1.5">
           {item.to ? (
-            <Link to={item.to} className="hover:text-foreground">
+            <Link
+              to={(isCustomerArea && item.label === "Home" && item.to === "/"
+                ? "/customer/dashboard"
+                : item.to) as never}
+              className="hover:text-foreground"
+            >
               {item.label}
             </Link>
           ) : (
