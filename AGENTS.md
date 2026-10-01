@@ -8,5 +8,3 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
-
-- Customer-area navigation derives its active UI state from the `/customer` route as well as authentication, because customer pages are intentionally accessible without login.

@@ -1,16 +1,5 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import {
-  Sparkles,
-  ShoppingCart,
-  Heart,
-  Bell,
-  User,
-  Menu,
-  ArrowUp,
-  Moon,
-  Sun,
-  LogOut,
-} from "lucide-react";
+import { Sparkles, ShoppingCart, Heart, Bell, User, Menu, ArrowUp, Moon, Sun } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,8 +7,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { cn } from "@/lib/utils";
 import { aiSuggestions } from "@/lib/shop-data";
 import { ShoppingAssistant } from "@/components/ds/ai/assistant";
-import { useAuth } from "@/lib/auth/auth-context";
-import { roleHomePath } from "@/lib/auth/roles";
 
 function useDarkMode() {
   const [dark, setDark] = useState(false);
@@ -35,36 +22,21 @@ function useDarkMode() {
   return { dark, toggle };
 }
 
+const MOBILE_LINKS: [string, string][] = [
+  ["Home", "/"],
+  ["Categories", "/categories"],
+  ["All products", "/products"],
+  ["Wishlist", "/wishlist"],
+  ["Cart", "/cart"],
+  ["Orders", "/orders"],
+  ["Notifications", "/notifications"],
+  ["Your account", "/dashboard/customer"],
+];
+
 export function ShopNav({ compact = false }: { compact?: boolean }) {
   const navigate = useNavigate();
   const { dark, toggle } = useDarkMode();
-  const { user, isAuthenticated, logout } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isCustomerArea = pathname === "/customer" || pathname.startsWith("/customer/");
-  const showCustomerNavigation = isAuthenticated || isCustomerArea;
-  const homePath = isCustomerArea
-    ? "/customer/dashboard"
-    : isAuthenticated
-      ? roleHomePath(user?.role)
-      : "/";
-
-  const mobileLinks: [string, string][] = [
-    ["Home", homePath],
-    ["Categories", "/categories"],
-    ["All products", "/products"],
-    ...(showCustomerNavigation
-      ? ([
-          ["Wishlist", "/customer/wishlist"],
-          ["Cart", "/customer/cart"],
-          ["Orders", "/customer/orders"],
-          ["Notifications", "/customer/notifications"],
-          ["Your account", "/customer/dashboard"],
-        ] as [string, string][])
-      : ([
-          ["Sign in", "/login"],
-          ["Create account", "/register"],
-        ] as [string, string][])),
-  ];
   const [q, setQ] = useState("");
   const [focus, setFocus] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -78,7 +50,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link
-          to={homePath as never}
+          to="/"
           aria-label="Nexa home"
           className="inline-flex items-center gap-2 text-lg font-semibold"
         >
@@ -171,30 +143,26 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               <Moon aria-hidden="true" className="size-4" />
             )}
           </Button>
-          {showCustomerNavigation && (
-            <>
-              <Link
-                to="/customer/notifications"
-                aria-label="Notifications, unread"
-                className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
-              >
-                <Bell aria-hidden="true" className="size-4" />
-                <span
-                  aria-hidden="true"
-                  className="absolute right-2 top-2 size-1.5 rounded-full bg-primary"
-                />
-              </Link>
-              <Link
-                to="/customer/wishlist"
-                aria-label="Wishlist"
-                className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
-              >
-                <Heart aria-hidden="true" className="size-4" />
-              </Link>
-            </>
-          )}
           <Link
-            to="/customer/cart"
+            to="/notifications"
+            aria-label="Notifications, unread"
+            className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
+          >
+            <Bell aria-hidden="true" className="size-4" />
+            <span
+              aria-hidden="true"
+              className="absolute right-2 top-2 size-1.5 rounded-full bg-primary"
+            />
+          </Link>
+          <Link
+            to="/wishlist"
+            aria-label="Wishlist"
+            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+          >
+            <Heart aria-hidden="true" className="size-4" />
+          </Link>
+          <Link
+            to="/cart"
             aria-label="Cart, 2 items"
             className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
           >
@@ -207,36 +175,13 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               2
             </Badge>
           </Link>
-          {showCustomerNavigation ? (
-            <>
-              <Link
-                to="/customer/dashboard"
-                aria-label="Your account"
-                className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
-              >
-                <User aria-hidden="true" className="size-4" />
-              </Link>
-              {isAuthenticated && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label="Sign out"
-                  onClick={() => void logout().then(() => navigate({ to: "/" }))}
-                >
-                  <LogOut aria-hidden="true" className="size-4" />
-                </Button>
-              )}
-            </>
-          ) : (
-            <>
-              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-                <Link to="/login">Sign in</Link>
-              </Button>
-              <Button asChild size="sm" variant="hero" className="hidden sm:inline-flex">
-                <Link to="/register">Register</Link>
-              </Button>
-            </>
-          )}
+          <Link
+            to="/dashboard/customer"
+            aria-label="Your account"
+            className="hidden size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground sm:inline-flex"
+          >
+            <User aria-hidden="true" className="size-4" />
+          </Link>
           <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Open menu">
@@ -248,9 +193,9 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
                 <SheetTitle>Browse Nexa</SheetTitle>
               </SheetHeader>
               <nav aria-label="Mobile" className="space-y-1 p-3 text-sm">
-                {mobileLinks.map(([label, to]) => (
+                {MOBILE_LINKS.map(([label, to]) => (
                   <Link
-                    key={label}
+                    key={to}
                     to={to}
                     onClick={() => setMenuOpen(false)}
                     className={cn(
@@ -316,24 +261,24 @@ export function ShopFooter() {
           links={[
             ["Categories", "/categories"],
             ["All products", "/products"],
-            ["Wishlist", "/customer/wishlist"],
-            ["Cart", "/customer/cart"],
+            ["Wishlist", "/wishlist"],
+            ["Cart", "/cart"],
           ]}
         />
         <FooterCol
           title="Account"
           links={[
-            ["Dashboard", "/customer/dashboard"],
-            ["Orders", "/customer/orders"],
-            ["Profile", "/customer/profile"],
-            ["Notifications", "/customer/notifications"],
+            ["Dashboard", "/dashboard/customer"],
+            ["Orders", "/orders"],
+            ["Profile", "/profile"],
+            ["Notifications", "/notifications"],
           ]}
         />
         <FooterCol
           title="Company"
           links={[
             ["About", "/"],
-            ["Become a seller", "/register"],
+            ["Become a seller", "/auth/register"],
             ["Help", "/"],
             ["Privacy", "/"],
           ]}
@@ -383,9 +328,6 @@ export function ShopShell({ children, compactNav }: { children: ReactNode; compa
 }
 
 export function Breadcrumbs({ items }: { items: { label: string; to?: string }[] }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isCustomerArea = pathname === "/customer" || pathname.startsWith("/customer/");
-
   return (
     <nav
       aria-label="Breadcrumb"
@@ -394,12 +336,7 @@ export function Breadcrumbs({ items }: { items: { label: string; to?: string }[]
       {items.map((item, i) => (
         <span key={i} className="inline-flex items-center gap-1.5">
           {item.to ? (
-            <Link
-              to={(isCustomerArea && item.label === "Home" && item.to === "/"
-                ? "/customer/dashboard"
-                : item.to) as never}
-              className="hover:text-foreground"
-            >
+            <Link to={item.to} className="hover:text-foreground">
               {item.label}
             </Link>
           ) : (

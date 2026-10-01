@@ -1,5 +1,4 @@
 import { Link, Outlet, useRouterState } from "@tanstack/react-router";
-import { SignOutIconButton } from "@/components/ds/sign-out-button";
 import {
   Sparkles,
   LayoutDashboard,
@@ -27,21 +26,21 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { to: "/admin/dashboard", label: "Overview", icon: LayoutDashboard, end: true },
-  { to: "/admin/revenue", label: "Revenue analytics", icon: LineChart },
-  { to: "/admin/users", label: "User management", icon: Users },
-  { to: "/admin/sellers", label: "Seller verification", icon: ShieldCheck, badge: "12" },
+  { to: "/dashboard/admin", label: "Overview", icon: LayoutDashboard, end: true },
+  { to: "/dashboard/admin/revenue", label: "Revenue analytics", icon: LineChart },
+  { to: "/dashboard/admin/users", label: "User management", icon: Users },
+  { to: "/dashboard/admin/sellers", label: "Seller verification", icon: ShieldCheck, badge: "12" },
   {
-    to: "/admin/moderation",
+    to: "/dashboard/admin/moderation",
     label: "Product moderation",
     icon: PackageSearch,
     badge: "23",
   },
-  { to: "/admin/categories", label: "Categories", icon: FolderTree },
-  { to: "/admin/orders", label: "Orders", icon: ShoppingBag },
-  { to: "/admin/reports", label: "Reports", icon: FileBarChart },
-  { to: "/admin/notifications", label: "Notifications", icon: Bell },
-  { to: "/admin/settings", label: "Settings", icon: Settings },
+  { to: "/dashboard/admin/categories", label: "Categories", icon: FolderTree },
+  { to: "/dashboard/admin/orders", label: "Orders", icon: ShoppingBag },
+  { to: "/dashboard/admin/reports", label: "Reports", icon: FileBarChart },
+  { to: "/dashboard/admin/notifications", label: "Notifications", icon: Bell },
+  { to: "/dashboard/admin/settings", label: "Settings", icon: Settings },
 ];
 
 function useDarkMode() {
@@ -62,7 +61,7 @@ function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?:
     <div className="flex h-full flex-col">
       <Link
         to="/"
-        className="flex items-center gap-2 border-b border-border/60 px-5 py-4 text-h6 font-semibold"
+        className="flex items-center gap-2 border-b border-border/60 px-5 py-4 text-lg font-semibold"
       >
         <span className="grid size-8 place-items-center rounded-lg text-primary-foreground [background-image:var(--gradient-ai)]">
           <Sparkles className="size-4" />
@@ -72,8 +71,8 @@ function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?:
           Admin
         </Badge>
       </Link>
-      <nav className="flex-1 space-y-0.5 overflow-y-auto p-3 text-small">
-        <p className="px-3 pb-1 pt-2 text-caption font-medium uppercase tracking-wider text-muted-foreground">
+      <nav className="flex-1 space-y-0.5 overflow-y-auto p-3 text-sm">
+        <p className="px-3 pb-1 pt-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
           Platform
         </p>
         {NAV.map(({ to, label, icon: Icon, end, badge }) => {
@@ -101,14 +100,14 @@ function SidebarInner({ pathname, onNavigate }: { pathname: string; onNavigate?:
       </nav>
       <div className="border-t border-border/60 p-3">
         <div className="rounded-xl border border-primary/20 p-3 [background-image:var(--gradient-subtle)]">
-          <div className="flex items-center gap-2 text-caption font-semibold">
+          <div className="flex items-center gap-2 text-xs font-semibold">
             <Sparkles className="size-3.5 text-primary" /> Trust & Safety AI
           </div>
-          <p className="mt-1 text-caption text-muted-foreground">
+          <p className="mt-1 text-xs text-muted-foreground">
             23 listings and 4 stores need a human decision today.
           </p>
           <Button size="sm" variant="hero" className="mt-3 w-full" asChild>
-            <Link to="/admin/moderation" onClick={onNavigate}>
+            <Link to="/dashboard/admin/moderation" onClick={onNavigate}>
               Review queue
             </Link>
           </Button>
@@ -177,7 +176,7 @@ export function AdminShell() {
             <div className="relative hidden max-w-md flex-1 md:block">
               <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <input
-                className="w-full rounded-xl border border-border bg-card py-2 pl-9 pr-3 text-small outline-none placeholder:text-muted-foreground focus:border-primary/50"
+                className="w-full rounded-xl border border-border bg-card py-2 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-primary/50"
                 placeholder="Search users, stores, orders, listings..."
                 aria-label="Search the platform"
               />
@@ -193,7 +192,7 @@ export function AdminShell() {
                 {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
               </Button>
               <Link
-                to="/admin/notifications"
+                to="/dashboard/admin/notifications"
                 aria-label="Notifications, unread"
                 className="relative inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
               >
@@ -201,16 +200,20 @@ export function AdminShell() {
                 <span className="absolute right-2 top-2 size-1.5 rounded-full bg-destructive" />
               </Link>
               <div className="ml-2 flex items-center gap-2 rounded-xl border border-border bg-card px-2.5 py-1.5">
-                <div className="grid size-7 place-items-center rounded-lg bg-primary text-caption font-semibold text-primary-foreground">
+                <div className="grid size-7 place-items-center rounded-lg bg-primary text-xs font-semibold text-primary-foreground">
                   NX
                 </div>
                 <div className="hidden sm:block">
-                  <p className="text-caption font-semibold leading-tight">Nexa Ops</p>
+                  <p className="text-xs font-semibold leading-tight">Nexa Ops</p>
                   <p className="text-[10px] text-muted-foreground">Super admin</p>
                 </div>
                 <ChevronDown className="hidden size-3.5 text-muted-foreground sm:block" />
               </div>
-              <SignOutIconButton />
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/auth/login" aria-label="Sign out">
+                  <LogOut className="size-4" />
+                </Link>
+              </Button>
             </div>
           </div>
         </header>
@@ -246,7 +249,7 @@ export function DataToolbar({
           value={query}
           onChange={(e) => onQuery(e.target.value)}
           placeholder={placeholder ?? "Search..."}
-          className="w-full rounded-xl border border-border bg-background py-2 pl-9 pr-3 text-small outline-none placeholder:text-muted-foreground focus:border-primary/50"
+          className="w-full rounded-xl border border-border bg-background py-2 pl-9 pr-3 text-sm outline-none placeholder:text-muted-foreground focus:border-primary/50"
         />
       </div>
       {children}
@@ -266,12 +269,12 @@ export function FilterSelect({
   label?: string;
 }) {
   return (
-    <label className="inline-flex items-center gap-2 text-caption text-muted-foreground">
+    <label className="inline-flex items-center gap-2 text-xs text-muted-foreground">
       {label && <span className="hidden sm:inline">{label}</span>}
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="rounded-xl border border-border bg-background px-3 py-2 text-small text-foreground outline-none focus:border-primary/50"
+        className="rounded-xl border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary/50"
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>
@@ -305,7 +308,7 @@ export function Pager({
   }, [page, pages]);
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 p-4 text-caption text-muted-foreground">
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 p-4 text-xs text-muted-foreground">
       <p>
         Showing{" "}
         <b className="text-foreground">
@@ -321,7 +324,7 @@ export function Pager({
               onPageSize(Number(e.target.value));
               onPage(1);
             }}
-            className="rounded-lg border border-border bg-background px-2 py-1.5 text-caption text-foreground outline-none"
+            className="rounded-lg border border-border bg-background px-2 py-1.5 text-xs text-foreground outline-none"
           >
             {[10, 25, 50].map((n) => (
               <option key={n} value={n}>
@@ -344,7 +347,7 @@ export function Pager({
             key={p}
             variant={p === page ? "default" : "outline"}
             size="icon"
-            className="size-8 text-caption"
+            className="size-8 text-xs"
             onClick={() => onPage(p)}
           >
             {p}
@@ -387,8 +390,8 @@ export function Panel({
       {(title || actions) && (
         <div className="flex flex-wrap items-center justify-between gap-3 p-5 pb-4">
           <div>
-            {title && <p className="text-small font-semibold">{title}</p>}
-            {subtitle && <p className="text-caption text-muted-foreground">{subtitle}</p>}
+            {title && <p className="text-sm font-semibold">{title}</p>}
+            {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
           </div>
           {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
         </div>

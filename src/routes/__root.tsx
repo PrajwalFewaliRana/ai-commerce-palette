@@ -8,11 +8,9 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import type { ErrorComponentProps } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { AuthProvider } from "@/lib/auth/auth-context";
 
 function NotFoundComponent() {
   return (
@@ -44,7 +42,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: ErrorComponentProps) {
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -146,10 +144,8 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <Outlet />
-      </AuthProvider>
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Outlet />
     </QueryClientProvider>
   );
 }

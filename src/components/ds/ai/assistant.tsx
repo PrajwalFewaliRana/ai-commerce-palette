@@ -15,7 +15,7 @@ interface Turn {
 
 /** Context-aware prompts so the assistant feels part of the page, not a bolted-on chatbot. */
 function contextFor(pathname: string) {
-  if (pathname.startsWith("/products/")) {
+  if (pathname.startsWith("/product/")) {
     return {
       label: "Helping you with this product",
       prompts: [
@@ -26,9 +26,9 @@ function contextFor(pathname: string) {
     };
   }
   if (
-    pathname.startsWith("/customer/cart") ||
-    pathname.startsWith("/customer/checkout") ||
-    pathname.startsWith("/customer/payment")
+    pathname.startsWith("/cart") ||
+    pathname.startsWith("/checkout") ||
+    pathname.startsWith("/payment")
   ) {
     return {
       label: "Reviewing your cart",
@@ -39,13 +39,13 @@ function contextFor(pathname: string) {
       ],
     };
   }
-  if (pathname.startsWith("/customer/orders")) {
+  if (pathname.startsWith("/orders")) {
     return {
       label: "Tracking your orders",
       prompts: ["Where is my order?", "Can I still change the address?", "Start a return"],
     };
   }
-  if (pathname.startsWith("/seller/dashboard")) {
+  if (pathname.startsWith("/dashboard/seller")) {
     return {
       label: "Working on your store",
       prompts: [
@@ -176,7 +176,7 @@ export function ShoppingAssistant() {
                         {turn.results.map(({ product, score, reason }) => (
                           <li key={product.id}>
                             <Link
-                              to="/products/$id"
+                              to="/product/$id"
                               params={{ id: product.id }}
                               className="flex items-center gap-3 rounded-2xl border border-border bg-card p-2.5 transition hover:border-primary/40"
                             >

@@ -2,7 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:where(.dark, .dark *):not(:where(.light, .light *)));
+@custom-variant dark (&:is(.dark *));
 
 /*
  * Design system definition.
@@ -250,57 +250,6 @@
   --sidebar-accent-foreground: oklch(0.96 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.8 0 0);
-}
-
-/* Scoped light theme — lets a light preview live inside a dark page. */
-.light {
-  /* Light — Warm Minimal: warm white, ivory, cream, beige, terracotta accent */
-  --background: oklch(0.985 0.008 85);
-  --foreground: oklch(0.22 0.012 60);
-  --card: oklch(0.975 0.012 84);
-  --card-foreground: oklch(0.22 0.012 60);
-  --popover: oklch(0.985 0.008 85);
-  --popover-foreground: oklch(0.22 0.012 60);
-  --primary: oklch(0.55 0.11 45);
-  --primary-foreground: oklch(0.985 0.008 85);
-  --secondary: oklch(0.94 0.018 80);
-  --secondary-foreground: oklch(0.3 0.02 60);
-  --muted: oklch(0.945 0.014 82);
-  --muted-foreground: oklch(0.52 0.015 65);
-  --accent: oklch(0.925 0.028 70);
-  --accent-foreground: oklch(0.34 0.05 45);
-  --destructive: oklch(0.52 0.14 28);
-  --destructive-foreground: oklch(0.985 0.008 85);
-  --border: oklch(0.9 0.018 80);
-  --input: oklch(0.9 0.018 80);
-  --ring: oklch(0.55 0.11 45);
-  --primary-glow: oklch(0.64 0.09 55);
-  --success: oklch(0.5 0.08 145);
-  --success-foreground: oklch(0.985 0.008 85);
-  --warning: oklch(0.72 0.1 70);
-  --warning-foreground: oklch(0.24 0.03 60);
-  --gradient-primary: linear-gradient(135deg, oklch(0.55 0.11 45), oklch(0.64 0.09 55));
-  --gradient-ai: linear-gradient(135deg, oklch(0.5 0.09 45) 0%, oklch(0.58 0.08 60) 55%, oklch(0.5 0.06 130) 100%);
-  --gradient-subtle: linear-gradient(180deg, oklch(0.975 0.014 84), oklch(0.985 0.008 85));
-  --gradient-ambient: radial-gradient(circle at 50% 40%, oklch(0.7 0.08 55 / 0.35), transparent 70%);
-  --shadow-sm: 0 1px 2px 0 oklch(0.3 0.03 60 / 0.06);
-  --shadow-md: 0 4px 12px -2px oklch(0.3 0.03 60 / 0.09);
-  --shadow-lg: 0 12px 32px -8px oklch(0.3 0.03 60 / 0.14);
-  --shadow-glow: 0 0 32px oklch(0.55 0.11 45 / 0.18);
-  --shadow-card: 0 1px 3px -1px oklch(0.3 0.03 60 / 0.07), 0 8px 24px -12px oklch(0.3 0.03 60 / 0.1);
-  --chart-1: oklch(0.55 0.11 45);
-  --chart-2: oklch(0.5 0.08 145);
-  --chart-3: oklch(0.62 0.09 70);
-  --chart-4: oklch(0.45 0.06 30);
-  --chart-5: oklch(0.68 0.05 95);
-  --sidebar: oklch(0.972 0.014 84);
-  --sidebar-foreground: oklch(0.22 0.012 60);
-  --sidebar-primary: oklch(0.55 0.11 45);
-  --sidebar-primary-foreground: oklch(0.985 0.008 85);
-  --sidebar-accent: oklch(0.935 0.02 80);
-  --sidebar-accent-foreground: oklch(0.28 0.02 60);
-  --sidebar-border: oklch(0.9 0.018 80);
-  --sidebar-ring: oklch(0.55 0.11 45);
 }
 
 @layer base {
