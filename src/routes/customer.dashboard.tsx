@@ -41,7 +41,7 @@ const statusVariant = {
   delivered: "success",
 } as const;
 
-export function CustomerDashboardPage() {
+function CustomerDashboardPage() {
   const active = orders.filter((o) => o.status !== "delivered");
   const picks = products.filter((p) => p.aiPick);
   const unread = notifications.filter((n) => n.unread);
