@@ -250,7 +250,7 @@ export function ShopNav({ compact = false }: { compact?: boolean }) {
               <nav aria-label="Mobile" className="space-y-1 p-3 text-sm">
                 {mobileLinks.map(([label, to]) => (
                   <Link
-                    key={to}
+                    key={label}
                     to={to}
                     onClick={() => setMenuOpen(false)}
                     className={cn(
